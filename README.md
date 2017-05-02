@@ -13,8 +13,8 @@ Tracking groceries got you stressed? Chill.
 1. [Usage](#Usage)
 2. [Requirements](#requirements)
 3. [Development](#development)
-    a. [Installing Dependencies](#installing-dependencies)
-    b. [Tasks](#tasks)
+    - [Installing Dependencies](#installing-dependencies)
+    - [Tasks](#tasks)
 4. [Roadmap](#roadmap)
 5. [Contributing](#contributing)
 
