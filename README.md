@@ -44,7 +44,7 @@ bower install
 
 ### Roadmap
 
-View the project roadmap [here](LINK_TO_DOC)
+View the project roadmap [here](https://trello.com/b/CBEpWlz0)
 
 
 ## Contributing
