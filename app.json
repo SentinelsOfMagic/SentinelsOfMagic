@@ -1,6 +1,7 @@
 {
   "name": "SentinelsOfMagic",
   "scripts": {
+    "start": "node index.js"
   },
   "env": {
   },
