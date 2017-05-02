@@ -3,20 +3,20 @@ Tracking groceries got you stressed? Chill.
 
 ## Team
 
-  - teamMember
-  - teamMember
-  - teamMember
-  - teamMember
+  - April Ablon
+  - Khoa Vo
+  - Ivana He
+  - Connor Wilson
 
 ## Table of Contents
 
 1. [Usage](#Usage)
-1. [Requirements](#requirements)
-1. [Development](#development)
-    1. [Installing Dependencies](#installing-dependencies)
-    1. [Tasks](#tasks)
-1. [Roadmap](#roadmap)
-1. [Contributing](#contributing)
+2. [Requirements](#requirements)
+3. [Development](#development)
+    a. [Installing Dependencies](#installing-dependencies)
+    b. [Tasks](#tasks)
+4. [Roadmap](#roadmap)
+5. [Contributing](#contributing)
 
 ## Usage
 
