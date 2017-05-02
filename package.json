@@ -8,8 +8,10 @@
     "node": ">=6.4.0"
   },
   "scripts": {
+    "start": "node index.js"
   },
   "dependencies": {
+    "express": "^4.15.2"
   },
   "devDependencies": {
     "babel-cli": "^6.7.5",
