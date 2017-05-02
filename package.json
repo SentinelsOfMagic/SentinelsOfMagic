@@ -1,9 +1,9 @@
 {
-  "name": "",
-  "version": "",
+  "name": "Fridgr",
+  "version": "0.0.1",
   "description": "",
-  "author": "",
-  "license": "",
+  "author": "Sentinels of Magic",
+  "license": "MIT",
   "engines": {
     "node": ">=6.4.0"
   },
