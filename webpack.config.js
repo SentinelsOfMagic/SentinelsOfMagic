@@ -8,8 +8,8 @@ module.exports = {
     login: `${SRC_DIR}/login.jsx`
   },
   output: {
-    filename: '[name].entry.js',
-    path: DIST_DIR
+    path: DIST_DIR,
+    filename: '[name]-bundle.js'
   },
   module : {
     loaders : [
