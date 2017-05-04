@@ -12,6 +12,6 @@ app.get('/inventory', function(req, res) {
 
 });
 
-app.listen(1337, function() {
+app.listen(process.env.PORT || 1337, function() {
   console.log('Listening on 1337...');
 });
