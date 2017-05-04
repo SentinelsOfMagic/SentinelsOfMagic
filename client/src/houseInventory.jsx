@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import HouseInventoryList from './HouseInventoryList.jsx';
+import Nav from './Nav.jsx';
 
 class HouseInventory extends React.Component {
   constructor(props) {
