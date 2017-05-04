@@ -16,6 +16,10 @@ class HouseInventory extends React.Component {
     this.getItems(this.updateItems.bind(this));
   }
 
+  something() {
+
+  }
+
   getItems(callback) {
     $.ajax({
       type: 'GET',
