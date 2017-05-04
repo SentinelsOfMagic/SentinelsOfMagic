@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
+import HouseInventoryList from './HouseInventoryList.jsx';
 
 class HouseInventory extends React.Component {
   constructor(props) {
@@ -40,7 +41,7 @@ class HouseInventory extends React.Component {
     <div>
       <h1>House Inventory</h1>
       <Nav />
-      <HouseInventoryItem />
+      <HouseInventoryList items={this.state.items}/>
     </div>
     );
   }
