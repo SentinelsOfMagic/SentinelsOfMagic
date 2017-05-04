@@ -22,7 +22,10 @@ coverage
 build/
 client/dist/bundle.js
 
-# Dependency directorys
+# Database access credentials
+database/config.js
+
+# Dependency directories
 # Deployed apps should consider commenting these lines out:
 # see https://npmjs.org/doc/faq.html#Should-I-check-my-node_modules-folder-into-git
 node_modules/
