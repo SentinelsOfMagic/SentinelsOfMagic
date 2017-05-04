@@ -15,7 +15,10 @@
   "dependencies": {
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
+    "jquery": "^3.2.1",
     "pg-promise": "^5.6.7",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
     "request": "^2.81.0"
   },
   "devDependencies": {
