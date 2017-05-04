@@ -25,10 +25,7 @@ Tracking groceries got you stressed? Chill.
 ## Requirements
 
 - Node 6.4.x
-- Redis 2.6.x
-- Postgresql 9.1.x
-- etc
-- etc
+- Postgresql 9.5.6
 
 ## Development
 
@@ -37,10 +34,40 @@ Tracking groceries got you stressed? Chill.
 From within the root directory:
 
 ```sh
-npm install -g bower
 npm install
-bower install
 ```
+
+### PostgreSQL
+
+-Install Postgre on your machine in whatever manner suites you.
+
+-Create a database called fridgr in PSQL
+
+-Create a user (e.g. fridgr_app) with a password
+
+-Grant this user permissions to access the database `fridgr`
+
+-From project root run
+
+```sh
+psql -U fridgr_app -h 127.0.0.1 -W fridgr < ./database/fridgr.sql
+```
+-U tells psql to run command as user (like MySQL, note capital)
+
+-h tells psql to make connection as if it were a server, this makes user access consistent with server access, and should save you from having to create two users, let me know if there are issues here
+
+-W makes psql ask for password
+
+Now that the database is created and running, create a config.js file in your database directory that module exports the string
+
+'postgres://USERNAME:PASSWORD@localhost:5432/fridgr'
+
+with appropriate replacements for username and password.
+
+Now when running on your dev machine this will be used for database connection, else the heroku DATABASE_URL environment variable will be used.
+
+Contact Connor if this doesn't work, there may be something subtle I missed. Also, maybe worth changing over to using .env at some point if we need a lot of keys.
+
 
 ### Roadmap
 
