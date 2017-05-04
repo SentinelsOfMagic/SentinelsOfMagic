@@ -53,11 +53,15 @@ npm install
 psql -U fridgr_app -h 127.0.0.1 -W fridgr < ./database/fridgr.sql
 ```
 -U tells psql to run command as user (like MySQL, note capital)
+
 -h tells psql to make connection as if it were a server, this makes user access consistent with server access, and should save you from having to create two users, let me know if there are issues here
+
 -W makes psql ask for password
 
 Now that the database is created and running, create a config.js file in your database directory that module exports the string
-'postgres://<username>:<password>@localhost:5432/fridgr'
+
+'postgres://USERNAME:PASSWORD@localhost:5432/fridgr'
+
 with appropriate replacements for username and password.
 
 Now when running on your dev machine this will be used for database connection, else the heroku DATABASE_URL environment variable will be used.
