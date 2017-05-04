@@ -1,3 +1,4 @@
+import React from 'react';
 import HouseInventoryListItem from './HouseInventoryListItem.jsx';
 
 var HouseInventoryList = (props) => {
