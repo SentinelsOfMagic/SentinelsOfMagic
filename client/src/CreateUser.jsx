@@ -27,7 +27,7 @@ class CreateUser extends React.Component {
     if (this.state.userName === true) {
       $.ajax({
       method:'POST',
-      url: 'match server route',
+      url: '/createUser',
       data: {'userName': userName},
       success: (data) => {
         this.setState({
