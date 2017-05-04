@@ -5,7 +5,8 @@ var DIST_DIR = path.join(__dirname, '/client/dist');
 module.exports = {
   entry: {
     index: `${SRC_DIR}/index.jsx`,
-    login: `${SRC_DIR}/login.jsx`
+    login: `${SRC_DIR}/login.jsx`,
+    inventory: `${SRC_DIR}/HouseInventory.jsx`
   },
   output: {
     path: DIST_DIR,
