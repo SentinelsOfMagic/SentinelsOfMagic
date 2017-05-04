@@ -62,7 +62,7 @@ CREATE TABLE private_items (
   user_id integer NOT NULL,
   item_id integer NOT NULL,
   need_to_restock boolean NOT NULL,
-  notes text
+  notes text DEFAULT ''
 );
 
 CREATE INDEX private_items_user_id_index ON private_items (user_id);
