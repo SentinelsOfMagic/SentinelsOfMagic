@@ -5,12 +5,15 @@ class HouseInventoryListItem extends React.Component {
     super(props);
 
     this.state = {
-
+      item: this.props.item
     };
   }
 
   render() {
-
+    return (
+      <div>
+      </div>
+    );
   }
 }
 
