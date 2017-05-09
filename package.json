@@ -1,7 +1,8 @@
 {
   "name": "Fridgr",
   "version": "0.0.1",
-  "description": "",
+  "description": "Tracking groceries got you stressed? Chill.",
+  "repository": "https://github.com/SentinelsOfMagic/SentinelsOfMagic",
   "author": "Sentinels of Magic",
   "license": "MIT",
   "engines": {
@@ -13,6 +14,7 @@
     "server-dev": "nodemon server/index.js"
   },
   "dependencies": {
+    "axios": "^0.16.1",
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
     "jquery": "^3.2.1",
