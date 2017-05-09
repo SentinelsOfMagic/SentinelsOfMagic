@@ -19,24 +19,24 @@ class CreateUser extends React.Component {
     this.setState ({
       userName: e.target.value,
       userNameExists: true
-    })
+    });
   }
 
   submitUserName() {
     var userName = this.state.userName;
     if (this.state.userName === true) {
       $.ajax({
-      method:'POST',
-      url: '/createUser',
-      data: {'userName': userName},
-      success: (data) => {
-        this.setState({
-          messageForUser: ''
-        })
-        console.log('success but i dont expect to get back any data', data);
-      },
-      dataType: 'json'
-      })
+        method: 'POST',
+        url: '/createUser',
+        data: {'userName': userName},
+        success: (data) => {
+          this.setState({
+            messageForUser: ''
+          });
+          console.log('success but i dont expect to get back any data', data);
+        },
+        dataType: 'json'
+      });
     }
     //if user succesfully posts to database succesfully, do we still need a next button?
     //shouldn't we redirect them to another page right after?
@@ -47,18 +47,18 @@ class CreateUser extends React.Component {
       <div>
         <div>Please create one user before proceeding</div>
         <div>Username</div>
-        <input type="text" onChange={this.change}>
+        <input type="text" onChange={this.change}/>
         <div>{this.state.message}</div>
         <button type="submit" onClick={this.submitUserName}>Submit</button>
       </div>
-    )
+    );
   }
 
 }
 
-export default CreateUser;
+// export default CreateUser;
 
-// ReactDOM.render(<CreateUser/>, document.getElementById('app'));
+ReactDOM.render(<CreateUser/>, document.getElementById('createUser'));
 
 
 
