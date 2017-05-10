@@ -10,7 +10,8 @@ class HouseInventory extends React.Component {
 
     this.state = {
       items: [],
-      houseId: 1 // dummy value for now, will get from superclass props eventually
+      houseId: 1, // dummy value for now, will get from superclass props eventually
+      userId: 4
     };
   }
 
@@ -38,7 +39,7 @@ class HouseInventory extends React.Component {
     <div>
       <h1>House Inventory</h1>
       <Nav />
-      <HouseInventoryList items={this.state.items}/>
+      <HouseInventoryList items={this.state.items} userId={this.state.userId} />
     </div>
     );
   }
