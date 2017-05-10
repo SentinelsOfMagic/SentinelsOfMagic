@@ -23,15 +23,33 @@ app.post('/inventory', function(req, res) {
 });
 
 app.post('/restock', function(req, res) {
-  res.send('Need to restock item...');
+  db.query('UPDATE houses_items SET need_to_restock = TRUE WHERE id = ${itemId#}',
+    { itemId: req.body.itemId })
+    .then(() => {
+      console.log('Item successfully updated to need_to_restock = TRUE in houses_items table');
+      res.sendStatus(201);
+    })
+    .catch(err => console.log('Item need_to_restock value unable to be updated in houses_items: ', err));
 });
 
 app.post('/claim', function(req, res) {
-  res.send('Item has been claimed...');
+  db.query('UPDATE houses_items SET user_id = ${userId#} WHERE id = ${itemId#}',
+    { itemId: req.body.itemId, userId: req.body.userId })
+    .then(() => {
+      console.log(`Item successfully updated to user_id = ${req.body.userId} in houses_items table`);
+      res.sendStatus(201);
+    })
+    .catch(err => console.log('Item user_id value unable to be updated in houses_items: ', err));
 });
 
 app.post('/delete', function(req, res) {
-  res.send('Deleting item...');
+  db.query('DELETE FROM houses_items WHERE id = ${itemId#}',
+    { itemId: req.body.itemId })
+    .then(() => {
+      console.log('Item successfully deleted from houses_items table');
+      res.sendStatus(201);
+    })
+    .catch(err => console.log('Item unable to be removed from houses_items: ', err));
 });
 
 app.get('/api/shop', routeHandlers.getShoppingList);
