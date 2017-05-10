@@ -1,6 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 import ReactDOM from 'react-dom';
+import UserNameInputBox from './UserNameInputBox.jsx';
 
 class CreateUser extends React.Component {
   constructor(props) {
@@ -10,55 +11,51 @@ class CreateUser extends React.Component {
       userNameExists: false,
       messageForUser: 'please type in a username'
     };
-    this.change = this.change.bind(this);
+
     this.submitUserName = this.submitUserName.bind(this);
-  }
-
-  change(e) {
-
-    this.setState ({
-      userName: e.target.value,
-      userNameExists: true
-    })
+    this.dataFromInputBox = this.dataFromInputBox.bind(this);
   }
 
   submitUserName() {
     var userName = this.state.userName;
-    if (this.state.userName === true) {
+    if (this.state.userNameExists === true) {
       $.ajax({
-      method:'POST',
-      url: 'match server route',
-      data: {'userName': userName},
-      success: (data) => {
-        this.setState({
-          messageForUser: ''
-        })
-        console.log('success but i dont expect to get back any data', data);
-      },
-      dataType: 'json'
-      })
+        method: 'POST',
+        url: '/createUser',
+        data: {'userName': userName},
+        success: (data) => {
+          this.setState({
+            messageForUser: ''
+          });
+          console.log('success but i dont expect to get back any data', data);
+        },
+        dataType: 'json'
+      });
     }
-    //if user succesfully posts to database succesfully, do we still need a next button?
-    //shouldn't we redirect them to another page right after?
+  }
+
+  dataFromInputBox(data) {
+    console.log('expect true', data.userNameExists);
+    this.setState({
+      userName: data.userName,
+      userNameExists: data.userNameExists
+    });
+    console.log('should have a userName after submit', this.state.userName);
   }
 
   render () {
     return (
       <div>
-        <div>Please create one user before proceeding</div>
+        <div>{this.state.messageForUser}</div>
         <div>Username</div>
-        <input type="text" onChange={this.change} />
-        <div>{this.state.message}</div>
-        <button type="submit" onClick={this.submitUserName}>Submit</button>
+        <UserNameInputBox dataFromInputBox={this.dataFromInputBox} submitUserName={this.submitUserName}/>
       </div>
-    )
+    );
   }
 
 }
 
-export default CreateUser;
-
-// ReactDOM.render(<CreateUser/>, document.getElementById('app'));
+ReactDOM.render(<CreateUser/>, document.getElementById('createUser'));
 
 
 
