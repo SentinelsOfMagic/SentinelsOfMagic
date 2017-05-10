@@ -11,6 +11,7 @@ var HouseInventoryList = (props) => {
       {props.items.map((item, index) =>
         <HouseInventoryListItem
         item = {item}
+        userId = {props.userId}
         key = {index}
         />
       )}
