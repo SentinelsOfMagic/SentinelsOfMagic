@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import HouseInventoryList from './HouseInventoryList.jsx';
 import Nav from './Nav.jsx';
-import dummyData from '../../database/dummyData.js';
 
 class HouseInventory extends React.Component {
   constructor(props) {
@@ -49,4 +48,5 @@ class HouseInventory extends React.Component {
   }
 }
 
-ReactDOM.render(<HouseInventory dummyData={dummyData} />, document.getElementById('inventory'));
+export default HouseInventory;
+// ReactDOM.render(<HouseInventory dummyData={dummyData} />, document.getElementById('inventory'));
