@@ -21,6 +21,7 @@ class HouseInventory extends React.Component {
     // will need to send the house id with this request
     axios.get('/inventory')
       .then(data => {
+        console.log(data);
         console.log('Successful GET request - house inventory items retrieved');
         callback(data);
       })

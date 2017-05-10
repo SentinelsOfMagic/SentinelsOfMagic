@@ -1,6 +1,10 @@
 import React from 'react';
 import HouseInventoryListItem from './HouseInventoryListItem.jsx';
 
+const AddItem = () => {
+  return (<p>AddItem</p>);
+};
+
 var HouseInventoryList = (props) => {
   return (
     <div>
