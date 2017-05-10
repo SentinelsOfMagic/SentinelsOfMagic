@@ -9,7 +9,8 @@ class HouseInventory extends React.Component {
     super(props);
 
     this.state = {
-      items: this.props.dummyData
+      items: [],
+      houseId: 1 // dummy value for now, will get from superclass props eventually
     };
   }
 
@@ -18,12 +19,10 @@ class HouseInventory extends React.Component {
   }
 
   getItems(callback) {
-    // will need to send the house id with this request
-    axios.get('/inventory')
-      .then(data => {
-        console.log(data);
-        console.log('Successful GET request - house inventory items retrieved');
-        callback(data);
+    axios.post('/inventory', { houseId: this.state.houseId })
+      .then(res => {
+        console.log('Successful GET request - house inventory items retrieved: ', res.data);
+        callback(res.data);
       })
       .catch(err => console.log('Unable to GET house inventory items: ', err));
   }
@@ -46,4 +45,3 @@ class HouseInventory extends React.Component {
 }
 
 export default HouseInventory;
-// ReactDOM.render(<HouseInventory dummyData={dummyData} />, document.getElementById('inventory'));
