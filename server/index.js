@@ -2,37 +2,21 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var db = require('../database/index.js');
 var request = require('request');
+var pgp = require('pg-promise')();
 
 var app = express();
 
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/../client/dist'));
 
-app.get('/inventory', function(req, res) {
-  // query houses_items table JOIN items table on item_id JOIN users table on user_id
-
-  // structure data in response
-  // list of items
-  /*
-  [
-    {
-      id: ,
-      name: ,
-      notes: ,
-      needToRestock: ,
-      username:
-    },
-    {
-      id: ,
-      name: ,
-      notes: ,
-      needToRestock: ,
-      username:
-    }
-  ]
-  */
-  // send back data
-  res.send('Getting inventory...');
+app.post('/inventory', function(req, res) {
+  db.query('SELECT houses_items.id AS id, houses_items.need_to_restock AS needToRestock, houses_items.notes AS notes, users.username AS username, items.itemname AS name FROM houses_items LEFT JOIN users ON houses_items.user_id = users.id LEFT JOIN items ON houses_items.item_id = items.id WHERE houses_items.house_id = ${houseId#};',
+    { houseId: req.body.houseId })
+    .then(data => {
+      console.log('Successful DB query: ', data)
+      res.send(data);
+    })
+    .catch(err => console.log('Bad DB query: ', err));
 });
 
 app.post('/restock', function(req, res) {
