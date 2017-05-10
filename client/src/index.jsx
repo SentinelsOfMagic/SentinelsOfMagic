@@ -1,10 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-<<<<<<< HEAD
-import HouseInventory from './components/HouseInventory.jsx';
-||||||| merged common ancestors
-import HouseInventory from './components/houseInventory.jsx';
-=======
 import getMuiTheme from 'material-ui/styles/getMuiTheme'; // method that returns material-ui theme
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'; // material-ui component
 import injectTapEventPlugin from 'react-tap-event-plugin'; // required for material-ui to function properly
@@ -14,7 +9,6 @@ import HomePage from './components/HomePage.jsx';
 import LoginPage from './containers/LoginPage.jsx';
 import SignUpPage from './containers/SignUpPage.jsx';
 import HouseInventory from './components/houseInventory.jsx';
->>>>>>> Add login/signup client components
 import CreateUser from './components/CreateUser.jsx';
 import dummyData from '../../database/dummyData.js'; // moved from houseInventory.jsx
 
