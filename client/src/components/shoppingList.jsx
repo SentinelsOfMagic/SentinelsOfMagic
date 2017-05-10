@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import ShoppingListItem from './components/ShoppingListItem.jsx';
+import ShoppingListItem from './ShoppingListItem.jsx';
 
 
 class ShoppingList extends React.Component {
@@ -13,9 +13,9 @@ class ShoppingList extends React.Component {
 
   componentWillMount() {
     axios.get('/api/shop')
-      .then((req, res) => {
-        console.log(res);
-        this.setState({shoppingListItems: res});
+      .then((res) => {
+        console.log('server response', res);
+        this.setState({shoppingListItems: res.data});
       })
       .catch((err) => {
         console.log(err);
@@ -25,9 +25,9 @@ class ShoppingList extends React.Component {
   render() {
     return (
       <div>
-        {this.state.shoppingListItems.map((item) => {
+        {this.state.shoppingListItems.map((item, index) => {
           return (
-            <ShoppingListItem item={item} />
+            <ShoppingListItem item={item} key={index} />
           );
         })}
       </div>
@@ -35,4 +35,4 @@ class ShoppingList extends React.Component {
   }
 }
 
-ReactDOM.render(<ShoppingList />, document.getElementById('shopping-list'));
+export default ShoppingList;
