@@ -47,11 +47,11 @@ class CreateUser extends React.Component {
       <div>
         <div>Please create one user before proceeding</div>
         <div>Username</div>
-        <input type="text" onChange={this.change}>
+        <input type="text" onChange={this.change} />
         <div>{this.state.message}</div>
         <button type="submit" onClick={this.submitUserName}>Submit</button>
       </div>
-    )
+    );
   }
 
 }

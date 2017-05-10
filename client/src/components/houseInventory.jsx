@@ -48,4 +48,5 @@ class HouseInventory extends React.Component {
   }
 }
 
-ReactDOM.render(<HouseInventory />, document.getElementById('inventory'));
+export default HouseInventory;
+//ReactDOM.render(<HouseInventory />, document.getElementById('inventory'));
