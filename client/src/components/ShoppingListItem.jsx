@@ -7,8 +7,9 @@ class ShoppingListItem extends React.Component {
 
   render() {
     return (
-      <div>
-      </div>
+      <ul>
+        <li>{this.props.item.itemname}</li>
+      </ul>
     );
   }
 }
