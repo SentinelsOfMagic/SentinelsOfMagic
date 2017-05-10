@@ -9,12 +9,11 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + '/../client/dist'));
 
 app.get('/inventory', function(req, res) {
-
 });
 
 
-app.post('/createUser', function(req, res) {
-  console.log('listening');
+app.get('/createUser', function(req, res) {
+  res.sendFile('/Users/ihe/Documents/Hack Reactor Prep/SentinelsOfMagic/client/dist/create-user.html')
 });
 
 app.listen(1337, function() {
