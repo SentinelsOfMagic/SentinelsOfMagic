@@ -37,7 +37,6 @@
     "babel-register": "^6.7.2",
     "webpack": "^2.5.0"
   },
-
   "devDependencies": {
     "chai": "^3.5.0",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",

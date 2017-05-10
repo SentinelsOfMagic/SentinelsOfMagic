@@ -8,7 +8,6 @@ const AddItem = () => {
 var HouseInventoryList = (props) => {
   return (
     <div>
-      <AddItem />
       {props.items.map((item, index) =>
         <HouseInventoryListItem
         item = {item}

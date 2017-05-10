@@ -7,10 +7,10 @@ class HouseInventoryListItem extends React.Component {
 
     this.state = {
       id: this.props.item.id, // this houses_items primary key id
-      name: this.props.item.itemname,
+      name: this.props.item.name,
       notes: this.props.item.notes,
-      needToRestock: this.props.item.need_to_restock,
-      username: '',
+      needToRestock: this.props.item.needtorestock,
+      username: this.props.item.username,
       session: '', // still unsure as to how the session hash will be accessed
       hide: false
     };
@@ -72,7 +72,7 @@ class HouseInventoryListItem extends React.Component {
           <button type="button" className="restock-button" onClick={this.clickRestock.bind(this)}>Need to Restock</button>
         </div>
       );
-    } else if (this.state.needToRestock && this.state.username === '') {
+    } else if (this.state.needToRestock && this.state.username === null) {
       return (
         <div>
           <div className="item-name">Name: {this.state.name}</div>
@@ -81,7 +81,7 @@ class HouseInventoryListItem extends React.Component {
           <button type="button" className="delete-button" onClick={this.clickDelete.bind(this)}>Delete</button>
         </div>
       );
-    } else if (this.state.needToRestock && this.state.username.length > 0) {
+    } else if (this.state.needToRestock && typeof this.state.username === 'string') {
       return (
         <div>
           <div className="item-name">Name: {this.state.name}</div>
