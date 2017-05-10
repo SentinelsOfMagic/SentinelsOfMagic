@@ -7,8 +7,6 @@ DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS houses;
 DROP TABLE IF EXISTS items;
 
-
-
 CREATE TABLE items (
   id integer NOT NULL PRIMARY KEY,
   itemname text UNIQUE NOT NULL
