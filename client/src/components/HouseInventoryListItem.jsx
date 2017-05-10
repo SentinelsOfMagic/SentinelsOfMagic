@@ -11,7 +11,7 @@ class HouseInventoryListItem extends React.Component {
       notes: this.props.item.notes,
       needToRestock: this.props.item.needtorestock,
       username: this.props.item.username,
-      session: '', // still unsure as to how the session hash will be accessed
+      userId: this.props.userId,
       hide: false
     };
   }
@@ -28,11 +28,7 @@ class HouseInventoryListItem extends React.Component {
   }
 
   clickClaim(event) {
-    axios.post('/claim', {
-      // send session hash
-      session: this.state.session, // would this be stored on this.state? TBD
-      itemId: this.state.id
-    })
+    axios.post('/claim', { itemId: this.state.id, userId: this.state.userId })
       .then(res => {
         console.log('Successful POST request to /claim');
         // response should have the username
@@ -45,12 +41,9 @@ class HouseInventoryListItem extends React.Component {
   }
 
   clickDelete(event) {
-    // post request to the db
     axios.post('/delete', { itemId: this.state.id })
       .then(res => {
         console.log('Successful POST request to /delete');
-        // put in a conditional statement in the render function that "hides" the element until the page is refreshed
-        // which should update the list from the database i.e. load inventory list without the deleted item
         this.setState({
           hide: true
         });
