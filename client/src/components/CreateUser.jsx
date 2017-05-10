@@ -55,7 +55,7 @@ class CreateUser extends React.Component {
 
 }
 
-ReactDOM.render(<CreateUser/>, document.getElementById('createUser'));
+//ReactDOM.render(<CreateUser/>, document.getElementById('createUser'));
 
 
 
