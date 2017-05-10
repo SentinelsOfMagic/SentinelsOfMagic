@@ -17,50 +17,45 @@ class HouseInventoryListItem extends React.Component {
   }
 
   clickRestock(event) {
-    axios.post('/restock', {
-      itemId: this.state.id
-    })
-    .then(res => {
-      console.log('Successful POST request to /restock');
-      this.setState({
-        needToRestock: true
-      });
-    })
-    .catch(err => console.log('Bad POST request to /restock: ', err));
+    axios.post('/restock', { itemId: this.state.id })
+      .then(res => {
+        console.log('Successful POST request to /restock');
+        this.setState({
+          needToRestock: true
+        });
+      })
+      .catch(err => console.log('Bad POST request to /restock: ', err));
   }
 
   clickClaim(event) {
-    // post request to the db
     axios.post('/claim', {
       // send session hash
       session: this.state.session, // would this be stored on this.state? TBD
       itemId: this.state.id
     })
-    .then(res => {
-      console.log('Successful POST request to /claim');
-      // response should have the username
-      // update username in state
-      this.setState({
-        username: 'April' // something like res.username
-      });
-    })
-    .catch(err => console.log('Bad POST request to /claim: ', err));
+      .then(res => {
+        console.log('Successful POST request to /claim');
+        // response should have the username
+        // update username in state
+        this.setState({
+          username: 'April' // something like res.username
+        });
+      })
+      .catch(err => console.log('Bad POST request to /claim: ', err));
   }
 
   clickDelete(event) {
     // post request to the db
-    axios.post('/delete', {
-      itemId: this.state.id
-    })
-    .then(res => {
-      console.log('Successful POST request to /delete');
-      // put in a conditional statement in the render function that "hides" the element until the page is refreshed
-      // which should update the list from the database i.e. load inventory list without the deleted item
-      this.setState({
-        hide: true
-      });
-    })
-    .catch(err => console.log('Bad POST request to /delete'));
+    axios.post('/delete', { itemId: this.state.id })
+      .then(res => {
+        console.log('Successful POST request to /delete');
+        // put in a conditional statement in the render function that "hides" the element until the page is refreshed
+        // which should update the list from the database i.e. load inventory list without the deleted item
+        this.setState({
+          hide: true
+        });
+      })
+      .catch(err => console.log('Bad POST request to /delete'));
   }
 
   render() {
