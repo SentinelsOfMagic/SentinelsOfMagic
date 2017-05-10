@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import $ from 'jquery';
+import axios from 'axios';
 import HouseInventoryList from './HouseInventoryList.jsx';
 import Nav from './Nav.jsx';
 
@@ -18,17 +18,13 @@ class HouseInventory extends React.Component {
   }
 
   getItems(callback) {
-    $.ajax({
-      type: 'GET',
-      url: '/inventory',
-      success: function(data) {
+    // will need to send the house id with this request
+    axios.get('/inventory')
+      .then(data => {
         console.log('Successful GET request - house inventory items retrieved');
         callback(data);
-      },
-      error: function() {
-        console.log('Unable to GET house inventory items');
-      }
-    });
+      })
+      .catch(err => console.log('Unable to GET house inventory items: ', err));
   }
 
   updateItems(data) {

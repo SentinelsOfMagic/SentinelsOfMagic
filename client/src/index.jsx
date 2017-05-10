@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import HouseInventory from './components/houseInventory.jsx';
+import HouseInventory from './components/HouseInventory.jsx';
 import CreateUser from './components/CreateUser.jsx';
 import dummyData from '../../database/dummyData.js'; // moved from houseInventory.jsx
 
