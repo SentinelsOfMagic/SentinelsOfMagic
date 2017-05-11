@@ -9,12 +9,14 @@ const LoginForm = ({
   onSubmit,
   onChange,
   errors,
+  successMessage,
   user
 }) => (
   <Card className="container">
     <form action="/" onSubmit={onSubmit}>
       <h2 className="card-heading">Login</h2>
 
+      {successMessage && <p className="success-message">{successMessage}</p>}
       {errors.summary && <p className="error-message">{errors.summary}</p>}
 
       <div className="field-line">
