@@ -12,6 +12,7 @@ import HouseInventory from './components/houseInventory.jsx';
 import CreateUser from './components/CreateUser.jsx';
 import dummyData from '../../database/dummyData.js'; // moved from houseInventory.jsx
 import shoppingList from './components/shoppingList.jsx';
+import SelectUser from './components/SelectUser.jsx';
 
 injectTapEventPlugin(); // required for material-ui to function properly
 
@@ -35,6 +36,8 @@ class App extends React.Component {
               <Route path="/login" component={LoginPage}/>
               <Route path="/signup" component={SignUpPage}/>
               <Route path="/shop" component={shoppingList} />
+              <Route path="/createUser" component={CreateUser}/>
+              <Route path="/Users" component={SelectUser}/>
             </div>
           </Router>
         </MuiThemeProvider>

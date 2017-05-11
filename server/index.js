@@ -10,6 +10,7 @@ let routeHandlers = require('./lib/route-handlers');
 let app = express();
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/../client/dist'));
 
 app.post('/inventory', function(req, res) {
@@ -50,6 +51,40 @@ app.post('/delete', function(req, res) {
       res.sendStatus(201);
     })
     .catch(err => console.log('Item unable to be removed from houses_items: ', err));
+});
+
+app.post('/createUser', function(req, res) {
+  console.log('expect username and houseId', req.body);
+  res.send('Creating User...');
+});
+
+app.post('/Users', function(req, res) {
+  console.log('are you herreeeeeeee?', req.body);
+
+  res.send([
+  {
+    id: 1,
+    username: 'bob',
+    'house_id': 3
+  },
+  {
+    id: 2,
+    username: 'tom',
+    'house_id': 3
+  },
+  {
+    id: 3,
+    username: 'joe',
+    'house_id': 2
+  },
+  {
+    id: 4,
+    username: 'pam',
+    'house_id': 2
+  }
+
+
+]);
 });
 
 app.get('/api/shop', routeHandlers.getShoppingList);
