@@ -35,6 +35,7 @@ class App extends React.Component {
               <Route path="/login" component={LoginPage}/>
               <Route path="/signup" component={SignUpPage}/>
               <Route path="/shop" component={shoppingList} />
+              <Route path="/createUser" component={CreateUser}/>
             </div>
           </Router>
         </MuiThemeProvider>

@@ -22,14 +22,12 @@ class CreateUser extends React.Component {
       $.ajax({
         method: 'POST',
         url: '/createUser',
-        data: {'userName': userName},
+        data: { userName: userName },
         success: (data) => {
           this.setState({
             messageForUser: ''
           });
-          console.log('success but i dont expect to get back any data', data);
-        },
-        dataType: 'json'
+        }
       });
     }
   }
@@ -39,8 +37,9 @@ class CreateUser extends React.Component {
     this.setState({
       userName: data.userName,
       userNameExists: data.userNameExists
+    }, function() {
+      this.submitUserName();
     });
-    console.log('should have a userName after submit', this.state.userName);
   }
 
   render () {
@@ -55,7 +54,7 @@ class CreateUser extends React.Component {
 
 }
 
-//ReactDOM.render(<CreateUser/>, document.getElementById('createUser'));
+export default CreateUser;
 
 
 

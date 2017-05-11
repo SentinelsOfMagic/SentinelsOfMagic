@@ -10,6 +10,7 @@ let routeHandlers = require('./lib/route-handlers');
 let app = express();
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/../client/dist'));
 
 app.post('/inventory', function(req, res) {
@@ -32,6 +33,11 @@ app.post('/claim', function(req, res) {
 
 app.post('/delete', function(req, res) {
   res.send('Deleting item...');
+});
+
+app.post('/createUser', function(req, res) {
+  console.log('expect username', req.body);
+  res.send('Creating User...');
 });
 
 app.get('/api/shop', routeHandlers.getShoppingList);

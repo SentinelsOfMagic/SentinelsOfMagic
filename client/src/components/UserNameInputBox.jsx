@@ -22,16 +22,14 @@ class UserNameInputBox extends React.Component {
 
 
   passDataToCreateUser() {
-    if (this.state.userNameExists === true) {
-      this.props.dataFromInputBox({userName: this.state.userName, userNameExists: this.state.userNameExists});
-    }
+    this.props.dataFromInputBox({userName: this.state.userName, userNameExists: this.state.userNameExists});
   }
 
   render () {
     return (
       <div>
        <input type='text' onChange={this.change}></input>
-        <button type="submit" onClick={(e)=>{ this.passDataToCreateUser(); this.props.submitUserName(); }} >Submit</button>
+        <button type="submit" onClick={(e)=>{ this.passDataToCreateUser(); }} >Submit</button>
       </div>
     );
   }
