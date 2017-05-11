@@ -75,7 +75,7 @@ app.post('/users', function(req, res) {
 });
 
 app.get('/api/shop', routeHandlers.getShoppingList);
-app.post('/api/shop', routeHandlers.modifyShoppingList);
+app.post('/api/shop', routeHandlers.updateWithPurchases);
 
 app.get('*', function(req, res) {
   res.sendFile(path.resolve(__dirname + '/../client/dist/index.html'));
