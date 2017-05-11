@@ -1,4 +1,5 @@
 import React from 'react';
+import ListItem from 'material-ui/List';
 
 class ShoppingListItem extends React.Component {
   constructor(props) {
@@ -7,9 +8,7 @@ class ShoppingListItem extends React.Component {
 
   render() {
     return (
-      <ul>
-        <li>{this.props.item.itemname}</li>
-      </ul>
+      <ListItem primaryText={this.props.item.itemname} />
     );
   }
 }
