@@ -9,7 +9,8 @@ class CreateUser extends React.Component {
     this.state = {
       userName: '',
       userNameExists: false,
-      messageForUser: 'please type in a username'
+      messageForUser: 'please type in a username',
+      houseId: 1 //need to get from login
     };
 
     this.submitUserName = this.submitUserName.bind(this);
@@ -22,7 +23,7 @@ class CreateUser extends React.Component {
       $.ajax({
         method: 'POST',
         url: '/createUser',
-        data: { userName: userName },
+        data: { userName: userName, houseId: this.state.houseId },
         success: (data) => {
           this.setState({
             messageForUser: ''

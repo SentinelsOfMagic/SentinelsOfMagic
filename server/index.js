@@ -36,8 +36,37 @@ app.post('/delete', function(req, res) {
 });
 
 app.post('/createUser', function(req, res) {
-  console.log('expect username', req.body);
+  console.log('expect username and houseId', req.body);
   res.send('Creating User...');
+});
+
+app.post('/Users', function(req, res) {
+  console.log('are you herreeeeeeee?', req.body);
+
+  res.send([
+  {
+    id: 1,
+    username: 'bob',
+    'house_id': 3
+  },
+  {
+    id: 2,
+    username: 'tom',
+    'house_id': 3
+  },
+  {
+    id: 3,
+    username: 'joe',
+    'house_id': 2
+  },
+  {
+    id: 4,
+    username: 'pam',
+    'house_id': 2
+  }
+
+
+]);
 });
 
 app.get('/api/shop', routeHandlers.getShoppingList);
