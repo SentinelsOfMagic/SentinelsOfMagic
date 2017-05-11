@@ -37,7 +37,7 @@ class App extends React.Component {
               <Route path="/signup" component={SignUpPage}/>
               <Route path="/shop" component={shoppingList} />
               <Route path="/createUser" component={CreateUser}/>
-              <Route path="/Users" component={SelectUser}/>
+              <Route path="/users" component={SelectUser}/>
             </div>
           </Router>
         </MuiThemeProvider>

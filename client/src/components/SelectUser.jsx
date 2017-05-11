@@ -29,7 +29,7 @@ class SelectUser extends React.Component {
   getUsers() {
     $.ajax({
       method: 'POST',
-      url: '/Users',
+      url: '/users',
       data: { houseId: this.state.houseId },
       success: (data) => {
         this.setState({

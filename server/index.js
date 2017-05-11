@@ -5,6 +5,7 @@ var request = require('request');
 var pgp = require('pg-promise')();
 let path = require('path');
 let routeHandlers = require('./lib/route-handlers');
+let authRoutes = require('./lib/auth.js');
 
 
 let app = express();
@@ -12,6 +13,7 @@ let app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/../client/dist'));
+app.use('/auth', authRoutes);
 
 app.post('/inventory', function(req, res) {
   db.query('SELECT houses_items.id AS id, houses_items.need_to_restock AS needToRestock, houses_items.notes AS notes, users.username AS username, items.itemname AS name FROM houses_items LEFT JOIN users ON houses_items.user_id = users.id LEFT JOIN items ON houses_items.item_id = items.id WHERE houses_items.house_id = ${houseId#};',
@@ -58,7 +60,7 @@ app.post('/createUser', function(req, res) {
   res.send('Creating User...');
 });
 
-app.post('/Users', function(req, res) {
+app.post('/users', function(req, res) {
   console.log('are you herreeeeeeee?', req.body);
 
   res.send([
