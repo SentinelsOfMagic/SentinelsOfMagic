@@ -2,13 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import ShoppingListItem from './ShoppingListItem.jsx';
+import {List, ListItem} from 'material-ui/List';
 
 
 class ShoppingList extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {shoppingListItems: []};
+    this.state = {shoppingListItems: [], selectedItems: []};
   }
 
   componentWillMount() {
@@ -24,13 +25,13 @@ class ShoppingList extends React.Component {
 
   render() {
     return (
-      <div>
+      <List>
         {this.state.shoppingListItems.map((item, index) => {
           return (
-            <ShoppingListItem item={item} key={index} />
+            <ListItem primaryText={item.itemname} key={index} />
           );
         })}
-      </div>
+      </List>
     );
   }
 }
