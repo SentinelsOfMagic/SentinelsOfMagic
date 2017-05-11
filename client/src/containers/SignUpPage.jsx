@@ -14,7 +14,8 @@ class SignUpPage extends React.Component {
       user: {
         houseName: '',
         password: ''
-      }
+      },
+      signedUp: false
     };
 
     this.processForm = this.processForm.bind(this);
@@ -48,10 +49,14 @@ class SignUpPage extends React.Component {
     .then((response) => {
 
       console.log('The form is valid');
+      localStorage.setItem('successMessage', response.data.message);
 
+      // redirect to LoginPage (with success message)
       context.setState({
-        errors: {}
+        errors: {},
+        signedUp: true
       });
+
     })
     .catch((err) => {
       var errors = err.response.data.errors ? err.response.data.errors : {};
@@ -66,12 +71,14 @@ class SignUpPage extends React.Component {
   render() {
     return (
       <div>
-        <SignUpForm
-          onSubmit={this.processForm}
-          onChange={this.changeUser}
-          errors={this.state.errors}
-          user={this.state.user}
-        />
+        {this.state.signedUp ?
+          <Redirect to='/login' /> :
+          <SignUpForm
+            onSubmit={this.processForm}
+            onChange={this.changeUser}
+            errors={this.state.errors}
+            user={this.state.user}
+          />}
       </div>
     );
   }

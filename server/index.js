@@ -4,8 +4,6 @@ var db = require('../database/index.js');
 var request = require('request');
 var pgp = require('pg-promise')();
 let path = require('path');
-let routeHandlers = require('./lib/route-handlers');
-let authRoutes = require('./lib/auth.js');
 
 
 let app = express();
@@ -13,6 +11,10 @@ let app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/../client/dist'));
+
+// routes
+let routeHandlers = require('./lib/route-handlers');
+let authRoutes = require('./lib/auth.js');
 app.use('/auth', authRoutes);
 
 app.post('/inventory', function(req, res) {

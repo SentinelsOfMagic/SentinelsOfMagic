@@ -1,5 +1,7 @@
 const express = require('express');
 const router = new express.Router();
+const db = require('../../database/index.js');
+const hashUtils = require('./hashUtils.js');
 
 // - validates the signup form. The 'payload' parameter is given by the data passed in by the post
 // request
@@ -70,7 +72,33 @@ router.post('/signup', (req, res, next) => {
       errors: validationResult.errors
     });
   } else {
-    return res.status(200).end();
+
+    //generate salt and hash
+    hashUtils.salt(32, (err, saltString) => {
+      if (err) {
+        console.error(err);
+        return;
+      }
+      var salt = saltString.toString('hex');
+      var hashedPW = hashUtils.hash('sha256').update(req.body.password + salt).digest('hex');
+
+      // write to database
+      var sql = 'INSERT INTO houses (housename, password, salt) VALUES ($1, $2, $3);';
+
+      db.query(sql, [req.body.houseName, hashedPW, salt])
+      .then((data) => {
+        console.log('House written to DB successfully:', data);
+      })
+      .catch((err) => {
+        console.log('Cannot write house to DB:', err);
+      });
+    });
+
+      // return res with a 'signup successful' message
+    return res.status(200).json({
+      success: true,
+      message: 'Sign up successful! Please log in with your new account.'
+    });
   }
 });
 
