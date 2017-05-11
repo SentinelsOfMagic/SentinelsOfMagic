@@ -8,12 +8,12 @@ DROP TABLE IF EXISTS houses;
 DROP TABLE IF EXISTS items;
 
 CREATE TABLE items (
-  id integer NOT NULL PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   itemname text UNIQUE NOT NULL
 );
 
 CREATE TABLE houses (
-  id  integer NOT NULL PRIMARY KEY,
+  id  SERIAL PRIMARY KEY,
   housename varchar(64) UNIQUE NOT NULL,
   password varchar(64) NOT NULL,
   salt text NOT NULL
@@ -22,7 +22,7 @@ CREATE TABLE houses (
 CREATE INDEX houses_housename_index ON houses (housename);
 
 CREATE TABLE users (
-  id integer NOT NULL PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   username text NOT NULL,
   house_id integer NOT NULL
 );
@@ -30,14 +30,14 @@ CREATE TABLE users (
 CREATE INDEX users_house_id_index ON users (house_id);
 
 CREATE TABLE sessions (
-  id integer NOT NULL PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   hash varchar(64) NOT NULL,
   house_id integer NOT NULL,
   user_id integer
 );
 
 CREATE TABLE houses_items (
-  id integer NOT NULL PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   house_id integer NOT NULL,
   item_id integer NOT NULL,
   need_to_restock boolean NOT NULL,
@@ -48,7 +48,7 @@ CREATE TABLE houses_items (
 CREATE INDEX houses_items_house_id_index ON houses_items (house_id);
 
 CREATE TABLE users_house_items (
-    id integer NOT NULL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     user_id integer NOT NULL,
     houses_items_id integer NOT NULL
 );
@@ -56,7 +56,7 @@ CREATE TABLE users_house_items (
 CREATE INDEX users_house_items_user_id_index ON users_house_items (user_id);
 
 CREATE TABLE private_items (
-  id integer NOT NULL PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   user_id integer NOT NULL,
   item_id integer NOT NULL,
   need_to_restock boolean NOT NULL,
@@ -66,7 +66,7 @@ CREATE TABLE private_items (
 CREATE INDEX private_items_user_id_index ON private_items (user_id);
 
 CREATE TABLE users_private_items (
-  id integer NOT NULL PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   user_id integer NOT NULL,
   private_item_id integer NOT NULL
 );
