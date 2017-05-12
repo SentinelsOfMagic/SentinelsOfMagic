@@ -2,6 +2,7 @@ import React from 'react';
 import $ from 'jquery';
 import dummyUserData from '../../../database/dummyUserData.js';
 import Users from './Users.jsx';
+import { Link } from 'react-router-dom';
 
 
 class SelectUser extends React.Component {
@@ -35,6 +36,7 @@ class SelectUser extends React.Component {
         this.setState({
           data: data
         });
+        console.log('expect array with data', this.state.data);
       }
     });
   }

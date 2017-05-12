@@ -58,37 +58,20 @@ app.post('/delete', function(req, res) {
 });
 
 app.post('/createUser', function(req, res) {
-  console.log('expect username and houseId', req.body);
-  res.send('Creating User...');
+  db.query('INSERT INTO users (id, username, house_id) VALUES (6, ${userName}, ${houseId#})', { userName: req.body.userName, houseId: req.body.houseId} )
+    .then(() => {
+      console.log('done creating user');
+      res.sendStatus(201);
+    })
+    .catch (err => console.log('unable to create user', err));
 });
 
 app.post('/users', function(req, res) {
-  console.log('are you herreeeeeeee?', req.body);
-
-  res.send([
-  {
-    id: 1,
-    username: 'bob',
-    'house_id': 3
-  },
-  {
-    id: 2,
-    username: 'tom',
-    'house_id': 3
-  },
-  {
-    id: 3,
-    username: 'joe',
-    'house_id': 2
-  },
-  {
-    id: 4,
-    username: 'pam',
-    'house_id': 2
-  }
-
-
-]);
+  db.query('SELECT * FROM users WHERE house_id=${houseId#}', { houseId: req.body.houseId })
+  .then( (data)=> {
+    res.send(data);
+  })
+  .catch(err => console.log('unable to get users', err));
 });
 
 app.get('/api/shop', routeHandlers.getShoppingList);
