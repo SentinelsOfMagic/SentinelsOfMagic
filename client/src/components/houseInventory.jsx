@@ -11,7 +11,7 @@ class HouseInventory extends React.Component {
 
     this.state = {
       items: [],
-      houseId: 1, // dummy value for now, will get from superclass props eventually
+      houseId: 1, // dummy value for now, will use cookies in future
       userId: 4
     };
   }
