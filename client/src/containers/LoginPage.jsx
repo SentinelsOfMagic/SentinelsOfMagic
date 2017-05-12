@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import LoginForm from '../components/LoginForm.jsx';
-
+import { Redirect } from 'react-router-dom';
 
 class LoginPage extends React.Component {
 
@@ -22,7 +22,9 @@ class LoginPage extends React.Component {
         houseName: '',
         password: ''
       },
-      successMessage: successMessage
+      successMessage: successMessage,
+      redirect: false,
+      to: ''
     };
 
     this.processForm = this.processForm.bind(this);
@@ -56,15 +58,28 @@ class LoginPage extends React.Component {
     .then((response) => {
       console.log('Login form is valid');
 
-      context.setState({
-        errors: {}
-      });
-
-      // TODO: get cookie from server
+      var houseId = parseInt(document.cookie.split('=')[1]);
 
       // check if a user exists
+      if (response.data.length > 0) {
+        console.log('have users');
         // if exists, redirect to SelectUser
+        context.setState({
+          errors: {},
+          houseId: houseId,
+          redirect: true,
+          to: '/users'
+        });
+      } else {
         // if no user exists, redirect to CreateUser
+        console.log('no user found');
+        context.setState({
+          errors: {},
+          houseId: houseId,
+          redirect: true,
+          to: '/createUser'
+        });
+      }
     })
     .catch((err) => {
       var errors = err.response.data.errors ? err.response.data.errors : {};
@@ -78,13 +93,17 @@ class LoginPage extends React.Component {
 
   render() {
     return (
-      <LoginForm
-        onSubmit={this.processForm}
-        onChange={this.changeUser}
-        errors={this.state.errors}
-        successMessage={this.state.successMessage}
-        user={this.state.user}
-      />
+      <div>
+        {this.state.redirect ?
+          <Redirect to={this.state.to}/> :
+          <LoginForm
+            onSubmit={this.processForm}
+            onChange={this.changeUser}
+            errors={this.state.errors}
+            successMessage={this.state.successMessage}
+            user={this.state.user}
+          />}
+      </div>
     );
   }
 }

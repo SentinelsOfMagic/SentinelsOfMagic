@@ -131,31 +131,34 @@ router.post('/login', (req, res, next) => {
     });
   } else {
     // get house, password, and salt from database using houseName
-    var sql = 'SELECT * FROM houses WHERE housename = \'${houseName#}\'';
-    db.query(sql, {houseName: req.body.houseName})
+    var houseQuery = 'SELECT * FROM houses WHERE housename = \'${houseName#}\'';
+    db.one(houseQuery, {houseName: req.body.houseName})
     .then((houseData) => {
       console.log('House data retrieved:', houseData);
 
-      // if no house found in db, return error message
-      if (houseData.length === 0) {
-        return res.status(400).json({
-          success: false,
-          message: 'Incorrect house name or password.'
-        });
-      }
-
       // use salt and password input to generate hash
-      var inputHash = hashUtils.hash('sha256').update(req.body.password + houseData[0].salt).digest('hex');
+      var inputHash = hashUtils.hash('sha256').update(req.body.password + houseData.salt).digest('hex');
 
       // compare new hash to hash in database
-      if (inputHash === houseData[0].password) {
+      if (inputHash === houseData.password) {
         console.log('passwords match');
 
-        // if match, return status 200
-        return res.status(200).end();
+        // check if a user exists
+        var userQuery = 'SELECT * FROM users WHERE house_id=${houseId#}';
+        db.query(userQuery, {houseId: houseData.id})
+        .then((usersData) => {
+          console.log('Users retrieved:', usersData);
+
+          // set cookie
+          res.cookie('houseId', `${houseData.id}`);
+          res.status(200).json(usersData);
+        })
+        .catch((err) => {
+          console.log('Error retrieving users:', err);
+        });
       } else {
         // if no match, return error
-        return res.status(400).json({
+        return res.status(401).json({
           success: false,
           message: 'Incorrect house name or password.'
         });
@@ -163,8 +166,19 @@ router.post('/login', (req, res, next) => {
     })
     .catch((err) => {
       console.log('Error retrieving house data:', err);
+
+      // if no house found in db, return error message
+      if (err.code === 0) {
+        return res.status(400).json({
+          success: false,
+          message: 'Incorrect house name or password.'
+        });
+      }
     });
   }
 });
+
+// TODO:
+// - update Base to reflect login/logout
 
 module.exports = router;

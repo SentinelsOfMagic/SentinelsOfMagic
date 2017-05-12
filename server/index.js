@@ -4,12 +4,14 @@ var db = require('../database/index.js');
 var request = require('request');
 var pgp = require('pg-promise')();
 let path = require('path');
+var cookieParser = require('cookie-parser');
 
 
 let app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 app.use(express.static(__dirname + '/../client/dist'));
 
 // routes
