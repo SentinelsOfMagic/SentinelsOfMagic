@@ -1,24 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-class Nav extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-
-    };
-  }
-
-
-
-  render() {
-    return (
-      <div>
-        <button id="my-shopping-list">My Shopping List</button>
-        <button id="house-inventory">House Inventory</button>
-      </div>
-    );
-  }
-}
+const Nav = (props) => {
+  return (
+    <div>
+      <button id="my-shopping-list"><Link to={'/shop'}>My Shopping List</Link></button>
+      <button id="house-inventory"><Link to={'/inventory'}>House Inventory</Link></button>
+    </div>
+  );
+};
 
 export default Nav;
