@@ -5,7 +5,7 @@ import ShoppingListItem from './ShoppingListItem.jsx';
 import {List, ListItem} from 'material-ui/List';
 import Checkbox from 'material-ui/Checkbox';
 import FlatButton from 'material-ui/FlatButton';
-
+import Nav from './Nav.jsx';
 
 class ShoppingList extends React.Component {
   constructor(props) {
@@ -48,6 +48,7 @@ class ShoppingList extends React.Component {
   render() {
     return (
       <div>
+        <Nav />
         <FlatButton label="Mark as Purchased" onClick={this.submitShopping.bind(this)} />
         <List>
           {this.state.shoppingListItems.map((item, index) => {
