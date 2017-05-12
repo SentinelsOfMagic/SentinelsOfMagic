@@ -3,6 +3,8 @@ import $ from 'jquery';
 import ReactDOM from 'react-dom';
 import UserNameInputBox from './UserNameInputBox.jsx';
 import CookieParser from 'cookie-parser';
+import UserList from './UserList.jsx';
+import { Link } from 'react-router-dom';
 
 class CreateUser extends React.Component {
   constructor(props) {
@@ -14,7 +16,8 @@ class CreateUser extends React.Component {
       userName: '',
       userNameExists: false,
       messageForUser: 'please type in a username',
-      houseId: houseId
+      houseId: houseId,
+      userNameList: []
     };
 
     this.submitUserName = this.submitUserName.bind(this);
@@ -29,6 +32,12 @@ class CreateUser extends React.Component {
         url: '/createUser',
         data: { userName: userName, houseId: this.state.houseId },
         success: (data) => {
+          this.state.userNameList.push(this.state.userName);
+          if (data) {
+            this.setState({
+              messageForUser: 'please choose another username'
+            });
+          }
           console.log('suceesssssss');
           this.setState({
             messageForUser: ''
@@ -55,6 +64,7 @@ class CreateUser extends React.Component {
         <div>{this.state.messageForUser}</div>
         <div>Username</div>
         <UserNameInputBox dataFromInputBox={this.dataFromInputBox} submitUserName={this.submitUserName}/>
+        <UserList addUser={this.state.userNameList}/>
       </div>
     );
   }

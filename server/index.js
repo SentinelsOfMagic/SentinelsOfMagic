@@ -67,13 +67,15 @@ app.post('/delete', (req, res) => {
 });
 
 app.post('/createUser', function(req, res) {
-  console.log('houseID', req.body.houseId);
+  console.log('houseId', req.body.houseId);
   //need to check if user is already in house
-  db.query('SELECT * FROM users WHERE username=${userName} and house_id=${houseId#}', { userName: req.body.userName, houseId: req.body.houseId })
-    .then((data)=>{
-      console.log('user already exists');
-    })
-    .catch (err => console.log('unable '));
+  // db.query('SELECT * FROM users WHERE username=${userName} and house_id=${houseId#}', { userName: req.body.userName, houseId: req.body.houseId })
+  //   .then((data)=>{
+  //     console.log('user already exists');
+  //     res.send(data);
+  //   })
+  //   .catch (err => console.log('unable '));
+
 
   db.query('INSERT INTO users (username, house_id) VALUES (${userName}, ${houseId#})', { userName: req.body.userName, houseId: req.body.houseId } )
     .then(() => {
