@@ -34,7 +34,6 @@ class CreateUser extends React.Component {
   }
 
   dataFromInputBox(data) {
-    console.log('expect true', data.userNameExists);
     this.setState({
       userName: data.userName,
       userNameExists: data.userNameExists

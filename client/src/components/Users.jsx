@@ -4,8 +4,7 @@ const Users = (props) => {
   return (
   <div>
     {props.users
-     .filter(user=>user['house_id'] === props.houseId)
-     .map((user)=>(<div data-key={user.id} onClick={props.redirect}>{user.username}</div>))}
+     .map((user)=>(<div key={user.id} data-key={user.id} onClick={props.redirect}>{user.username}</div>))}
   </div>
   );
 };
