@@ -54,12 +54,17 @@ class LoginPage extends React.Component {
       password: password
     })
     .then((response) => {
+      console.log('Login form is valid');
 
       context.setState({
         errors: {}
       });
 
-      console.log('The form is valid');
+      // TODO: get cookie from server
+
+      // check if a user exists
+        // if exists, redirect to SelectUser
+        // if no user exists, redirect to CreateUser
     })
     .catch((err) => {
       var errors = err.response.data.errors ? err.response.data.errors : {};
