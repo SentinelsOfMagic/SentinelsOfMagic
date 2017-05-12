@@ -2,6 +2,7 @@ import React from 'react';
 import $ from 'jquery';
 import ReactDOM from 'react-dom';
 import UserNameInputBox from './UserNameInputBox.jsx';
+import CookieParser from 'cookie-parser';
 
 class CreateUser extends React.Component {
   constructor(props) {
@@ -28,12 +29,15 @@ class CreateUser extends React.Component {
         url: '/createUser',
         data: { userName: userName, houseId: this.state.houseId },
         success: (data) => {
+          console.log('suceesssssss');
           this.setState({
             messageForUser: ''
           });
         }
       });
     }
+    //need to redirect to somewhere here
+
   }
 
   dataFromInputBox(data) {
