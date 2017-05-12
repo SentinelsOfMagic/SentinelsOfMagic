@@ -19,7 +19,7 @@ let routeHandlers = require('./lib/route-handlers');
 let authRoutes = require('./lib/auth.js');
 app.use('/auth', authRoutes);
 
-app.post('/inventory', function(req, res) {
+app.post('/inventory', (req, res) => {
   db.query('SELECT houses_items.id AS id, houses_items.need_to_restock AS needToRestock, houses_items.notes AS notes, users.username AS username, items.itemname AS name FROM houses_items LEFT JOIN users ON houses_items.user_id = users.id LEFT JOIN items ON houses_items.item_id = items.id WHERE houses_items.house_id = ${houseId#};',
     { houseId: req.body.houseId })
     .then(data => {
@@ -29,7 +29,7 @@ app.post('/inventory', function(req, res) {
     .catch(err => console.log('Bad DB query: ', err));
 });
 
-app.post('/restock', function(req, res) {
+app.post('/restock', (req, res) => {
   db.query('UPDATE houses_items SET need_to_restock = TRUE WHERE id = ${itemId#}',
     { itemId: req.body.itemId })
     .then(() => {
@@ -39,17 +39,24 @@ app.post('/restock', function(req, res) {
     .catch(err => console.log('Item need_to_restock value unable to be updated in houses_items: ', err));
 });
 
-app.post('/claim', function(req, res) {
+app.post('/claim', (req, res) => {
   db.query('UPDATE houses_items SET user_id = ${userId#} WHERE id = ${itemId#}',
     { itemId: req.body.itemId, userId: req.body.userId })
     .then(() => {
       console.log(`Item successfully updated to user_id = ${req.body.userId} in houses_items table`);
       res.sendStatus(201);
     })
-    .catch(err => console.log('Item user_id value unable to be updated in houses_items: ', err));
+    .catch(err => console.log('Items user_id value unable to be updated in houses_items: ', err));
+
+  db.query('INSERT INTO users_house_items (user_id, houses_items_id) VALUES (${userId#}, ${itemId#})',
+    { itemId: req.body.itemId, userId: req.body.userId })
+    .then(() => {
+      console.log('Item successfully inserted item into users_houses_items table');
+    })
+    .catch(err => console.log('Item unable to be inserted in users_houses_items: ', err));
 });
 
-app.post('/delete', function(req, res) {
+app.post('/delete', (req, res) => {
   db.query('DELETE FROM houses_items WHERE id = ${itemId#}',
     { itemId: req.body.itemId })
     .then(() => {
@@ -74,6 +81,43 @@ app.post('/users', function(req, res) {
     res.send(data);
   })
   .catch(err => console.log('unable to get users', err));
+});
+
+app.post('/add', (req, res) => {
+  console.log('ADDING TO DB: ', req.body);
+  db.query('SELECT id FROM items WHERE itemname = ${name}', { name: req.body.name })
+    .then(body => {
+      console.log('Selecting ID from items: ', body[0].id);
+      if (!body[0].id) {
+        throw 'Item does not exist';
+      }
+      return body[0].id;
+    })
+    .catch(err => {
+      console.log('Got caught!');
+      console.log('itemname: ', req.body.name);
+      db.query('INSERT INTO items (itemname) VALUES (${name})', { name: req.body.name })
+        .then(() => {
+          console.log('Successful insert into ITEMS');
+          db.query('SELECT id FROM items WHERE itemname = ${name}', { name: req.body.name })
+          .then(body => {
+            console.log('Successful in retrieving the item id: ', body[0].id);
+            return body[0].id;
+          })
+          .catch(err => console.log('Error getting item id form ITEMS: ', err));
+        })
+        .catch(err => console.log('Error inserting row into ITEMS: ', err));
+    })
+    .then(id => {
+      console.log('We got the ID now: ', id);
+      db.query('INSERT INTO houses_items (house_id, item_id, need_to_restock, notes) VALUES (${houseId#}, ${itemId#}, ${needToRestock^}, ${notes})',
+        { houseId: req.body.houseId, itemId: id, needToRestock: false, notes: req.body.notes })
+        .then(() => {
+          console.log('Successful insert into HOUSES_ITEMS');
+          res.send(201);
+        })
+        .catch(err => console.log('Unable to add to houses_items table: ', err));
+    });
 });
 
 app.get('/api/shop', routeHandlers.getShoppingList);
