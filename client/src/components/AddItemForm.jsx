@@ -20,7 +20,6 @@ class AddItemForm extends React.Component {
 
   clickSubmit(event) {
     this.postItem(this.state);
-    // need to add this to house inventory list items
   }
 
   saveName(event) {
