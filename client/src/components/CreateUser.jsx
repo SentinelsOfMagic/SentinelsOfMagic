@@ -6,11 +6,14 @@ import UserNameInputBox from './UserNameInputBox.jsx';
 class CreateUser extends React.Component {
   constructor(props) {
     super(props);
+
+    var houseId = parseInt(document.cookie.split('=')[1]);
+
     this.state = {
       userName: '',
       userNameExists: false,
       messageForUser: 'please type in a username',
-      houseId: 1 //need to get from login
+      houseId: houseId
     };
 
     this.submitUserName = this.submitUserName.bind(this);
