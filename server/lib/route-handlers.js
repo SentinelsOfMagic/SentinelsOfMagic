@@ -2,7 +2,6 @@ let shop = require('../../database/models/shoppingList');
 
 let getShoppingList = (req, res) => {
   shop.getShoppingListForUser(1, 1).then((data) => {
-    console.log('data', data);
     res.send(data);
   })
   .catch((err) => {
@@ -13,8 +12,7 @@ let getShoppingList = (req, res) => {
 };
 
 let updateWithPurchases = (req, res) => {
-  console.log(req);
-  shop.updateWithPurchases(1, 1, []).then((data) => {
+  shop.updateWithPurchases(1, 1, req.body.data).then((data) => {
     console.log('new shopping list: ', data);
     res.send(data);
   })
