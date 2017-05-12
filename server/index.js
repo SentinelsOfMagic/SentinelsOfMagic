@@ -48,11 +48,10 @@ app.post('/claim', (req, res) => {
     })
     .catch(err => console.log('Items user_id value unable to be updated in houses_items: ', err));
 
-  db.query('INSERT INTO users_houses_items (user_id, houses_items_id) VALUES (${userId#}, ${itemId#})',
+  db.query('INSERT INTO users_house_items (user_id, houses_items_id) VALUES (${userId#}, ${itemId#})',
     { itemId: req.body.itemId, userId: req.body.userId })
     .then(() => {
       console.log('Item successfully inserted item into users_houses_items table');
-      // res.sendStatus(201);
     })
     .catch(err => console.log('Item unable to be inserted in users_houses_items: ', err));
 });
@@ -85,37 +84,40 @@ app.post('/users', function(req, res) {
 });
 
 app.post('/add', (req, res) => {
-  // query if item is in items table
-  db.query('SELECT id FROM items WHERE itemname = ${itemname~}', { itemname: req.body.name })
-    .then(id => {
-      if (!id) {
-        db.query('INSERT INTO items (itemname) VALUE ($(itemname~))', { itemname: req.body.name })
-          .then()
-          .catch();
-        // add to db
-      }
-      throw 'id exists';
-    })
-    // this should be a then, as all items should have id's at this points
-    // query for id
-    // insert into houses_items table
-    .catch(err => {
-      if (err = 'id exists') {
-        db.query('INSERT INTO houses_items (house_id, item_id, need_to_restock, notes) VALUES (${houseId#}, ${itemId#}, ${needToRestock^}, ${notes~})',
-          { houseId: req.body.houseId, itemId: id, needToRestock: FALSE, notes: req.body.notes })
-          .then(() => res.send(201))
-          .catch(err => console.log('Unable to add to houses_items table: ', err));
-      }
-    });
-  // if yes
-    // get item id
-  // if not
-    // add to items table
-    // get item id
-  // insert item_id and notes into houses_items table
-  // add to db
   console.log('ADDING TO DB: ', req.body);
-  res.send('Add to db...');
+  db.query('SELECT id FROM items WHERE itemname = ${name}', { name: req.body.name })
+    .then(body => {
+      console.log('Selecting ID from items: ', body[0].id);
+      if (!body[0].id) {
+        throw 'Item does not exist';
+      }
+      return body[0].id;
+    })
+    .catch(err => {
+      console.log('Got caught!');
+      console.log('itemname: ', req.body.name);
+      db.query('INSERT INTO items (itemname) VALUES (${name})', { name: req.body.name })
+        .then(() => {
+          console.log('Successful insert into ITEMS');
+          db.query('SELECT id FROM items WHERE itemname = ${name}', { name: req.body.name })
+          .then(body => {
+            console.log('Successful in retrieving the item id: ', body[0].id);
+            return body[0].id;
+          })
+          .catch(err => console.log('Error getting item id form ITEMS: ', err));
+        })
+        .catch(err => console.log('Error inserting row into ITEMS: ', err));
+    })
+    .then(id => {
+      console.log('We got the ID now: ', id);
+      db.query('INSERT INTO houses_items (house_id, item_id, need_to_restock, notes) VALUES (${houseId#}, ${itemId#}, ${needToRestock^}, ${notes})',
+        { houseId: req.body.houseId, itemId: id, needToRestock: false, notes: req.body.notes })
+        .then(() => {
+          console.log('Successful insert into HOUSES_ITEMS');
+          res.send(201);
+        })
+        .catch(err => console.log('Unable to add to houses_items table: ', err));
+    });
 });
 
 app.get('/api/shop', routeHandlers.getShoppingList);
