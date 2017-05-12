@@ -30,47 +30,47 @@ let getShoppingListForUser = (userId, houseId) => {
 
 let updateWithPurchases = (userId, houseId, updateList) => {
 
-  // could be more efficient but I like filter
-  let privateItems = updateList.filter((item) => {
-    return item.private;
-  });
-  let publicItems = updateList.filter((item) => {
-    return !item.private;
-  });
-
   return db.tx((transaction) => {
 
-    let updateHouseItems = transaction.none(`
-      UPDATE houses_items
-      SET need_to_restock = false, user_id = NULL
-      WHERE id = ANY($1)`, [publicItems.map((item) => item.houses_items_id)]);
+    let queries = [];
 
-    let updateUserHouseItems = transaction.none(`
-      DELETE FROM users_house_items
-      WHERE id = ANY($1)`, [publicItems.map((item) => item.id)]);
+    let publicItems = updateList.filter((item) => {
+      return !item.private;
+    });
 
-    let updatePrivateItems = transaction.none(`
-      UPDATE private_items
-      SET need_to_restock = false
-      WHERE id = ANY($1)`, privateItems.map((item) => item.private_item_id));
+    let privateItems = updateList.filter((item) => {
+      return item.private;
+    });
 
-    let updateUserPrivateItems = transaction.none(`
-      DELETE FROM users_private_items
-      WHERE id = ANY($1)`, privateItems.map((item) => item.id));
+    if (publicItems.length > 0) {
 
-    if (privateItems.length > 0 && publicItems.length > 0) {
-      return transaction.batch([updateHouseItems, updateUserHouseItems, updatePrivateItems, updateUserPrivateItems]);
-    } else if (privateItems.length > 0) {
-      return transaction.batch([updatePrivateItems, updateUserPrivateItems]);
-    } else if (publicItems.length > 0) {
-      return transaction.batch([updateHouseItems, updateUserHouseItems]);
-    } else {
-      return transaction.batch([]);
+      console.log(publicItems.map((item) => item.houses_items_id));
+      queries.push(transaction.none(`
+        UPDATE houses_items
+        SET need_to_restock = false, user_id = NULL
+        WHERE id = ANY($1)`, [publicItems.map((item) => item.houses_items_id)]));
+
+      queries.push(transaction.none(`
+        DELETE FROM users_house_items
+        WHERE id = ANY($1)`, [publicItems.map((item) => item.id)]));
     }
 
+    if (privateItems.length > 0) {
 
+      queries.push(transaction.none(`
+          UPDATE private_items
+          SET need_to_restock = false
+          WHERE id = ANY($1)`, [privateItems.map((item) => item.private_item_id)]));
+
+      queries.push(updateUserPrivateItems = transaction.none(`
+          DELETE FROM users_private_items
+          WHERE id = ANY($1)`, [privateItems.map((item) => item.id)]));
+    }
+
+    return transaction.batch(queries);
   })
-  .then((data) => {
+  .then(() => {
+    console.log('FOUR');
     return getShoppingListForUser(userId, houseId);
   })
   .catch((err) => {
