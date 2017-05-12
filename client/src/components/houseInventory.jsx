@@ -38,8 +38,8 @@ class HouseInventory extends React.Component {
   render() {
     return (
     <div>
-      <h1>House Inventory</h1>
       <Nav />
+      <h1>House Inventory</h1>
       <AddItem houseId={this.state.houseId}/>
       <HouseInventoryList items={this.state.items} userId={this.state.userId} />
     </div>
