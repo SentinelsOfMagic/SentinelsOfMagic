@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import HouseInventoryList from './HouseInventoryList.jsx';
 import Nav from './Nav.jsx';
+import AddItem from './AddItem.jsx';
 
 class HouseInventory extends React.Component {
   constructor(props) {
@@ -39,6 +40,7 @@ class HouseInventory extends React.Component {
     <div>
       <h1>House Inventory</h1>
       <Nav />
+      <AddItem houseId={this.state.houseId}/>
       <HouseInventoryList items={this.state.items} userId={this.state.userId} />
     </div>
     );
