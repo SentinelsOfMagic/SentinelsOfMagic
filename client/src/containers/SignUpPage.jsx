@@ -47,8 +47,7 @@ class SignUpPage extends React.Component {
       password: password
     })
     .then((response) => {
-
-      console.log('The form is valid');
+      console.log('Signup form is valid');
       localStorage.setItem('successMessage', response.data.message);
 
       // redirect to LoginPage (with success message)
@@ -56,7 +55,6 @@ class SignUpPage extends React.Component {
         errors: {},
         signedUp: true
       });
-
     })
     .catch((err) => {
       var errors = err.response.data.errors ? err.response.data.errors : {};
