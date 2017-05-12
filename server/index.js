@@ -5,7 +5,6 @@ var request = require('request');
 var pgp = require('pg-promise')();
 let path = require('path');
 var cookieParser = require('cookie-parser');
-var utils = require('./lib/inventoryUtils.js');
 
 let app = express();
 
