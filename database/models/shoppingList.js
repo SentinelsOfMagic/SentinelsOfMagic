@@ -44,7 +44,6 @@ let updateWithPurchases = (userId, houseId, updateList) => {
 
     if (publicItems.length > 0) {
 
-      console.log(publicItems.map((item) => item.houses_items_id));
       queries.push(transaction.none(`
         UPDATE houses_items
         SET need_to_restock = false, user_id = NULL
@@ -70,7 +69,6 @@ let updateWithPurchases = (userId, houseId, updateList) => {
     return transaction.batch(queries);
   })
   .then(() => {
-    console.log('FOUR');
     return getShoppingListForUser(userId, houseId);
   })
   .catch((err) => {
