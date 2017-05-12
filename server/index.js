@@ -6,7 +6,6 @@ var pgp = require('pg-promise')();
 let path = require('path');
 var cookieParser = require('cookie-parser');
 
-
 let app = express();
 
 app.use(bodyParser.json());
@@ -84,7 +83,49 @@ app.post('/users', function(req, res) {
 });
 
 app.post('/add', (req, res) => {
+
   console.log('ADDING TO DB: ', req.body);
+
+  // refactor to use tasks
+  // first parameter is a function
+
+  // db.task(task => {
+  //   console.log('Beginning task...');
+  //   return task.query('SELECT id FROM items WHERE itemname = ${name}', { name: req.body.name })
+  //     .then(body => {
+  //       console.log('Selecting ID from items: ', body[0].id);
+  //       if (!body[0].id) {
+  //         throw 'Item does not exist';
+  //       }
+  //       return body[0].id;
+  //     })
+  //     .catch(err => {
+  //       console.log('Item does not exist, need to insert...');
+  //       db.query('INSERT INTO items (itemname) VALUES (${name})', { name: req.body.name })
+  //         .then(() => {
+  //           console.log('Successful insert into ITEMS');
+  //           db.query('SELECT id FROM items WHERE itemname = ${name}', { name: req.body.name })
+  //             .then(body =>{
+  //               console.log('Successful in retrieving the item id: ', body[0].id);
+  //               return body[0].id;
+  //             })
+  //             .catch(err => console.log('Error getting item id form ITEMS: ', err));
+  //         })
+  //         .catch(err => console.log('Error inserting row into ITEMS: ', err));
+  //     });
+  // })
+  //   .then(id => {
+  //     console.log('We got the ID now: ', id);
+  //     db.query('INSERT INTO houses_items (house_id, item_id, need_to_restock, notes) VALUES (${houseId#}, ${itemId#}, ${needToRestock^}, ${notes})',
+  //       { houseId: req.body.houseId, itemId: id, needToRestock: false, notes: req.body.notes })
+  //       .then(() => {
+  //         console.log('Successful insert into HOUSES_ITEMS');
+  //         res.sendStatus(201);
+  //       })
+  //       .catch(err => console.log('Unable to add to houses_items table: ', err));
+  //   })
+  //   .catch(err => console.log('TASKS didn\'t work: ', err));
+
   db.query('SELECT id FROM items WHERE itemname = ${name}', { name: req.body.name })
     .then(body => {
       console.log('Selecting ID from items: ', body[0].id);
@@ -114,7 +155,7 @@ app.post('/add', (req, res) => {
         { houseId: req.body.houseId, itemId: id, needToRestock: false, notes: req.body.notes })
         .then(() => {
           console.log('Successful insert into HOUSES_ITEMS');
-          res.send(201);
+          res.sendStatus(201);
         })
         .catch(err => console.log('Unable to add to houses_items table: ', err));
     });
