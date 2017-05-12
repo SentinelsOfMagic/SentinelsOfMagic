@@ -58,7 +58,16 @@ let updateWithPurchases = (userId, houseId, updateList) => {
       DELETE FROM users_private_items
       WHERE id = ANY($1)`, privateItems.map((item) => item.id));
 
-    return transaction.batch([updateHouseItems, updateUserHouseItems, updatePrivateItems, updateUserPrivateItems]);
+    if (privateItems.length > 0 && publicItems.length > 0) {
+      return transaction.batch([updateHouseItems, updateUserHouseItems, updatePrivateItems, updateUserPrivateItems]);
+    } else if (privateItems.length > 0) {
+      return transaction.batch([updatePrivateItems, updateUserPrivateItems]);
+    } else if (publicItems.length > 0) {
+      return transaction.batch([updateHouseItems, updateUserHouseItems]);
+    } else {
+      return transaction.batch([]);
+    }
+
 
   })
   .then((data) => {
