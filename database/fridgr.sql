@@ -98,3 +98,11 @@ INSERT INTO houses_items (id, house_id, item_id, need_to_restock, notes, user_id
 
 INSERT INTO private_items (id, user_id, item_id, need_to_restock, notes) VALUES
 (1, 1, 4, false, 'must not let anyone know');
+
+INSERT INTO users_house_items (user_id, houses_items_id) VALUES
+(1, 1),
+(1, 2),
+(1, 3);
+
+INSERT INTO users_private_items (user_id, private_item_id) VALUES (1, 1);
+
