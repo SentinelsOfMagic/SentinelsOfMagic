@@ -3,14 +3,17 @@ import $ from 'jquery';
 import dummyUserData from '../../../database/dummyUserData.js';
 import Users from './Users.jsx';
 import { Link } from 'react-router-dom';
-
+import CookieParser from 'cookie-parser';
 
 class SelectUser extends React.Component {
   constructor(props) {
     super(props);
+
+    var houseId = parseInt(document.cookie.split('=')[1]);
+
     this.state = {
       data: [],
-      houseId: 2, //need to grab this from somewhere
+      houseId: houseId,
       userId: ''
     };
     this.getUsers = this.getUsers.bind(this);
@@ -24,7 +27,6 @@ class SelectUser extends React.Component {
     this.setState({
       userId: e.target.getAttribute('data-key')
     });
-    //redirect to housing inventory
   }
 
   getUsers() {
@@ -36,14 +38,18 @@ class SelectUser extends React.Component {
         this.setState({
           data: data
         });
-        console.log('expect array with data', this.state.data);
       }
     });
   }
 
+
+
   render () {
     return (
-      <Users users={this.state.data} houseId={this.state.houseId} redirect={this.grabInventory}/>
+      <div>
+        <Users users={this.state.data} houseId={this.state.houseId} redirect={this.grabInventory}/>
+        <Link to="/createUser">Create User</Link>
+      </div>
     );
   }
 
