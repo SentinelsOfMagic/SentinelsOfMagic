@@ -35,13 +35,12 @@ class HouseInventory extends React.Component {
 
   submitItem() {
     this.getItems(this.updateItems.bind(this));
-    console.log('state items: ', this.state.items);
   }
 
   getItems(callback) {
     axios.post('/inventory', { houseId: this.state.houseId })
       .then(res => {
-        console.log('Successful GET request to /inventory - house inventory items retrieved: ', res.data);
+        console.log('Successful GET request to /inventory - house inventory items retrieved');
         callback(res.data);
       })
       .catch(err => console.log('Unable to GET house inventory items: ', err));
