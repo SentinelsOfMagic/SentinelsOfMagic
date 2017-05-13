@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  font: 300 16px/22px "Roboto", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 16px;
 }
 
@@ -64,4 +65,22 @@ a:hover {
 .success-message {
   padding: 0 16px;
   color: green;
+}
+
+.item {
+  text-align: center;
+}
+
+.item-name {
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.item-notes {
+  text-align: center;
+}
+
+.add-item {
+  text-align: center;
+  padding: 20px;
 }
