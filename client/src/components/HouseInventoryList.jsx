@@ -1,9 +1,10 @@
 import React from 'react';
 import HouseInventoryListItem from './HouseInventoryListItem.jsx';
+import { GridList, GridTile } from 'material-ui/GridList';
 
 var HouseInventoryList = (props) => {
   return (
-    <div>
+    <GridList cellHeight="auto" cols="4" padding={15}>
       {props.items.map((item, index) =>
         <HouseInventoryListItem
         item = {item}
@@ -11,7 +12,7 @@ var HouseInventoryList = (props) => {
         key = {index}
         />
       )}
-    </div>
+    </GridList>
   );
 };
 
