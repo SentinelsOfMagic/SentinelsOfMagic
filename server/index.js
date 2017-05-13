@@ -5,6 +5,7 @@ var request = require('request');
 var pgp = require('pg-promise')();
 let path = require('path');
 var cookieParser = require('cookie-parser');
+var utils = require('./lib/inventoryUtils.js');
 
 let app = express();
 
@@ -97,6 +98,13 @@ app.post('/users', function(req, res) {
 app.post('/add', (req, res) => {
 
   console.log('Adding item to inventory... ', req.body);
+
+  var validate = utils.validateAddItemForm(req.body);
+
+  if (!validate.success) {
+    console.log('validate: ', validate.errors);
+    return res.status(400).json(validate.errors);
+  }
 
   db.query('SELECT id FROM items WHERE itemname = ${name}', { name: req.body.name })
     .then(body => {

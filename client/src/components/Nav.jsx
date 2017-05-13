@@ -37,7 +37,6 @@ class Nav extends React.Component {
     this.setState({
       value: event
     });
-    console.log('change: ', event);
   }
 
   render() {
