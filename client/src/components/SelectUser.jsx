@@ -4,17 +4,23 @@ import dummyUserData from '../../../database/dummyUserData.js';
 import Users from './Users.jsx';
 import { Link } from 'react-router-dom';
 import CookieParser from 'cookie-parser';
+import { Redirect } from 'react-router-dom';
 
 class SelectUser extends React.Component {
   constructor(props) {
     super(props);
 
-    var houseId = parseInt(document.cookie.split('=')[1]);
+    // var houseId = parseInt(document.cookie.split(';')[0]);
+    var cookieString = document.cookie;
+    var houseIdRegex = new RegExp ('\houseId=(.*)');
+    var houseId = houseIdRegex.exec(cookieString)[1];
 
     this.state = {
       data: [],
       houseId: houseId,
-      userId: ''
+      userId: 0,
+      redirect: false,
+      to: '/inventory'
     };
     this.getUsers = this.getUsers.bind(this);
     this.grabInventory = this.grabInventory.bind(this);
@@ -26,7 +32,20 @@ class SelectUser extends React.Component {
 
   grabInventory(e) {
     this.setState({
-      userId: e.target.getAttribute('data-key')
+      userId: parseInt(e.target.getAttribute('data-key'))
+    }, function() {
+      $.ajax({
+        method: 'POST',
+        url: '/settingCooks',
+        data: { userId: this.state.userId },
+        success: (data ) => {
+          this.setState({
+            redirect: true
+          });
+          console.log('sucess sending the cookie! :D');
+        }
+      });
+      console.log('this should be a number', this.state.userId);
     });
   }
 
@@ -44,11 +63,11 @@ class SelectUser extends React.Component {
   }
 
 
-
   render () {
     return (
       <div>
-        <Users users={this.state.data} houseId={this.state.houseId} redirect={this.grabInventory}/>
+        {this.state.redirect ? <Redirect to={this.state.to}/> :
+        <Users users={this.state.data} houseId={this.state.houseId} redirect={this.grabInventory}/>}
         <Link to="/createUser">Create User</Link>
       </div>
     );
