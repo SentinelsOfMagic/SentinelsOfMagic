@@ -27,6 +27,7 @@ class SelectUser extends React.Component {
   }
 
   componentDidMount() {
+    console.log(this.state.houseId);
     this.getUsers();
   }
 

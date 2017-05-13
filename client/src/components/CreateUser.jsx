@@ -10,7 +10,9 @@ class CreateUser extends React.Component {
   constructor(props) {
     super(props);
 
-    var houseId = parseInt(document.cookie.split('=')[1]);
+    var cookieString = document.cookie;
+    var houseIdRegex = new RegExp ('\houseId=(.*)');
+    var houseId = houseIdRegex.exec(cookieString)[1];
 
     this.state = {
       userName: '',
