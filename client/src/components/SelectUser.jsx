@@ -9,7 +9,10 @@ class SelectUser extends React.Component {
   constructor(props) {
     super(props);
 
-    var houseId = parseInt(document.cookie.split('=')[1]);
+    // var houseId = parseInt(document.cookie.split(';')[0]);
+    var cookieString = document.cookie;
+    var houseIdRegex = new RegExp ('\houseId=(.*)');
+    var houseId = houseIdRegex.exec(cookieString)[1];
 
     this.state = {
       data: [],
@@ -21,6 +24,10 @@ class SelectUser extends React.Component {
   }
 
   componentDidMount() {
+    var cookieString = document.cookie;
+    var houseIdRegex = new RegExp ('\houseId=(.*)');
+    var houseId = houseIdRegex.exec(cookieString)[1];
+    console.log('houseId', houseId)
     this.getUsers();
   }
 

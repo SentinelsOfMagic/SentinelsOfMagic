@@ -22,6 +22,7 @@ class CreateUser extends React.Component {
 
     this.submitUserName = this.submitUserName.bind(this);
     this.dataFromInputBox = this.dataFromInputBox.bind(this);
+    this.passInCooks = this.passInCooks.bind(this);
   }
 
   submitUserName() {
@@ -49,6 +50,19 @@ class CreateUser extends React.Component {
 
   }
 
+  passInCooks () {
+    console.log('happpened')
+    var userName = this.state.userName;
+    $.ajax({
+      method: 'POST',
+      url: '/cookUser',
+      data: {userName: userName},
+      success: (data) => {
+        console.log('done passing the cookie');
+      }
+    });
+  }
+
   dataFromInputBox(data) {
     this.setState({
       userName: data.userName,
@@ -64,7 +78,7 @@ class CreateUser extends React.Component {
         <div>{this.state.messageForUser}</div>
         <div>Username</div>
         <UserNameInputBox dataFromInputBox={this.dataFromInputBox} submitUserName={this.submitUserName}/>
-        <UserList addUser={this.state.userNameList}/>
+        <UserList addUser={this.state.userNameList} passInCooks={this.passInCooks}/>
       </div>
     );
   }
