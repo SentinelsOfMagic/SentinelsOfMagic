@@ -3,7 +3,7 @@ import { NavLink, Link } from 'react-router-dom';
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
-import { Router, hashHistory, Route, IndexRoute, withRouter } from 'react-router'; // here in attempt to make the title clickable
+// import { Router, hashHistory, Route, IndexRoute, withRouter } from 'react-router'; // here in attempt to make the title clickable
 
 
 class Base extends React.Component {
@@ -28,7 +28,8 @@ class Base extends React.Component {
       <div>
         <AppBar
           onLeftIconButtonTouchTap={this.handleToggle.bind(this)}
-          title="Fridgr"
+          // onLeftIconButtonClick={this.handleToggle.bind(this)}
+          title={<NavLink exact to="/" >Fridgr</NavLink>}
         />
           <Drawer
             docked={false}

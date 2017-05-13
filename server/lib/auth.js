@@ -180,5 +180,6 @@ router.post('/login', (req, res, next) => {
 
 // TODO:
 // - update Base to reflect login/logout
+// - verify cookie for authorized components
 
 module.exports = router;
