@@ -1,5 +1,8 @@
 import React from 'react';
 import axios from 'axios';
+import { Card, CardText } from 'material-ui/Card';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
 
 class AddItemForm extends React.Component {
   constructor(props) {
@@ -36,13 +39,20 @@ class AddItemForm extends React.Component {
 
   render() {
     return (
-      <form>
-        Item Name:
-        <input type="text" value={this.state.name} onChange={this.saveName.bind(this)}></input>
-        Notes:
-        <input type="text" value={this.state.notes} onChange={this.saveNotes.bind(this)}></input>
-        <button onClick={this.clickSubmit.bind(this)}>Submit</button>
-      </form>
+      <Card className="container">
+        <form>
+          <h4 className="card-heading">Add New Inventory Item</h4>
+          <div className="field-line">
+            <TextField floatingLabelText="Item Name" type="text" value={this.state.name} onChange={this.saveName.bind(this)}></TextField>
+          </div>
+          <div className="field-line">
+            <TextField floatingLabelText="Notes" type="text" value={this.state.notes} onChange={this.saveNotes.bind(this)}></TextField>
+          </div>
+          <div className="button-line">
+            <RaisedButton primary={true} label="Submit" onClick={this.clickSubmit.bind(this)}></RaisedButton>
+          </div>
+        </form>
+      </Card>
     );
   }
 }
