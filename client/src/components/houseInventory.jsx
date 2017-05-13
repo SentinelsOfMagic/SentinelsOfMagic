@@ -40,7 +40,6 @@ class HouseInventory extends React.Component {
     return (
     <div>
       <Nav page={this.state.page}/>
-      <h1>House Inventory</h1>
       <AddItem houseId={this.state.houseId}/>
       <HouseInventoryList items={this.state.items} userId={this.state.userId} />
     </div>

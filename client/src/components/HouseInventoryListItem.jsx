@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import { GridList, GridTile } from 'material-ui/GridList';
+import RaisedButton from 'material-ui/RaisedButton';
 
 class HouseInventoryListItem extends React.Component {
   constructor(props) {
@@ -59,27 +61,27 @@ class HouseInventoryListItem extends React.Component {
       );
     } else if (!this.state.needToRestock) {
       return (
-        <div>
-          <div className="item-name">Name: {this.state.name}</div>
-          <div className="item-notes">Notes: {this.state.notes}</div>
-          <button type="button" className="restock-button" onClick={this.clickRestock.bind(this)}>Need to Restock</button>
+        <div className="item">
+          <h4 className="item-name">{this.state.name}</h4>
+          <h5 className="item-notes">{this.state.notes}</h5>
+          <RaisedButton primary={true} label="Need to Restock" onClick={this.clickRestock.bind(this)}></RaisedButton>
         </div>
       );
     } else if (this.state.needToRestock && this.state.username === null) {
       return (
-        <div>
-          <div className="item-name">Name: {this.state.name}</div>
-          <div className="item-notes">Notes: {this.state.notes}</div>
-          <button type="button" className="claim-button" onClick={this.clickClaim.bind(this)}>Add to My Shopping List</button>
-          <button type="button" className="delete-button" onClick={this.clickDelete.bind(this)}>Delete</button>
+        <div className="item">
+          <h4 className="item-name">{this.state.name}</h4>
+          <h5 className="item-notes">{this.state.notes}</h5>
+          <RaisedButton primary={true} label="Add to My Shopping List" onClick={this.clickClaim.bind(this)}></RaisedButton>
+          <RaisedButton secondary={true} label="Delete" onClick={this.clickDelete.bind(this)}></RaisedButton>
         </div>
       );
     } else if (this.state.needToRestock && typeof this.state.username === 'string') {
       return (
-        <div>
-          <div className="item-name">Name: {this.state.name}</div>
-          <div className="item-notes">Notes: {this.state.notes}</div>
-          <button type="button" className="claimed">Claimed by {this.state.username}</button>
+        <div className="item">
+          <h4 className="item-name">{this.state.name}</h4>
+          <h5 className="item-notes">{this.state.notes}</h5>
+          <RaisedButton disabled={true} label={`Claimed by ${this.state.username}`}></RaisedButton>
         </div>
       );
     }
