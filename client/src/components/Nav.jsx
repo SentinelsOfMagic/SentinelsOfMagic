@@ -52,14 +52,4 @@ class Nav extends React.Component {
 }
 
 export default Nav;
-      /*
-        <AppBar onLeftIconButtonTouchTap={this.handleToggle.bind(this)} onLeftIconButtonClick={this.handleToggle.bind(this)} title="Fridgr" />
-        <Drawer
-          docked={false}
-          open={this.state.open}
-          onRequestChange={open => this.setState({ open })}
-        >
-          <MenuItem onTouchTap={this.handleClose.bind(this)}><Link to={'/shop'}>My Shopping List</Link></MenuItem>
-          <MenuItem onTouchTap={this.handleClose.bind(this)}><Link to={'/inventory'}>House Inventory</Link></MenuItem>
-        </Drawer>
-        */
+
