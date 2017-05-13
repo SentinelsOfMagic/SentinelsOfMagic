@@ -17,6 +17,7 @@ class SelectUser extends React.Component {
       userId: ''
     };
     this.getUsers = this.getUsers.bind(this);
+    this.grabInventory = this.grabInventory.bind(this);
   }
 
   componentDidMount() {
