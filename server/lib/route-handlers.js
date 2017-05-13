@@ -13,7 +13,6 @@ let getShoppingList = (req, res) => {
 
 let updateWithPurchases = (req, res) => {
   shop.updateWithPurchases(1, 1, req.body.data).then((data) => {
-    console.log('new shopping list: ', data);
     res.send(data);
   })
   .catch((err) => {
