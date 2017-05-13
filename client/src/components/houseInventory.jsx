@@ -12,7 +12,8 @@ class HouseInventory extends React.Component {
     this.state = {
       items: [],
       houseId: 1, // dummy value for now, will use cookies in future
-      userId: 4
+      userId: 4,
+      page: 'inventory'
     };
   }
 
@@ -38,7 +39,7 @@ class HouseInventory extends React.Component {
   render() {
     return (
     <div>
-      <Nav />
+      <Nav page={this.state.page}/>
       <h1>House Inventory</h1>
       <AddItem houseId={this.state.houseId}/>
       <HouseInventoryList items={this.state.items} userId={this.state.userId} />
