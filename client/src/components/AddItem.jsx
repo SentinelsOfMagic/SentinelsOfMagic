@@ -17,11 +17,17 @@ class AddItem extends React.Component {
     });
   }
 
+  toggleForm(bool) {
+    this.setState({
+      showForm: bool
+    });
+  }
+
   render() {
     if (this.state.showForm) {
       return (
         <div>
-          <AddItemForm houseId={this.props.houseId}/>
+          <AddItemForm houseId={this.props.houseId} toggleForm={this.toggleForm.bind(this)}/>
         </div>
       );
     } else {
