@@ -35,16 +35,17 @@ class CreateUser extends React.Component {
         url: '/createUser',
         data: { userName: userName, houseId: this.state.houseId },
         success: (data) => {
-          this.state.userNameList.push(this.state.userName);
-          if (data) {
+          console.log('what does it look like', data);
+          if (data !== 'Username already taken') {
+            this.state.userNameList.push(this.state.userName);
             this.setState({
-              messageForUser: 'please choose another username'
+              messageForUser: data
+            });
+          } else {
+            this.setState({
+              messageForUser: data
             });
           }
-          console.log('suceesssssss');
-          this.setState({
-            messageForUser: ''
-          });
         }
       });
     }
@@ -63,6 +64,9 @@ class CreateUser extends React.Component {
   }
 
   dataFromInputBox(data) {
+    if (data.userName) {
+
+    }
     this.setState({
       userName: data.userName,
       userNameExists: data.userNameExists
