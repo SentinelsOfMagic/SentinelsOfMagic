@@ -74,7 +74,6 @@ app.post('/delete', (req, res) => {
 });
 
 app.post('/createUser', function(req, res) {
-  console.log('houseId', req.body.houseId);
   //need to check if user is already in house
   // db.query('SELECT * FROM users WHERE username=${userName} and house_id=${houseId#}', { userName: req.body.userName, houseId: req.body.houseId })
   //   .then((data)=>{
@@ -83,10 +82,8 @@ app.post('/createUser', function(req, res) {
   //   })
   //   .catch (err => console.log('unable '));
 
-
   db.query('INSERT INTO users (username, house_id) VALUES (${userName}, ${houseId#})', { userName: req.body.userName, houseId: req.body.houseId } )
     .then(() => {
-      console.log('done creating user');
       res.sendStatus(201);
     })
     .catch (err => console.log('unable to create user', err));
@@ -118,6 +115,7 @@ app.post('/cookUser', function(req, res) {
 app.post('/users', function(req, res) {
   db.query('SELECT * FROM users WHERE house_id=${houseId#}', { houseId: req.body.houseId })
     .then( (data)=> {
+      console.log('getting all users from this house', data);
       res.send(data);
     })
     .catch(err => console.log('unable to get users', err));
