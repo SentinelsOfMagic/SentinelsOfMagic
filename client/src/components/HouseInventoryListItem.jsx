@@ -8,13 +8,12 @@ class HouseInventoryListItem extends React.Component {
     super(props);
 
     this.state = {
-      id: this.props.item.id, // this houses_items primary key id
+      id: this.props.item.id,
       name: this.props.item.name,
       notes: this.props.item.notes,
       needToRestock: this.props.item.needtorestock,
       username: this.props.item.username,
-      userId: this.props.userId,
-      hide: false
+      userId: this.props.userId
     };
   }
 
@@ -33,10 +32,8 @@ class HouseInventoryListItem extends React.Component {
     axios.post('/claim', { itemId: this.state.id, userId: this.state.userId })
       .then(res => {
         console.log('Successful POST request to /claim');
-        // response should have the username
-        // update username in state
         this.setState({
-          username: 'April' // something like res.username
+          username: res.data.username
         });
       })
       .catch(err => console.log('Bad POST request to /claim: ', err));
@@ -46,20 +43,13 @@ class HouseInventoryListItem extends React.Component {
     axios.post('/delete', { itemId: this.state.id })
       .then(res => {
         console.log('Successful POST request to /delete');
-        this.setState({
-          hide: true
-        });
+        this.props.submitItem();
       })
       .catch(err => console.log('Bad POST request to /delete'));
   }
 
   render() {
-    if (this.state.hide) {
-      return (
-        <div>
-        </div>
-      );
-    } else if (!this.state.needToRestock) {
+    if (!this.state.needToRestock) {
       return (
         <div className="item">
           <h4 className="item-name">{this.state.name}</h4>

@@ -28,7 +28,6 @@ class Base extends React.Component {
       <div>
         <AppBar
           onLeftIconButtonTouchTap={this.handleToggle.bind(this)}
-          onLeftIconButtonClick={this.handleToggle.bind(this)}
           title="Fridgr"
         />
           <Drawer
@@ -38,7 +37,7 @@ class Base extends React.Component {
           >
             <MenuItem onTouchTap={this.handleClose.bind(this)} primaryText="Login" containerElement={<Link to="/login"/>}/>
             <MenuItem onTouchTap={this.handleClose.bind(this)} primaryText="Sign Up" containerElement={<Link to="/signup"/>}/>
-            <MenuItem onTouchTap={this.handleClose.bind(this)} primaryText="Logout"/>
+            <MenuItem onTouchTap={this.handleClose.bind(this)} primaryText="Logout" containerElement={<Link to="/"/>}/>
           </Drawer>
       </div>
     );
@@ -46,16 +45,3 @@ class Base extends React.Component {
 }
 
 export default Base;
-/*
-    <div className="top-bar">
-      <div className="top-bar-left">
-        <NavLink exact to="/">Fridgr</NavLink>
-      </div>
-
-      <div className="top-bar-right">
-        <Link to="/login">Log in</Link>
-        <Link to="/signup">Sign up</Link>
-      </div>
-
-    </div>
-*/

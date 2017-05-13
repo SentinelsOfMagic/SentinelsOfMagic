@@ -27,7 +27,7 @@ class AddItem extends React.Component {
     if (this.state.showForm) {
       return (
         <div>
-          <AddItemForm houseId={this.props.houseId} toggleForm={this.toggleForm.bind(this)}/>
+          <AddItemForm houseId={this.props.houseId} toggleForm={this.toggleForm.bind(this)} submitItem={this.props.submitItem}/>
         </div>
       );
     } else {
