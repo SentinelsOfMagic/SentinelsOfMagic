@@ -20,7 +20,10 @@ class AddItemForm extends React.Component {
 
   postItem(obj) {
     axios.post('/add', obj)
-      .then(res => console.log('Successful POST request to /add'))
+      .then(res => {
+        console.log('Successful POST request to /add');
+        this.props.submitItem();
+      })
       .catch(err => {
         console.log('Bad POST request to /add');
         this.setState({
@@ -32,6 +35,7 @@ class AddItemForm extends React.Component {
 
   clickSubmit(event) {
     this.postItem(this.state);
+    this.props.toggleForm(false);
   }
 
   clickCancel(event) {
@@ -52,7 +56,7 @@ class AddItemForm extends React.Component {
 
   render() {
     return (
-      <Card className="container" showExpandableButton={true}>
+      <Card className="container">
         <form>
           <h4 className="card-heading">Add New Inventory Item</h4>
           <div className="field-line">
