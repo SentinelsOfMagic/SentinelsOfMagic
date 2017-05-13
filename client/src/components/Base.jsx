@@ -38,6 +38,7 @@ class Base extends React.Component {
           >
             <MenuItem onTouchTap={this.handleClose.bind(this)} primaryText="Login" containerElement={<Link to="/login"/>}/>
             <MenuItem onTouchTap={this.handleClose.bind(this)} primaryText="Sign Up" containerElement={<Link to="/signup"/>}/>
+            <MenuItem onTouchTap={this.handleClose.bind(this)} primaryText="Logout"/>
           </Drawer>
       </div>
     );
