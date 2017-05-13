@@ -11,7 +11,7 @@ class ShoppingList extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {shoppingListItems: [], selectedItems: []};
+    this.state = {shoppingListItems: [], selectedItems: [], page: 'shop'};
   }
 
   componentWillMount() {
@@ -48,7 +48,7 @@ class ShoppingList extends React.Component {
   render() {
     return (
       <div>
-        <Nav />
+        <Nav page={this.state.page}/>
         <FlatButton label="Mark as Purchased" onClick={this.submitShopping.bind(this)} />
         <List>
           {this.state.shoppingListItems.map((item, index) => {
