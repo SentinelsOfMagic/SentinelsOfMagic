@@ -66,7 +66,6 @@ class LoginPage extends React.Component {
         // if exists, redirect to SelectUser
         context.setState({
           errors: {},
-          houseId: houseId,
           redirect: true,
           to: '/users'
         });
@@ -75,7 +74,6 @@ class LoginPage extends React.Component {
         console.log('no user found');
         context.setState({
           errors: {},
-          houseId: houseId,
           redirect: true,
           to: '/createUser'
         });
