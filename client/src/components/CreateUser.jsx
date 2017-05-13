@@ -46,12 +46,9 @@ class CreateUser extends React.Component {
         }
       });
     }
-    //need to redirect to somewhere here
-
   }
 
   passInCooks () {
-    console.log('happpened')
     var userName = this.state.userName;
     $.ajax({
       method: 'POST',
