@@ -86,17 +86,28 @@ app.post('/createUser', function(req, res) {
 
 });
 
+app.post('/settingCooks', function(req, res) {
+  console.log('shooott...', req.body.userId);
+  db.query('SELECT * FROM users WHERE id=${userId#}', { userId: req.body.userId})
+    .then((data)=>{
+      res.clearCookie('userId');
+      res.cookie('userId', data[0].id);
+      res.send('successful cookie passing');
+    })
+    .catch(err => console.log('unable to set cookies', err));
+});
+
 app.post('/cookUser', function(req, res) {
   db.query('SELECT * FROM users WHERE username=${userName}', { userName: req.body.userName })
   .then( (data)=> {
+    res.clearCookie('userId');
     res.cookie('userId', data[0].id);
     res.send(201);
   })
-  .catch( err=> console.log('unable to pass cookies', err))
+  .catch( err=> console.log('unable to pass cookies', err));
 });
 
 app.post('/users', function(req, res) {
-  console.log('expecting houseID hereeeee', req.body.houseId);
   db.query('SELECT * FROM users WHERE house_id=${houseId#}', { houseId: req.body.houseId })
     .then( (data)=> {
       res.send(data);
