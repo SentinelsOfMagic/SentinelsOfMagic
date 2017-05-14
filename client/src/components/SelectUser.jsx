@@ -6,14 +6,19 @@ import { Link } from 'react-router-dom';
 import CookieParser from 'cookie-parser';
 import { Redirect } from 'react-router-dom';
 import RaisedButton from 'material-ui/RaisedButton';
+import {parse} from 'cookie';
 
 class SelectUser extends React.Component {
   constructor(props) {
     super(props);
 
-    var cookieString = document.cookie;
-    var houseIdRegex = new RegExp ('\houseId=(.*)');
-    var houseId = houseIdRegex.exec(cookieString)[1];
+    // var cookieString = document.cookie;
+    // var houseIdRegex = new RegExp ('\houseId=(.*)');
+    // var houseId = houseIdRegex.exec(cookieString)[1];
+
+    var cookie = parse(document.cookie);
+    var houseId = parseInt(cookie.fridgrSesh.split('"houseId":')[1]);
+    console.log('Current houseId:', houseId);
 
     this.state = {
       data: [],
@@ -27,7 +32,7 @@ class SelectUser extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.state.houseId);
+    // console.log(this.state.houseId);
     this.getUsers();
   }
 

@@ -6,14 +6,19 @@ import CookieParser from 'cookie-parser';
 import UserList from './UserList.jsx';
 import { Link } from 'react-router-dom';
 import { Card } from 'material-ui/Card';
+import {parse} from 'cookie';
 
 class CreateUser extends React.Component {
   constructor(props) {
     super(props);
 
-    var cookieString = document.cookie;
-    var houseIdRegex = new RegExp ('\houseId=(.*)');
-    var houseId = houseIdRegex.exec(cookieString)[1];
+    // var cookieString = document.cookie;
+    // var houseIdRegex = new RegExp ('\houseId=(.*)');
+    // var houseId = houseIdRegex.exec(cookieString)[1];
+
+    var cookie = parse(document.cookie);
+    var houseId = parseInt(cookie.fridgrSesh.split('"houseId":')[1]);
+    console.log('Current houseId:', houseId);
 
     this.state = {
       userName: '',

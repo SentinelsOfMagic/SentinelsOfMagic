@@ -88,18 +88,18 @@ router.post('/signup', (req, res, next) => {
       }
 
       //generate salt and hash
-      hashUtils.salt(32, (err, saltString) => {
+      hashUtils.salt(32, (err, salt) => {
         if (err) {
           console.error(err);
           return;
         }
-        var salt = saltString.toString('hex');
-        var hashedPW = hashUtils.hash('sha256').update(req.body.password + salt).digest('hex');
+        var saltString = salt.toString('hex');
+        var hashedPW = hashUtils.hash('sha256').update(req.body.password + saltString).digest('hex');
 
         // write to database
         var sql = 'INSERT INTO houses (housename, password, salt) VALUES ($1, $2, $3);';
 
-        db.query(sql, [req.body.houseName, hashedPW, salt])
+        db.query(sql, [req.body.houseName, hashedPW, saltString])
         .then((data) => {
           console.log('House written to DB successfully:', data);
         })
@@ -131,7 +131,7 @@ router.post('/login', (req, res, next) => {
     });
   } else {
     // get house, password, and salt from database using houseName
-    var houseQuery = 'SELECT * FROM houses WHERE housename = \'${houseName#}\'';
+    var houseQuery = 'SELECT * FROM houses WHERE housename = ${houseName}';
     db.one(houseQuery, {houseName: req.body.houseName})
     .then((houseData) => {
       console.log('House data retrieved:', houseData);
@@ -141,7 +141,7 @@ router.post('/login', (req, res, next) => {
 
       // compare new hash to hash in database
       if (inputHash === houseData.password) {
-        console.log('passwords match');
+        console.log('Passwords match');
 
         // check if a user exists
         var userQuery = 'SELECT * FROM users WHERE house_id=${houseId#}';
@@ -149,14 +149,28 @@ router.post('/login', (req, res, next) => {
         .then((usersData) => {
           console.log('Users retrieved:', usersData);
 
-          // set cookie
-          res.cookie('houseId', `${houseData.id}`);
-          res.status(200).json(usersData);
+          // update session with houseId
+          var currentSeshId = req.cookies.fridgrSesh.id;
+          var sessionQuery = 'UPDATE sessions SET house_id = ${houseId#} WHERE id = ${sessionId#}';
+          db.query(sessionQuery, {houseId: houseData.id, sessionId: currentSeshId})
+          .then((sessionData) => {
+            console.log('Session updated with houseId:', sessionData);
+
+            // add houseId to cookie
+            var currentCookie = req.cookies.fridgrSesh;
+            currentCookie['houseId'] = houseData.id;
+            res.cookie('fridgrSesh', currentCookie);
+            res.status(200).json(usersData);
+          })
+          .catch((err) => {
+            console.log('Error updating session with houseId:', err);
+          });
         })
         .catch((err) => {
           console.log('Error retrieving users:', err);
         });
       } else {
+        console.log('Passwords do not match');
         // if no match, return error
         return res.status(401).json({
           success: false,

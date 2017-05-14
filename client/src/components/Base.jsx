@@ -29,7 +29,7 @@ class Base extends React.Component {
         <AppBar
           onLeftIconButtonTouchTap={this.handleToggle.bind(this)}
           // onLeftIconButtonClick={this.handleToggle.bind(this)}
-          title={<NavLink exact to="/" >Fridgr</NavLink>}
+          title={<div className="title"><NavLink exact to="/" >Fridgr</NavLink></div>}
         />
           <Drawer
             docked={false}
