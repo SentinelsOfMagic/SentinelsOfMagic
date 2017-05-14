@@ -8,6 +8,10 @@ body {
   color: #ff4081;
 }
 
+.username {
+  cursor: pointer;
+}
+
 span:hover + .hovered {
     display: block;
 }
