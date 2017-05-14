@@ -6,12 +6,14 @@ var pgp = require('pg-promise')();
 let path = require('path');
 var cookieParser = require('cookie-parser');
 var utils = require('./lib/inventoryUtils.js');
+var assignCookie = require('./middleware/assignCookie');
 
 let app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(assignCookie);
 app.use(express.static(__dirname + '/../client/dist'));
 
 // routes
@@ -119,21 +121,56 @@ app.post('/createUser', function(req, res) {
 
 app.post('/settingCooks', function(req, res) {
   console.log('shooott...', req.body.userId);
-  db.query('SELECT * FROM users WHERE id=${userId#}', { userId: req.body.userId})
-    .then((data)=>{
-      res.clearCookie('userId');
-      res.cookie('userId', data[0].id);
-      res.send('successful cookie passing');
-    })
-    .catch(err => console.log('unable to set cookies', err));
+
+  // update session with userId
+  var currentSeshId = req.cookies.fridgrSesh.id;
+  var sessionQuery = 'UPDATE sessions SET user_id = ${userId#} WHERE id = ${sessionId#}';
+  db.query(sessionQuery, {userId: req.body.userId, sessionId: currentSeshId})
+  .then((sessionData) => {
+    console.log('Session updated with userId:', sessionData);
+
+    // add userId to cookie
+    var currentCookie = req.cookies.fridgrSesh;
+    currentCookie['userId'] = parseInt(req.body.userId);
+    res.cookie('fridgrSesh', currentCookie);
+    res.status(200).end();
+  })
+  .catch((err) => {
+    console.log('Error updating session with userId:', err);
+  });
+
+  // db.query('SELECT * FROM users WHERE id=${userId#}', { userId: req.body.userId})
+  //   .then((data)=>{
+  //     res.clearCookie('userId');
+  //     res.cookie('userId', data[0].id);
+  //     res.send('successful cookie passing');
+  //   })
+  //   .catch(err => console.log('unable to set cookies', err));
 });
 
 app.post('/cookUser', function(req, res) {
   db.query('SELECT * FROM users WHERE username=${userName}', { userName: req.body.userName })
   .then( (data)=> {
-    res.clearCookie('userId');
-    res.cookie('userId', data[0].id);
-    res.send(201);
+    // res.clearCookie('userId');
+    // res.cookie('userId', data[0].id);
+    // res.send(201);
+
+    // update session with userId
+    var currentSeshId = req.cookies.fridgrSesh.id;
+    var sessionQuery = 'UPDATE sessions SET user_id = ${userId#} WHERE id = ${sessionId#}';
+    db.query(sessionQuery, {userId: data[0].id, sessionId: currentSeshId})
+    .then((sessionData) => {
+      console.log('Session updated with userId:', sessionData);
+
+      // add userId to cookie
+      var currentCookie = req.cookies.fridgrSesh;
+      currentCookie['userId'] = data[0].id;
+      res.cookie('fridgrSesh', currentCookie);
+      res.status(201).end();
+    })
+    .catch((err) => {
+      console.log('Error updating session with userId:', err);
+    });
   })
   .catch( err=> console.log('unable to pass cookies', err));
 });

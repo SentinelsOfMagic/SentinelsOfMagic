@@ -23,7 +23,7 @@ span:hover + .hovered {
 }
 
 a {
-  color: #ffffff;
+  color: #00bcd4;
   font-weight: bold;
   text-decoration: none;
   transition: color 0.4s;
@@ -31,6 +31,14 @@ a {
 
 h2 {
   text-transform: uppercase;
+}
+
+.title a {
+  color: #ffffff;
+}
+
+a:hover {
+  color: #ff4081;
 }
 
 .somePadding {
@@ -43,10 +51,6 @@ h2 {
   margin-left: 20px;
 }
 
-a:hover {
-  color: #ff4081;
-}
-
 .text-center {
   text-align: center;
 }
@@ -55,6 +59,7 @@ a:hover {
   padding: 10px 15px;
   margin-bottom: 50px;
 }
+
 .top-bar::after {
   content: '';
   display: block;

@@ -58,7 +58,8 @@ class LoginPage extends React.Component {
     .then((response) => {
       console.log('Login form is valid');
 
-      var houseId = parseInt(document.cookie.split('=')[1]);
+      // set loggedIn status
+      localStorage.setItem('loggedIn', true);
 
       // check if a user exists
       if (response.data.length > 0) {
@@ -80,6 +81,7 @@ class LoginPage extends React.Component {
       }
     })
     .catch((err) => {
+      console.log(err);
       var errors = err.response.data.errors ? err.response.data.errors : {};
       errors.summary = err.response.data.message;
 
