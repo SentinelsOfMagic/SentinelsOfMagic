@@ -4,11 +4,35 @@ body {
   font-size: 16px;
 }
 
+.changeColorForUserList {
+  color: #ff4081;
+}
+
+span:hover + .hovered {
+    display: block;
+}
+
+.hovered {
+    background-color: yellow;
+    padding: 20px;
+    display: none;
+}
+
 a {
   color: #ffffff;
   font-weight: bold;
   text-decoration: none;
   transition: color 0.4s;
+}
+
+.somePadding {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.someSidePadding {
+  margin-right: 20px;
+  margin-left: 20px;
 }
 
 a:hover {
