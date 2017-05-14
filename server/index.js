@@ -20,13 +20,22 @@ let authRoutes = require('./lib/auth.js');
 app.use('/auth', authRoutes);
 
 app.post('/inventory', (req, res) => {
-  db.query('SELECT houses_items.id AS id, houses_items.need_to_restock AS needToRestock, houses_items.notes AS notes, users.username AS username, items.itemname AS name FROM houses_items LEFT JOIN users ON houses_items.user_id = users.id LEFT JOIN items ON houses_items.item_id = items.id WHERE houses_items.house_id = ${houseId#};',
+  db.query('SELECT houses_items.id AS id, houses_items.need_to_restock AS needToRestock, houses_items.notes AS notes, users.username AS username, users.id AS userid, items.itemname AS name FROM houses_items LEFT JOIN users ON houses_items.user_id = users.id LEFT JOIN items ON houses_items.item_id = items.id WHERE houses_items.house_id = ${houseId#};',
     { houseId: req.body.houseId })
     .then(data => {
       console.log(`Successful HOUSES_ITEMS table query for houseId = ${req.body.houseId}`);
       res.send(data);
     })
     .catch(err => console.log(`Bad HOUSES_ITEMS table query for houseId = ${req.body.houseId}: `, err));
+});
+
+app.post('/housename', (req, res) => {
+  db.query('SELECT housename FROM houses WHERE id = ${houseId#}', { houseId: req.body.houseId })
+    .then(data => {
+      console.log(`Successful HOUSES table query for houseId = ${req.body.houseId}`);
+      res.send(data[0]);
+    })
+    .catch(err => console.log(`Bad HOUSES table query for houseId = ${req.body.houseId}: `, err));
 });
 
 app.post('/restock', (req, res) => {
@@ -72,6 +81,23 @@ app.post('/delete', (req, res) => {
       res.sendStatus(201);
     })
     .catch(err => console.log(`Item, item_id = ${req.body.itemId}, unable to be removed from HOUSES_ITEMS: `, err));
+});
+
+app.post('/unclaim', (req, res) => {
+  db.query('UPDATE houses_items SET user_id = null WHERE id = ${itemId#}',
+    { itemId: req.body.itemId })
+    .then(() => {
+      console.log('Successful update of HOUSES_ITEMS table setting user_id = NULL');
+    })
+    .catch(err => console.log(`Unable to update user_id = ${req.body.itemId} to NULL in HOUSES_ITEMS`));
+
+  db.query('DELETE FROM users_house_items WHERE houses_items_id = ${itemId#}',
+    { itemId: req.body.itemId })
+    .then(() => {
+      console.log(`Successful deletion of houses_items_id = ${req.body.itemId} in USERS_HOUSE_ITEMS`);
+      res.sendStatus(201);
+    })
+    .catch(err => console.log(`Unable to delete houses_items_id = ${req.body.itemId} in USERS_HOUSE_ITEMS`));
 });
 
 app.post('/createUser', function(req, res) {

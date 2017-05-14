@@ -29,6 +29,10 @@ a {
   transition: color 0.4s;
 }
 
+h2 {
+  text-transform: uppercase;
+}
+
 .somePadding {
   margin-top: 20px;
   margin-bottom: 20px;

@@ -14,49 +14,65 @@ class HouseInventory extends React.Component {
     this.state = {
       items: [],
       page: 'inventory',
-      userId: 4
+      housename: ''
     };
 
     var cookies = document.cookie.replace(/ /g, '').split(';').map(item => item.split('='));
+    var cookieJar = {};
 
     for (var i = 0; i < cookies.length; i++) {
-      if (cookies[i][0] === 'houseId') {
-        this.state.houseId = cookies[i][1];
-      }
-    //   if (cookies[i][0] === 'userId') {
-    //     this.state.userId = cookies[i][1];
-    //   }
+      cookieJar[cookies[i][0]] = cookies[i][1];
     }
+
+    this.state.houseId = cookieJar['houseId'];
+    this.state.userId = cookieJar['userId'];
   }
 
   componentDidMount() {
     this.submitItem();
+    this.getHouseName(this.updateHouseName.bind(this));
   }
 
   submitItem() {
     this.getItems(this.updateItems.bind(this));
-    console.log('state items: ', this.state.items);
+  }
+
+  getHouseName(callback) {
+    axios.post('/housename', { houseId: this.state.houseId })
+      .then(res => {
+        console.log('Successful POST request to /housename');
+        callback(res.data.housename);
+      })
+      .catch(err => console.log('Unsuccessful POST request to /housename - unable to retrieve housename: ', err));
+  }
+
+  updateHouseName(data) {
+    this.setState({
+      housename: data
+    });
   }
 
   getItems(callback) {
     axios.post('/inventory', { houseId: this.state.houseId })
       .then(res => {
-        console.log('Successful GET request to /inventory - house inventory items retrieved: ', res.data);
+        console.log('Successful POST request to /inventory - house inventory items retrieved');
         callback(res.data);
       })
-      .catch(err => console.log('Unable to GET house inventory items: ', err));
+      .catch(err => console.log('Unsuccessful POST request to /inventory - unable to retrieve house inventory items: ', err));
   }
 
   updateItems(data) {
+    var sortedData = data.sort((a, b) => a.id - b.id);
     this.setState({
-      items: data
+      items: sortedData
     });
   }
 
   render() {
     return (
-    <div>
+    <div className="item">
       <Nav page={this.state.page}/>
+      <h2>{this.state.housename}</h2>
       <AddItem houseId={this.state.houseId} submitItem={this.submitItem.bind(this)}/>
       <HouseInventoryList items={this.state.items} userId={this.state.userId} submitItem={this.submitItem.bind(this)}/>
     </div>
