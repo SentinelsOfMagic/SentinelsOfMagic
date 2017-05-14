@@ -13,7 +13,8 @@ class HouseInventoryListItem extends React.Component {
       notes: this.props.item.notes,
       needToRestock: this.props.item.needtorestock,
       username: this.props.item.username,
-      userId: this.props.userId
+      userId: this.props.userId,
+      itemUserId: this.props.item.userid
     };
   }
 
@@ -66,12 +67,23 @@ class HouseInventoryListItem extends React.Component {
           <RaisedButton secondary={true} label="Delete" onClick={this.clickDelete.bind(this)}></RaisedButton>
         </div>
       );
-    } else if (this.state.needToRestock && typeof this.state.username === 'string') {
+    } else if (this.state.needToRestock && typeof this.state.username === 'string' && Number(this.state.userId) !== Number(this.state.itemUserId)) {
+      console.log('user NOT logged in: ', this.state.userId);
+      console.log('itemUserId: ', this.state.itemUserId);
       return (
         <div className="item">
           <h4 className="item-name">{this.state.name}</h4>
           <h5 className="item-notes">{this.state.notes}</h5>
           <RaisedButton disabled={true} label={`Claimed by ${this.state.username}`}></RaisedButton>
+        </div>
+      );
+    } else if (this.state.needToRestock && typeof this.state.username === 'string' && Number(this.state.userId) === Number(this.state.itemUserId)) {
+      console.log('user IS logged in');
+      return (
+        <div className="item">
+          <h4 className="item-name">{this.state.name}</h4>
+          <h5 className="item-notes">{this.state.notes}</h5>
+          <RaisedButton disabled={true} label={'Claimed by me'}></RaisedButton>
         </div>
       );
     }
