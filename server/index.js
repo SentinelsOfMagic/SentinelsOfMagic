@@ -32,7 +32,7 @@ app.post('/inventory', (req, res) => {
 app.post('/housename', (req, res) => {
   db.query('SELECT housename FROM houses WHERE id = ${houseId#}', { houseId: req.body.houseId })
     .then(data => {
-      console.log(`Successful HOUSES table query for houseId = ${req.body.houseId}: `, data[0]);
+      console.log(`Successful HOUSES table query for houseId = ${req.body.houseId}`);
       res.send(data[0]);
     })
     .catch(err => console.log(`Bad HOUSES table query for houseId = ${req.body.houseId}: `, err));
@@ -81,6 +81,23 @@ app.post('/delete', (req, res) => {
       res.sendStatus(201);
     })
     .catch(err => console.log(`Item, item_id = ${req.body.itemId}, unable to be removed from HOUSES_ITEMS: `, err));
+});
+
+app.post('/unclaim', (req, res) => {
+  db.query('UPDATE houses_items SET user_id = null WHERE id = ${itemId#}',
+    { itemId: req.body.itemId })
+    .then(() => {
+      console.log('Successful update of HOUSES_ITEMS table setting user_id = NULL');
+    })
+    .catch(err => console.log(`Unable to update user_id = ${req.body.itemId} to NULL in HOUSES_ITEMS`));
+
+  db.query('DELETE FROM users_house_items WHERE houses_items_id = ${itemId#}',
+    { itemId: req.body.itemId })
+    .then(() => {
+      console.log(`Successful deletion of houses_items_id = ${req.body.itemId} in USERS_HOUSE_ITEMS`);
+      res.sendStatus(201);
+    })
+    .catch(err => console.log(`Unable to delete houses_items_id = ${req.body.itemId} in USERS_HOUSE_ITEMS`));
 });
 
 app.post('/createUser', function(req, res) {
