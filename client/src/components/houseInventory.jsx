@@ -62,8 +62,9 @@ class HouseInventory extends React.Component {
   }
 
   updateItems(data) {
+    var sortedData = data.sort((a, b) => a.id - b.id);
     this.setState({
-      items: data
+      items: sortedData
     });
   }
 
