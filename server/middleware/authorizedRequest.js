@@ -1,18 +1,34 @@
 let session = require('../../database/models/session');
 
-let isAuthorizedForRoute = (req, res, next) => {
-  session.getSession(req.cookies.session.id)
+let authPageRequest = (req, res, next) => {
+  session.getSession(req.cookies.fridgrSesh.id)
   .then((session) => {
-    if (session.hash === req.cookies.session.hash &&
-        session.houseId === req.cookies.session.houseId &&
-        session.userId === req.cookies.session.userId) {
+    if (session.hash === req.cookies.fridgrSesh.hash &&
+        session.houseId === req.cookies.fridgrSesh.houseId &&
+        session.userId === req.cookies.fridgrSesh.userId) {
       next();
     } else {
-      res.clearCookie('session');
+      res.clearCookie('fridgrSesh');
       res.redirect(401, '/login');
     }
   });
 
 };
 
-module.exports = isAuthorizedForRoute;
+let authAPICall = (req, res, next) => {
+  session.getSession(req.cookies.fridgrSesh.id)
+  .then((session) => {
+    if (session.hash === req.cookies.fridgrSesh.hash &&
+        session.houseId === req.cookies.fridgrSesh.houseId &&
+        session.userId === req.cookies.fridgrSesh.userId) {
+      next();
+    } else {
+      res.clearCookie('fridgrSesh');
+      res.send({error: 'unauthorized'});
+    }
+  });
+
+};
+
+module.exports.pageRequest = authPageRequest;
+module.exports.APICall = authAPICall;

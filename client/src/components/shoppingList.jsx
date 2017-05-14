@@ -1,8 +1,10 @@
 import axios from 'axios';
+import auth from '../lib/clientAuth.js';
 import FlatButton from 'material-ui/FlatButton';
 import Nav from './Nav.jsx';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {BrowserRouter as Router} from 'react-router-dom';
 import {
   Table,
   TableBody,
@@ -10,6 +12,8 @@ import {
   TableHeaderColumn,
   TableRow,
   TableRowColumn} from 'material-ui/Table';
+
+
 
 class ShoppingList extends React.Component {
   constructor(props) {
@@ -22,10 +26,15 @@ class ShoppingList extends React.Component {
   }
 
   componentWillMount() {
+    auth(this.props.history);
     axios.get('/api/shop')
       .then((res) => {
-        this.setState({
-          shoppingListItems: res.data});
+        if (res.data.error) {
+          console.log(res.data.error);
+        } else {
+          this.setState({
+            shoppingListItems: res.data});
+        }
       })
       .catch((err) => {
         console.log(err);

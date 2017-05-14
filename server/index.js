@@ -7,6 +7,7 @@ let path = require('path');
 var cookieParser = require('cookie-parser');
 var utils = require('./lib/inventoryUtils.js');
 var assignCookie = require('./middleware/assignCookie');
+let checkAuth = require('./middleware/authorizedRequest.js');
 
 let app = express();
 
@@ -230,8 +231,8 @@ app.post('/add', (req, res) => {
     .catch(err => console.log(`Error querying ITEMS table for ${req.body.name}: `, err));
 });
 
-app.get('/api/shop', routeHandlers.getShoppingList);
-app.post('/api/shop', routeHandlers.updateWithPurchases);
+app.get('/api/shop', checkAuth.APICall, routeHandlers.getShoppingList);
+app.post('/api/shop', checkAuth.pageRequest, routeHandlers.updateWithPurchases);
 
 app.get('*', function(req, res) {
   res.sendFile(path.resolve(__dirname + '/../client/dist/index.html'));
