@@ -1,19 +1,17 @@
 let shop = require('../../database/models/shoppingList');
 
 let getShoppingList = (req, res) => {
-  console.log(req.cookies);
-  shop.getShoppingListForUser(1, 1).then((data) => {
+  shop.getShoppingListForUser(req.cookies.fridgrSesh.userId, req.cookies.fridgrSesh.houseId).then((data) => {
     res.send(data);
   })
   .catch((err) => {
     console.log(err);
-    // TODO: FIX BEFORE I'M PUBLIC
     res.send(err);
   });
 };
 
 let updateWithPurchases = (req, res) => {
-  shop.updateWithPurchases(1, 1, req.body.data).then((data) => {
+  shop.updateWithPurchases(req.cookies.fridgrSesh.userId, req.cookies.fridgrSesh.houseId, req.body.data).then((data) => {
     res.send(data);
   })
   .catch((err) => {
