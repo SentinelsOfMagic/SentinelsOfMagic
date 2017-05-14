@@ -32,7 +32,7 @@ CREATE INDEX users_house_id_index ON users (house_id);
 CREATE TABLE sessions (
   id SERIAL PRIMARY KEY,
   hash varchar(64) NOT NULL,
-  house_id integer NOT NULL,
+  house_id integer,
   user_id integer
 );
 
