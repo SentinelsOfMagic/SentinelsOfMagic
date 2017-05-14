@@ -13,20 +13,18 @@ class HouseInventory extends React.Component {
 
     this.state = {
       items: [],
-      page: 'inventory',
-      userId: 4
+      page: 'inventory'
     };
 
     var cookies = document.cookie.replace(/ /g, '').split(';').map(item => item.split('='));
+    var cookieJar = {};
 
     for (var i = 0; i < cookies.length; i++) {
-      if (cookies[i][0] === 'houseId') {
-        this.state.houseId = cookies[i][1];
-      }
-    //   if (cookies[i][0] === 'userId') {
-    //     this.state.userId = cookies[i][1];
-    //   }
+      cookieJar[cookies[i][0]] = cookies[i][1];
     }
+
+    this.state.houseId = cookieJar['houseId'];
+    this.state.userId = cookieJar['userId'];
   }
 
   componentDidMount() {
