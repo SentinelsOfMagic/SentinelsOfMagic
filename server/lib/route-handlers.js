@@ -1,6 +1,7 @@
 let shop = require('../../database/models/shoppingList');
 
 let getShoppingList = (req, res) => {
+  console.log(req.cookies);
   shop.getShoppingListForUser(1, 1).then((data) => {
     res.send(data);
   })
