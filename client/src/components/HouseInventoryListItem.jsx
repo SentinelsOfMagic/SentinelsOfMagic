@@ -68,8 +68,6 @@ class HouseInventoryListItem extends React.Component {
         </div>
       );
     } else if (this.state.needToRestock && typeof this.state.username === 'string' && Number(this.state.userId) !== Number(this.state.itemUserId)) {
-      console.log('user NOT logged in: ', this.state.userId);
-      console.log('itemUserId: ', this.state.itemUserId);
       return (
         <div className="item">
           <h4 className="item-name">{this.state.name}</h4>
@@ -78,7 +76,6 @@ class HouseInventoryListItem extends React.Component {
         </div>
       );
     } else if (this.state.needToRestock && typeof this.state.username === 'string' && Number(this.state.userId) === Number(this.state.itemUserId)) {
-      console.log('user IS logged in');
       return (
         <div className="item">
           <h4 className="item-name">{this.state.name}</h4>
