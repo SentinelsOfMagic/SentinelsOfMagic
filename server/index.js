@@ -29,6 +29,15 @@ app.post('/inventory', (req, res) => {
     .catch(err => console.log(`Bad HOUSES_ITEMS table query for houseId = ${req.body.houseId}: `, err));
 });
 
+app.post('/housename', (req, res) => {
+  db.query('SELECT housename FROM houses WHERE id = ${houseId#}', { houseId: req.body.houseId })
+    .then(data => {
+      console.log(`Successful HOUSES table query for houseId = ${req.body.houseId}: `, data[0]);
+      res.send(data[0]);
+    })
+    .catch(err => console.log(`Bad HOUSES table query for houseId = ${req.body.houseId}: `, err));
+});
+
 app.post('/restock', (req, res) => {
   db.query('UPDATE houses_items SET need_to_restock = TRUE WHERE id = ${itemId#}',
     { itemId: req.body.itemId })
