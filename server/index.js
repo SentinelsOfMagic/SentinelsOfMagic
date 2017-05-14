@@ -74,21 +74,21 @@ app.post('/delete', (req, res) => {
 });
 
 app.post('/createUser', function(req, res) {
-  //need to check if user is already in house
-  // db.query('SELECT * FROM users WHERE username=${userName} and house_id=${houseId#}', { userName: req.body.userName, houseId: req.body.houseId })
-  //   .then((data)=>{
-  //     console.log('user already exists');
-  //     res.send(data);
-  //   })
-  //   .catch (err => console.log('unable '));
+  db.query('SELECT * FROM users WHERE username=${userName} and house_id=${houseId#}', { userName: req.body.userName, houseId: req.body.houseId })
+    .then((data)=>{
+      if (data.length === 0) {
+        console.log('shouldnt show up if array has stuff');
+        db.query('INSERT INTO users (username, house_id) VALUES (${userName}, ${houseId#})', { userName: req.body.userName, houseId: req.body.houseId } )
+          .then(() => {
+            res.send('Successfully created user');
+          })
+          .catch (err => console.log('unable to create user', err));
+      } else {
 
-  db.query('INSERT INTO users (username, house_id) VALUES (${userName}, ${houseId#})', { userName: req.body.userName, houseId: req.body.houseId } )
-    .then(() => {
-      res.sendStatus(201);
+        res.send('Username already taken');
+      }
     })
-    .catch (err => console.log('unable to create user', err));
-
-
+    .catch (err => console.log('unable '));
 });
 
 app.post('/settingCooks', function(req, res) {
