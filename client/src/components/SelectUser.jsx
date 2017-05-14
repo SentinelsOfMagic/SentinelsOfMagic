@@ -5,12 +5,12 @@ import Users from './Users.jsx';
 import { Link } from 'react-router-dom';
 import CookieParser from 'cookie-parser';
 import { Redirect } from 'react-router-dom';
+import RaisedButton from 'material-ui/RaisedButton';
 
 class SelectUser extends React.Component {
   constructor(props) {
     super(props);
 
-    // var houseId = parseInt(document.cookie.split(';')[0]);
     var cookieString = document.cookie;
     var houseIdRegex = new RegExp ('\houseId=(.*)');
     var houseId = houseIdRegex.exec(cookieString)[1];
@@ -67,10 +67,13 @@ class SelectUser extends React.Component {
   render () {
     return (
       <div>
+        <div className="somePadding someSidePadding">
+          <RaisedButton secondary={true}><Link to="/createUser">Create User</Link></RaisedButton>
+        </div>
+        <div className="somePadding someSidePadding">Who are you? :D</div>
         {this.state.redirect ? <Redirect to={this.state.to}/> :
-        <Users users={this.state.data} houseId={this.state.houseId} redirect={this.grabInventory}/>}
-        <Link to="/createUser">Create User</Link>
-      </div>
+        <div className="somePadding"><Users users={this.state.data} houseId={this.state.houseId} redirect={this.grabInventory}/></div>}
+        </div>
     );
   }
 

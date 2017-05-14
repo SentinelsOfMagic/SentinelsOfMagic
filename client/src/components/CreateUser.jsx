@@ -5,6 +5,7 @@ import UserNameInputBox from './UserNameInputBox.jsx';
 import CookieParser from 'cookie-parser';
 import UserList from './UserList.jsx';
 import { Link } from 'react-router-dom';
+import { Card } from 'material-ui/Card';
 
 class CreateUser extends React.Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class CreateUser extends React.Component {
     this.state = {
       userName: '',
       userNameExists: false,
-      messageForUser: 'please type in a username',
+      messageForUser: 'Please type in a username.',
       houseId: houseId,
       userNameList: []
     };
@@ -36,7 +37,7 @@ class CreateUser extends React.Component {
         data: { userName: userName, houseId: this.state.houseId },
         success: (data) => {
           console.log('what does it look like', data);
-          if (data !== 'Username already taken') {
+          if (data !== 'Username already taken. Please type in another username.') {
             this.state.userNameList.push(this.state.userName);
             this.setState({
               messageForUser: data
@@ -77,12 +78,11 @@ class CreateUser extends React.Component {
 
   render () {
     return (
-      <div>
-        <div>{this.state.messageForUser}</div>
-        <div>Username</div>
+      <Card className="container">
+        <div className="somePadding">{this.state.messageForUser}</div>
         <UserNameInputBox dataFromInputBox={this.dataFromInputBox} submitUserName={this.submitUserName}/>
         <UserList addUser={this.state.userNameList} passInCooks={this.passInCooks}/>
-      </div>
+      </Card>
     );
   }
 

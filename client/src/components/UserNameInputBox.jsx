@@ -1,4 +1,6 @@
 import React from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
+import { Card } from 'material-ui/Card';
 
 class UserNameInputBox extends React.Component {
   constructor (props) {
@@ -20,17 +22,21 @@ class UserNameInputBox extends React.Component {
     });
   }
 
-
   passDataToCreateUser() {
     this.props.dataFromInputBox({userName: this.state.userName, userNameExists: this.state.userNameExists});
   }
 
   render () {
     return (
+
       <div>
        <input type='text' onChange={this.change}></input>
-        <button type="submit" onClick={(e)=>{ this.passDataToCreateUser(); }} >Submit</button>
+       <div>
+        <RaisedButton className="somePadding" secondary={true} onClick={(e)=>{ this.passDataToCreateUser(); }}>Submit</RaisedButton>
+       </div>
       </div>
+
+
     );
   }
 
