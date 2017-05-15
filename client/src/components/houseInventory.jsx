@@ -5,6 +5,7 @@ import HouseInventoryList from './HouseInventoryList.jsx';
 import Nav from './Nav.jsx';
 import AddItem from './AddItem.jsx';
 import {parse} from 'cookie';
+import auth from '../lib/clientAuth.js';
 
 
 class HouseInventory extends React.Component {
@@ -27,6 +28,10 @@ class HouseInventory extends React.Component {
     var userId = parseInt(cookie.fridgrSesh.split('"userId":')[1]);
     console.log('Current userId:', userId);
     this.state.userId = userId;
+  }
+
+  componentWillMount() {
+    auth(this.props.history);
   }
 
   componentDidMount() {

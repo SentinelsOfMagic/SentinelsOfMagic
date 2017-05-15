@@ -7,6 +7,7 @@ import CookieParser from 'cookie-parser';
 import { Redirect } from 'react-router-dom';
 import RaisedButton from 'material-ui/RaisedButton';
 import {parse} from 'cookie';
+import auth from '../lib/clientAuth.js';
 
 class SelectUser extends React.Component {
   constructor(props) {
@@ -29,6 +30,10 @@ class SelectUser extends React.Component {
     };
     this.getUsers = this.getUsers.bind(this);
     this.grabInventory = this.grabInventory.bind(this);
+  }
+
+  componentWillMount() {
+    auth(this.props.history);
   }
 
   componentDidMount() {
