@@ -112,6 +112,16 @@ app.post('/unclaim', (req, res) => {
     .catch(err => console.log(`Unable to delete houses_items_id = ${req.body.itemId} in USERS_HOUSE_ITEMS`));
 });
 
+app.post('/undo', (req, res) => {
+  db.query('UPDATE houses_items SET need_to_restock = false WHERE id = ${itemId#}',
+    { itemId: req.body.itemId })
+    .then(() => {
+      console.log(`Successful update of HOUSES_ITEMS table setting need_to_restock = false for item_id = ${req.body.itemId}`);
+      res.sendStatus(201);
+    })
+    .catch(err => console.log(`Unable to update item_id = ${req.body.itemId} to need_to_restock = false in HOUSES_ITEMS: `, err));
+});
+
 app.post('/checkUsers', function(req, res) {
   db.query('SELECT * FROM users WHERE house_id=${houseId}', { houseId: req.body.houseId })
      .then((data) => {
