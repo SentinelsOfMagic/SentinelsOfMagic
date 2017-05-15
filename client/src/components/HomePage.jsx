@@ -12,7 +12,7 @@ class HomePage extends React.Component {
   }
 
   render() {
-    if (localStorage.getItem('loggedIn') === 'true') {
+    if (localStorage.getItem('loggedIn') !== null) {
       return (
         <div>
           <Nav page={this.state.page} />
