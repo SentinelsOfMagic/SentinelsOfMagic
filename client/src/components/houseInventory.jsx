@@ -14,7 +14,8 @@ class HouseInventory extends React.Component {
     this.state = {
       items: [],
       page: 'inventory',
-      housename: ''
+      housename: '',
+      username: ''
     };
 
     var cookie = parse(document.cookie);
@@ -31,6 +32,7 @@ class HouseInventory extends React.Component {
   componentDidMount() {
     this.submitItem();
     this.getHouseName(this.updateHouseName.bind(this));
+    this.getUserName(this.updateUserName.bind(this));
   }
 
   submitItem() {
@@ -49,6 +51,21 @@ class HouseInventory extends React.Component {
   updateHouseName(data) {
     this.setState({
       housename: data
+    });
+  }
+
+  getUserName(callback) {
+    axios.post('/username', { userId: this.state.userId })
+      .then(res => {
+        console.log('Successful POST request to /username');
+        callback(res.data.username);
+      })
+      .catch(err => console.log('Unsuccessful POST request to /username - unable to retrieve username: ', err));
+  }
+
+  updateUserName(data) {
+    this.setState({
+      username: data
     });
   }
 
@@ -73,6 +90,7 @@ class HouseInventory extends React.Component {
       <div className="item">
         <Nav page={this.state.page}/>
         <h2>{this.state.housename}</h2>
+        <h4>😇 = {this.state.username}</h4>
         <AddItem houseId={this.state.houseId} submitItem={this.submitItem.bind(this)}/>
         <HouseInventoryList items={this.state.items} userId={this.state.userId} submitItem={this.submitItem.bind(this)}/>
       </div>
