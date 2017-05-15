@@ -137,3 +137,7 @@ a:hover {
 .user {
   display: inline-block;
 }
+
+.black-text {
+  color: #000;
+}
