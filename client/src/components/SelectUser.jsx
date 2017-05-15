@@ -12,10 +12,6 @@ class SelectUser extends React.Component {
   constructor(props) {
     super(props);
 
-    // var cookieString = document.cookie;
-    // var houseIdRegex = new RegExp ('\houseId=(.*)');
-    // var houseId = houseIdRegex.exec(cookieString)[1];
-
     var cookie = parse(document.cookie);
     var houseId = parseInt(cookie.fridgrSesh.split('"houseId":')[1]);
     console.log('Current houseId:', houseId);
@@ -42,7 +38,6 @@ class SelectUser extends React.Component {
   }
 
   componentDidMount() {
-    // console.log(this.state.houseId);
     this.getUsers();
   }
 
@@ -58,10 +53,8 @@ class SelectUser extends React.Component {
           this.setState({
             redirect: true
           });
-          console.log('sucess sending the cookie! :D');
         }
       });
-      console.log('this should be a number', this.state.userId);
     });
   }
 

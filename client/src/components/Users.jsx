@@ -5,7 +5,7 @@ import { GridList, GridTile } from 'material-ui/GridList';
 const Users = (props) => {
   var colNums = (props.usersCount > 5) ? 5 : props.usersCount;
   return (
-  <div className="item largeSidePadding">
+  <div className="item selectUserPadding">
     <GridList cellHeight="auto" cols={colNums}>
     {props.users
      .map((user)=>(
