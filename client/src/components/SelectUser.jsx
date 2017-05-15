@@ -86,7 +86,7 @@ class SelectUser extends React.Component {
         <div className="somePadding someSidePadding">
           <RaisedButton className="title" secondary={true} label={<Link to="/createUser">Create User</Link>}></RaisedButton>
         </div>
-        <div className="somePadding someSidePadding">Who are you? 😄</div>
+        <div className="somePadding someSidePadding black-text">Who are you? 😄</div>
         {this.state.redirect ? <Redirect to={this.state.to}/> :
         <div className="somePadding item"><Users users={this.state.data} usersCount={this.state.usersCount} houseId={this.state.houseId} redirect={this.grabInventory}/></div>}
       </div>
