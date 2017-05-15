@@ -16,7 +16,7 @@ class Logout extends React.Component {
     let cookies = parse(document.cookie);
     let fridgrSesh = JSON.parse(cookies.fridgrSesh.slice(2));
 
-    if (cookies.fridgrSesh && fridgrSesh.userId && fridgrSesh.houseId) {
+    if (cookies.fridgrSesh && (fridgrSesh.userId || fridgrSesh.houseId)) {
       var context = this;
 
       axios.post('/auth/logout')
