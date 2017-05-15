@@ -29,6 +29,7 @@ class ShoppingList extends React.Component {
     auth(this.props.history);
     axios.get('/api/shop')
       .then((res) => {
+        console.log(res);
         if (res.data.error) {
           console.log(res.data.error);
         } else {
