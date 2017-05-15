@@ -7,6 +7,7 @@ let path = require('path');
 var cookieParser = require('cookie-parser');
 var utils = require('./lib/inventoryUtils.js');
 var assignCookie = require('./middleware/assignCookie');
+
 let checkAuth = require('./middleware/authorizedRequest.js');
 
 let app = express();
