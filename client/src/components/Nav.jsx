@@ -22,6 +22,10 @@ class Nav extends React.Component {
       this.setState({
         value: 1
       });
+    } else if (this.state.page === 'home') {
+      this.setState({
+        value: -1
+      });
     }
   }
 
