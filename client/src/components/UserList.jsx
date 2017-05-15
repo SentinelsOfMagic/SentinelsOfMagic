@@ -11,15 +11,15 @@ class UserList extends React.Component {
     this.state = {
       user: ''
     };
+
+    this.selectUser = this.selectUser.bind(this);
   }
 
   selectUser(event, index, value) {
-    console.log('CHANGING');
-    console.log('event: ', event);
-    console.log('index: ', index);
-    console.log('value: ', value);
-    // update user in state
-    // invoke passInCooks function from props
+    this.setState({
+      user: value
+    });
+    this.props.passInCooks(value);
   }
 
   render() {
@@ -27,7 +27,7 @@ class UserList extends React.Component {
       return (
         <div>
           <SelectField floatingLabelText="Select a user" multiple={false} value={this.state.user} onChange={(e, i, v) => this.selectUser(e, i, v)}>
-            {this.props.addUser.map((user)=>(<MenuItem key={user} label={user} value={user}></MenuItem>))}
+            {this.props.addUser.map((user)=>(<MenuItem key={user} label={user} value={user}>{user}</MenuItem>))}
           </SelectField>
           <div>
             and <Link to="/inventory">continue</Link>
@@ -38,8 +38,8 @@ class UserList extends React.Component {
     } else if (this.props.clicked && !this.props.cookieIsSet) {
       return (
         <div>
-          <SelectField floatingLabelText="Select a user" multiple={false}>
-            {this.props.addUser.map((user)=>(<MenuItem key={user}>{user}</MenuItem>))}
+          <SelectField floatingLabelText="Select a user" multiple={false} value={this.state.user} onChange={(e, i, v) => this.selectUser(e, i, v)}>
+            {this.props.addUser.map((user)=>(<MenuItem key={user} label={user} value={user}>{user}</MenuItem>))}
           </SelectField>
           <div>or <Link to="/users">go back</Link> and select a different user.</div>
         </div>
