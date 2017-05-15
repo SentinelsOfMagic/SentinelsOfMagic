@@ -10,6 +10,7 @@ body {
 
 .username {
   cursor: pointer;
+  text-transform: uppercase;
 }
 
 span:hover + .hovered {
@@ -49,6 +50,11 @@ a:hover {
 .someSidePadding {
   margin-right: 20px;
   margin-left: 20px;
+}
+
+.largeSidePadding {
+  margin-right: 200px;
+  margin-left: 200px;
 }
 
 .text-center {
