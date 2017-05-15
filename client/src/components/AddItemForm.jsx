@@ -23,9 +23,10 @@ class AddItemForm extends React.Component {
       .then(res => {
         console.log('Successful POST request to /add');
         this.props.submitItem();
+        this.props.toggleForm(false);
       })
       .catch(err => {
-        console.log('Bad POST request to /add');
+        console.log('Bad POST request to /add: ', err.response.data);
         this.setState({
           errorName: err.response.data.name,
           errorNotes: err.response.data.notes
@@ -35,7 +36,6 @@ class AddItemForm extends React.Component {
 
   clickSubmit(event) {
     this.postItem(this.state);
-    this.props.toggleForm(false);
   }
 
   clickCancel(event) {
