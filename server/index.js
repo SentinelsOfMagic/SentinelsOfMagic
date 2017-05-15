@@ -53,7 +53,6 @@ app.post('/restock', (req, res) => {
 });
 
 app.post('/claim', (req, res) => {
-
   db.query('UPDATE houses_items SET user_id = ${userId#} WHERE id = ${itemId#}',
     { itemId: req.body.itemId, userId: req.body.userId })
     .then(() => {
