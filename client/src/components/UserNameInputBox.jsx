@@ -24,7 +24,6 @@ class UserNameInputBox extends React.Component {
   }
 
   passDataToCreateUser() {
-    console.log('please work');
     this.props.dataFromInputBox({userName: this.state.userName, userNameExists: this.state.userNameExists});
     this.props.buttonClicked(true);
   }
