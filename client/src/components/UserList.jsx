@@ -10,11 +10,15 @@ const UserList = (props) => {
         <div>or <Link to="/users">go back</Link> and select a different user.</div>
       </div>
     );
-  } else {
+  } else if (props.usersExist) {
     return (
       <div>
         <div>or <Link to="/users">go back</Link> and select a different user.</div>
       </div>
+    );
+  } else {
+    return (
+      <div></div>
     );
   }
 };
