@@ -22,7 +22,6 @@ class Base extends React.Component {
   }
 
   render() {
-    console.log('localStorage: ', typeof localStorage.getItem('loggedIn'));
     if (localStorage.getItem('loggedIn') === 'true') {
       return (
         <div>
