@@ -6,7 +6,7 @@ database:
     - psql -U ubuntu fridgr < database/fridgr.sql
 dependencies:
   override:
-    - npm install --dev
+    - npm install
 compile:
   override:
     - webpack -d
