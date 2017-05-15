@@ -35,12 +35,18 @@ class UserList extends React.Component {
           <div>or <Link to="/users">go back</Link> and select a different user.</div>
         </div>
       );
-    } else if (this.props.clicked && !this.props.cookieIsSet) {
+    } else if (this.props.clicked && !this.props.cookieIsSet && this.props.error === '') {
       return (
         <div>
           <SelectField floatingLabelText="Select a user" multiple={false} value={this.state.user} onChange={(e, i, v) => this.selectUser(e, i, v)}>
             {this.props.addUser.map((user)=>(<MenuItem key={user} label={user} value={user}>{user}</MenuItem>))}
           </SelectField>
+          <div>or <Link to="/users">go back</Link> and select a different user.</div>
+        </div>
+      );
+    } else if (this.props.clicked && !this.props.cookieIsSet && this.props.error !== '') {
+      return (
+        <div>
           <div>or <Link to="/users">go back</Link> and select a different user.</div>
         </div>
       );
