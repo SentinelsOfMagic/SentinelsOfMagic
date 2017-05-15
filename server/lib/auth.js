@@ -192,8 +192,30 @@ router.post('/login', (req, res, next) => {
   }
 });
 
-// TODO:
-// - update Base to reflect login/logout
-// - verify cookie for authorized components
+router.post('/logout', (req, res, next) => {
+  var currentSeshId = req.cookies.fridgrSesh.id;
+
+  // clear out houseId and userId from cookie
+  var currentCookie = req.cookies.fridgrSesh;
+  delete currentCookie['houseId'];
+  delete currentCookie['userId'];
+  res.cookie('fridgrSesh', currentCookie);
+  console.log('Credentials cleared from cookie');
+
+  // clear out houseId and userId from session
+  var sessionQuery = 'UPDATE sessions SET house_id = NULL, user_id = NULL WHERE id = ${sessionId#}';
+  db.query(sessionQuery, {sessionId: currentSeshId})
+  .then((sessionData) => {
+    console.log('Credentials removed from session:', sessionData);
+
+    return res.status(200).json({
+      success: true,
+      message: 'Logout successful!'
+    });
+  })
+  .catch((err) => {
+    console.log('Error occurred while clearing credentials from session:', err);
+  });
+});
 
 module.exports = router;

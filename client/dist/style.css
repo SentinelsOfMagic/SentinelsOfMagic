@@ -42,6 +42,7 @@ a:hover {
 }
 
 .somePadding {
+  color: tomato;
   margin-top: 20px;
   margin-bottom: 20px;
 }
