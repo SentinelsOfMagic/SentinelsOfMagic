@@ -37,28 +37,27 @@ class CreateUser extends React.Component {
   }
 
   componentWillMount() {
-
-    $.ajax({
-      method: 'POST',
-      url: '/checkUsers',
-      data: { houseId: this.state.houseId },
-      success: (data) => {
-        if (data.length > 0) {
-          this.setState({
-            usersExist: true
-          });
-          console.log('usersExist');
-        } else {
-          console.log('usersDontExist');
-        }
-      }
-    });
-
     let cookies = parse(document.cookie);
     let fridgrSesh = JSON.parse(cookies.fridgrSesh.slice(2));
 
     if (!cookies.fridgrSesh || !fridgrSesh.houseId) {
       this.props.history.push('/login');
+    } else {
+      $.ajax({
+        method: 'POST',
+        url: '/checkUsers',
+        data: { houseId: this.state.houseId },
+        success: (data) => {
+          if (data.length > 0) {
+            this.setState({
+              usersExist: true
+            });
+            console.log('usersExist');
+          } else {
+            console.log('usersDontExist');
+          }
+        }
+      });
     }
   }
 
