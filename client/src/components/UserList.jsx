@@ -44,7 +44,7 @@ class UserList extends React.Component {
           <div>or <Link to="/users">go back</Link> and select a different user.</div>
         </div>
       );
-    } else if (this.props.clicked && !this.props.cookieIsSet && this.props.error !== '') {
+    } else if (this.props.clicked && !this.props.cookieIsSet && this.props.error !== '' && this.props.usersExist) {
       return (
         <div>
           <div>or <Link to="/users">go back</Link> and select a different user.</div>
@@ -65,5 +65,3 @@ class UserList extends React.Component {
 }
 
 export default UserList;
-
-// {this.props.addUser.map((user)=>(<div key={user} onClick={this.props.passInCooks.bind(this)}><Link to="/inventory">{user}</Link></div>))}

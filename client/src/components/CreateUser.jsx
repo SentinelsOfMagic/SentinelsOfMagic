@@ -73,14 +73,13 @@ class CreateUser extends React.Component {
             console.log('what does it look like', data);
             if (data !== 'Username already taken. Please enter another.') {
               this.state.userNameList.push(this.state.userName);
-              // this.setState({
-              //   messageForUser: data
-              // });
+              this.setState({
+                error: ''
+              });
             } else {
               this.setState({
                 error: data
               });
-              console.log('data: ', this.state.error);
             }
           }
         });
@@ -123,7 +122,7 @@ class CreateUser extends React.Component {
   render () {
     return (
       <Card className="container">
-        <h4 className="card-heading">Add new user</h4>
+        <h4 className="card-heading">Add new user/s</h4>
         <UserNameInputBox error={this.state.error} dataFromInputBox={this.dataFromInputBox} submitUserName={this.submitUserName} buttonClicked={this.buttonClicked.bind(this)}/>
         <UserList error={this.state.error} cookieIsSet={this.state.cookieIsSet} usersExist={this.state.usersExist} addUser={this.state.userNameList} passInCooks={this.passInCooks.bind(this)} clicked={this.state.buttonClicked}/>
       </Card>
