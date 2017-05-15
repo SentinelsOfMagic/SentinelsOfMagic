@@ -80,7 +80,6 @@ class CreateUser extends React.Component {
               this.setState({
                 error: data
               });
-              console.log('data: ', this.state.error);
             }
           }
         });
