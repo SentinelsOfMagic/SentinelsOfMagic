@@ -23,7 +23,7 @@ class CreateUser extends React.Component {
     this.state = {
       userName: '',
       userNameExists: false,
-      messageForUser: 'Please type in a username.',
+      messageForUser: 'Enter a new user',
       houseId: houseId,
       userNameList: []
     };
@@ -84,7 +84,7 @@ class CreateUser extends React.Component {
   render () {
     return (
       <Card className="container">
-        <div className="somePadding">{this.state.messageForUser}</div>
+        <h4 className="card-heading">{this.state.messageForUser}</h4>
         <UserNameInputBox dataFromInputBox={this.dataFromInputBox} submitUserName={this.submitUserName}/>
         <UserList addUser={this.state.userNameList} passInCooks={this.passInCooks}/>
       </Card>
