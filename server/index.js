@@ -159,12 +159,11 @@ app.post('/settingCooks', function(req, res) {
 });
 
 app.post('/cookUser', function(req, res) {
-  db.query('SELECT * FROM users WHERE username=${userName}', { userName: req.body.userName })
+  db.query('SELECT * FROM users WHERE username=${userName} AND house_id=${houseId#}', { userName: req.body.userName, houseId: req.body.houseId })
   .then( (data)=> {
     // res.clearCookie('userId');
     // res.cookie('userId', data[0].id);
     // res.send(201);
-
     // update session with userId
     var currentSeshId = req.cookies.fridgrSesh.id;
     var sessionQuery = 'UPDATE sessions SET user_id = ${userId#} WHERE id = ${sessionId#}';
