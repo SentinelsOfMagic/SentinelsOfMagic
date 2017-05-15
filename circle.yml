@@ -12,7 +12,7 @@ database:
     - psql -U ubuntu circle_test < database/fridgr.sql
 compile:
   override:
-    - npm run circle-build
+    - nvm use 6 && npm run circle-build
 test:
   override:
-    - npm test
+    - nvm use 6 && npm test
