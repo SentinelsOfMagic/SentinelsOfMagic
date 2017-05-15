@@ -26,6 +26,7 @@ class Base extends React.Component {
       return (
         <div>
           <AppBar
+            className="title"
             onLeftIconButtonTouchTap={this.handleToggle.bind(this)}
             title={<NavLink exact to="/" >Fridgr</NavLink>}
           />
@@ -42,6 +43,7 @@ class Base extends React.Component {
       return (
         <div>
           <AppBar
+            className="title"
             onLeftIconButtonTouchTap={this.handleToggle.bind(this)}
             title={<NavLink exact to="/" >Fridgr</NavLink>}
           />
