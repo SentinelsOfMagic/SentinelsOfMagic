@@ -17,7 +17,7 @@ const Users = (props) => {
             <div><img data-key={user.id} src="https://media.giphy.com/media/3o8dpbSeoqQZNvjANq/giphy.gif" height="60" width="60"/></div>{user.username}
           </span>
 
-          <div className="hovered">This is me. Click away!</div>
+          <div className="hovered black-text">This is me. Click away!</div>
 
         </div>))}
     </GridList>
