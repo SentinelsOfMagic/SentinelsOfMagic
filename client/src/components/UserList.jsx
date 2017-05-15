@@ -23,7 +23,6 @@ class UserList extends React.Component {
   }
 
   render() {
-    console.log('error: ', this.props.error);
     if (this.props.clicked && this.props.cookieIsSet) {
       return (
         <div>
@@ -66,5 +65,3 @@ class UserList extends React.Component {
 }
 
 export default UserList;
-
-// {this.props.addUser.map((user)=>(<div key={user} onClick={this.props.passInCooks.bind(this)}><Link to="/inventory">{user}</Link></div>))}
