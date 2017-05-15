@@ -12,10 +12,6 @@ class CreateUser extends React.Component {
   constructor(props) {
     super(props);
 
-    // var cookieString = document.cookie;
-    // var houseIdRegex = new RegExp ('\houseId=(.*)');
-    // var houseId = houseIdRegex.exec(cookieString)[1];
-
     var cookie = parse(document.cookie);
     var houseId = parseInt(cookie.fridgrSesh.split('"houseId":')[1]);
     console.log('Current houseId:', houseId);

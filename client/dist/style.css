@@ -42,18 +42,18 @@ a:hover {
   color: #ff4081;
 }
 
-.somePadding {
+.selectUserTwo {
   color: tomato;
   margin-top: 20px;
   margin-bottom: 20px;
 }
 
-.someSidePadding {
+.selectUserThree {
   margin-right: 20px;
   margin-left: 20px;
 }
 
-.largeSidePadding {
+.selectUserPadding {
   margin-right: 200px;
   margin-left: 200px;
 }
