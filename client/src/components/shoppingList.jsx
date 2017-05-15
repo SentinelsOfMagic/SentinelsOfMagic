@@ -1,6 +1,6 @@
 import axios from 'axios';
 import auth from '../lib/clientAuth.js';
-import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 import Nav from './Nav.jsx';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -73,6 +73,10 @@ class ShoppingList extends React.Component {
       });
     }
 
+    if (this.state.selected.length > 0) {
+
+    }
+
   }
 
   isSelected(index) {
@@ -86,7 +90,7 @@ class ShoppingList extends React.Component {
     return (
       <div>
         <Nav page={this.state.page}/>
-        <FlatButton backgroundColor="#dbdbdb" hoverColor="#ff4081" label="Mark as Purchased" onTouchTap={this.submitShopping.bind(this)} />
+        <RaisedButton secondary={this.state.selected.length > 0} disabled={this.state.selected.length === 0} label={'Mark as Purchased'} onTouchTap={this.submitShopping.bind(this)} />
         <Table multiSelectable={true} enableSelectAll={true} onRowSelection={this.handleRowSelection}>
           <TableHeader>
             <TableRow>
