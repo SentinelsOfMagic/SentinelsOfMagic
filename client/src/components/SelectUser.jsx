@@ -7,7 +7,6 @@ import CookieParser from 'cookie-parser';
 import { Redirect } from 'react-router-dom';
 import RaisedButton from 'material-ui/RaisedButton';
 import {parse} from 'cookie';
-import auth from '../lib/clientAuth.js';
 
 class SelectUser extends React.Component {
   constructor(props) {
@@ -34,7 +33,12 @@ class SelectUser extends React.Component {
   }
 
   componentWillMount() {
-    auth(this.props.history);
+    let cookies = parse(document.cookie);
+    let fridgrSesh = JSON.parse(cookies.fridgrSesh.slice(2));
+
+    if (!cookies.fridgrSesh || !fridgrSesh.houseId) {
+      this.props.history.push('/login');
+    }
   }
 
   componentDidMount() {

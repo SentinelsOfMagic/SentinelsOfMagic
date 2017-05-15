@@ -86,7 +86,7 @@ class ShoppingList extends React.Component {
     return (
       <div>
         <Nav page={this.state.page}/>
-        <FlatButton label="Mark as Purchased" onTouchTap={this.submitShopping.bind(this)} />
+        <FlatButton backgroundColor="#dbdbdb" hoverColor="#ff4081" label="Mark as Purchased" onTouchTap={this.submitShopping.bind(this)} />
         <Table multiSelectable={true} enableSelectAll={true} onRowSelection={this.handleRowSelection}>
           <TableHeader>
             <TableRow>
