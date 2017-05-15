@@ -7,6 +7,7 @@ import UserList from './UserList.jsx';
 import { Link } from 'react-router-dom';
 import { Card } from 'material-ui/Card';
 import {parse} from 'cookie';
+import auth from '../lib/clientAuth.js';
 
 class CreateUser extends React.Component {
   constructor(props) {
@@ -31,6 +32,10 @@ class CreateUser extends React.Component {
     this.submitUserName = this.submitUserName.bind(this);
     this.dataFromInputBox = this.dataFromInputBox.bind(this);
     this.passInCooks = this.passInCooks.bind(this);
+  }
+
+  componentWillMount() {
+    auth(this.props.history);
   }
 
   submitUserName() {
