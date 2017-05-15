@@ -20,5 +20,11 @@ module.exports = {
       }
     ]
   },
+  resolve: {
+    modules: [
+      path.resolve('./client'),
+      'node_modules'
+    ]
+  }
   // watch: true
 };
