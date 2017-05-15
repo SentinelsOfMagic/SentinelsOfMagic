@@ -112,6 +112,14 @@ app.post('/unclaim', (req, res) => {
     .catch(err => console.log(`Unable to delete houses_items_id = ${req.body.itemId} in USERS_HOUSE_ITEMS`));
 });
 
+app.post('/checkUsers', function(req, res) {
+  db.query('SELECT * FROM users WHERE house_id=${houseId}', { houseId: req.body.houseId })
+     .then((data) => {
+       res.send(data);
+     })
+     .catch(err => console.log('unable to retrieve users'));
+});
+
 app.post('/createUser', function(req, res) {
   db.query('SELECT * FROM users WHERE username=${userName} and house_id=${houseId#}', { userName: req.body.userName, houseId: req.body.houseId })
     .then((data)=>{

@@ -26,7 +26,8 @@ class CreateUser extends React.Component {
       messageForUser: 'Enter a new user',
       houseId: houseId,
       userNameList: [],
-      buttonClicked: false
+      buttonClicked: false,
+      usersExist: false
     };
 
     this.submitUserName = this.submitUserName.bind(this);
@@ -35,6 +36,23 @@ class CreateUser extends React.Component {
   }
 
   componentWillMount() {
+
+    $.ajax({
+      method: 'POST',
+      url: '/checkUsers',
+      data: { houseId: this.state.houseId },
+      success: (data) => {
+        if (data.length>0) {
+          this.setState({
+            usersExist: true
+          });
+          console.log('usersExist')
+        } else {
+          console.log('usersDontExist');
+        }
+      }
+    })
+
     let cookies = parse(document.cookie);
     let fridgrSesh = JSON.parse(cookies.fridgrSesh.slice(2));
 
@@ -102,7 +120,7 @@ class CreateUser extends React.Component {
       <Card className="container">
         <h4 className="card-heading">{this.state.messageForUser}</h4>
         <UserNameInputBox dataFromInputBox={this.dataFromInputBox} submitUserName={this.submitUserName} buttonClicked={this.buttonClicked.bind(this)}/>
-        <UserList addUser={this.state.userNameList} passInCooks={this.passInCooks.bind(this)} clicked={this.state.buttonClicked}/>
+        <UserList usersExist={this.state.usersExist} addUser={this.state.userNameList} passInCooks={this.passInCooks.bind(this)} clicked={this.state.buttonClicked}/>
       </Card>
     );
   }
