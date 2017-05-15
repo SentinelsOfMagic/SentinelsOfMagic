@@ -141,7 +141,7 @@ app.post('/createUser', function(req, res) {
           })
           .catch (err => console.log('unable to create user', err));
       } else {
-        res.send('Username already taken. Please type in another username.');
+        res.send('Username already taken. Please enter another.');
       }
     })
     .catch (err => console.log('unable '));

@@ -23,7 +23,7 @@ class CreateUser extends React.Component {
     this.state = {
       userName: '',
       userNameExists: false,
-      messageForUser: 'Enter a new user',
+      error: '',
       houseId: houseId,
       userNameList: [],
       buttonClicked: false,
@@ -62,26 +62,33 @@ class CreateUser extends React.Component {
   }
 
   submitUserName() {
-    var userName = this.state.userName;
-    if (this.state.userNameExists === true) {
-      $.ajax({
-        method: 'POST',
-        url: '/createUser',
-        data: { userName: userName, houseId: this.state.houseId },
-        success: (data) => {
-          console.log('what does it look like', data);
-          if (data !== 'Username already taken. Please type in another username.') {
-            this.state.userNameList.push(this.state.userName);
-            this.setState({
-              messageForUser: data
-            });
-          } else {
-            this.setState({
-              messageForUser: data
-            });
-          }
-        }
+    if (this.state.userName === '') {
+      this.setState({
+        error: 'Please enter a valid username'
       });
+    } else {
+      var userName = this.state.userName;
+      if (this.state.userNameExists === true) {
+        $.ajax({
+          method: 'POST',
+          url: '/createUser',
+          data: { userName: userName, houseId: this.state.houseId },
+          success: (data) => {
+            console.log('what does it look like', data);
+            if (data !== 'Username already taken. Please enter another.') {
+              this.state.userNameList.push(this.state.userName);
+              // this.setState({
+              //   messageForUser: data
+              // });
+            } else {
+              this.setState({
+                error: data
+              });
+              console.log('data: ', this.state.error);
+            }
+          }
+        });
+      }
     }
   }
 
@@ -120,9 +127,9 @@ class CreateUser extends React.Component {
   render () {
     return (
       <Card className="container">
-        <h4 className="card-heading">{this.state.messageForUser}</h4>
-        <UserNameInputBox dataFromInputBox={this.dataFromInputBox} submitUserName={this.submitUserName} buttonClicked={this.buttonClicked.bind(this)}/>
-        <UserList cookieIsSet={this.state.cookieIsSet} usersExist={this.state.usersExist} addUser={this.state.userNameList} passInCooks={this.passInCooks.bind(this)} clicked={this.state.buttonClicked}/>
+        <h4 className="card-heading">Add new user</h4>
+        <UserNameInputBox error={this.state.error} dataFromInputBox={this.dataFromInputBox} submitUserName={this.submitUserName} buttonClicked={this.buttonClicked.bind(this)}/>
+        <UserList error={this.state.error} cookieIsSet={this.state.cookieIsSet} usersExist={this.state.usersExist} addUser={this.state.userNameList} passInCooks={this.passInCooks.bind(this)} clicked={this.state.buttonClicked}/>
       </Card>
     );
   }

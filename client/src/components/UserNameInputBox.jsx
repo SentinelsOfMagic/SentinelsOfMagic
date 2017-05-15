@@ -8,7 +8,8 @@ class UserNameInputBox extends React.Component {
     super(props);
     this.state = {
       userName: '',
-      userNameExists: false
+      userNameExists: false,
+      error: ''
     };
 
     this.change = this.change.bind(this);
@@ -32,7 +33,7 @@ class UserNameInputBox extends React.Component {
     return (
 
       <div>
-       <TextField type="text" floatingLabelText="Name" onChange={this.change}></TextField>
+       <TextField type="text" floatingLabelText="Name" errorText={this.props.error} onChange={this.change}></TextField>
        <div>
         <RaisedButton className="somePadding" secondary={true} label="Submit" onClick={(e)=>{ this.passDataToCreateUser(); }}></RaisedButton>
        </div>
