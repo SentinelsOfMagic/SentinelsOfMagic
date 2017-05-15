@@ -1,6 +1,7 @@
 import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Card } from 'material-ui/Card';
+import TextField from 'material-ui/TextField';
 
 class UserNameInputBox extends React.Component {
   constructor (props) {
@@ -30,9 +31,9 @@ class UserNameInputBox extends React.Component {
     return (
 
       <div>
-       <input type='text' onChange={this.change}></input>
+       <TextField type='text' floatingLabelText="Name" onChange={this.change}></TextField>
        <div>
-        <RaisedButton className="somePadding" secondary={true} onClick={(e)=>{ this.passDataToCreateUser(); }}>Submit</RaisedButton>
+        <RaisedButton className="somePadding" secondary={true} label="Submit" onClick={(e)=>{ this.passDataToCreateUser(); }}></RaisedButton>
        </div>
       </div>
 
