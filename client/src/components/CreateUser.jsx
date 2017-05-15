@@ -27,7 +27,8 @@ class CreateUser extends React.Component {
       houseId: houseId,
       userNameList: [],
       buttonClicked: false,
-      usersExist: false
+      usersExist: false,
+      cookieIsSet: false
     };
 
     this.submitUserName = this.submitUserName.bind(this);
@@ -42,16 +43,16 @@ class CreateUser extends React.Component {
       url: '/checkUsers',
       data: { houseId: this.state.houseId },
       success: (data) => {
-        if (data.length>0) {
+        if (data.length > 0) {
           this.setState({
             usersExist: true
           });
-          console.log('usersExist')
+          console.log('usersExist');
         } else {
           console.log('usersDontExist');
         }
       }
-    })
+    });
 
     let cookies = parse(document.cookie);
     let fridgrSesh = JSON.parse(cookies.fridgrSesh.slice(2));
@@ -85,14 +86,16 @@ class CreateUser extends React.Component {
     }
   }
 
-  passInCooks(event) {
-    var userName = event.target.text;
+  passInCooks(username) {
     $.ajax({
       method: 'POST',
       url: '/cookUser',
-      data: {userName: userName, houseId: this.state.houseId},
+      data: {userName: username, houseId: this.state.houseId},
       success: (data) => {
         console.log('done passing the cookie');
+        this.setState({
+          cookieIsSet: true
+        });
       }
     });
   }
@@ -120,7 +123,7 @@ class CreateUser extends React.Component {
       <Card className="container">
         <h4 className="card-heading">{this.state.messageForUser}</h4>
         <UserNameInputBox dataFromInputBox={this.dataFromInputBox} submitUserName={this.submitUserName} buttonClicked={this.buttonClicked.bind(this)}/>
-        <UserList usersExist={this.state.usersExist} addUser={this.state.userNameList} passInCooks={this.passInCooks.bind(this)} clicked={this.state.buttonClicked}/>
+        <UserList cookieIsSet={this.state.cookieIsSet} usersExist={this.state.usersExist} addUser={this.state.userNameList} passInCooks={this.passInCooks.bind(this)} clicked={this.state.buttonClicked}/>
       </Card>
     );
   }
