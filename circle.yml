@@ -1,6 +1,7 @@
 machine:
   environment:
     DATABASE_URL: postgresql://ubuntu:@127.0.0.1:5432/circle_test
+    NODE_ENV: test
 dependencies:
   override:
     - npm install
@@ -9,7 +10,7 @@ database:
     - psql -U ubuntu circle_test < database/fridgr.sql
 compile:
   override:
-    - npm run heroku-postbuild
+    - npm run circle-build
 test:
   override:
     - npm test
