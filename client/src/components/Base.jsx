@@ -22,7 +22,7 @@ class Base extends React.Component {
   }
 
   render() {
-    if (localStorage.getItem('loggedIn') === 'true') {
+    if (localStorage.getItem('loggedIn') !== null) {
       return (
         <div>
           <AppBar
@@ -36,7 +36,7 @@ class Base extends React.Component {
               onRequestChange={open => this.setState({ open })}
             >
               <MenuItem onTouchTap={this.handleClose.bind(this)} primaryText="Change User" containerElement={<Link to="/users"/>}/>
-              <MenuItem onTouchTap={this.handleClose.bind(this)} primaryText="Logout" containerElement={<Link to="/"/>}/>
+              <MenuItem onTouchTap={this.handleClose.bind(this)} primaryText="Logout" containerElement={<Link to="/logout"/>}/>
             </Drawer>
         </div>
       );

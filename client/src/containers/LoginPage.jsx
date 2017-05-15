@@ -81,7 +81,7 @@ class LoginPage extends React.Component {
       }
     })
     .catch((err) => {
-      console.log(err);
+      console.log('Error occurred during login:', err);
       var errors = err.response.data.errors ? err.response.data.errors : {};
       errors.summary = err.response.data.message;
 
