@@ -13,7 +13,7 @@ const Users = (props) => {
 
           <span className="username changeColorForUserList" key={user.id} data-key={user.id} onClick={props.redirect}>
 
-            <div><img src="https://media.giphy.com/media/3o8dpbSeoqQZNvjANq/giphy.gif" height="60" width="60"/></div>{user.username}
+            <div><img data-key={user.id} src="https://media.giphy.com/media/3o8dpbSeoqQZNvjANq/giphy.gif" height="60" width="60"/></div>{user.username}
           </span>
 
           <div className="hovered">This is me. Click away!</div>
