@@ -5,7 +5,6 @@ import HouseInventoryList from './HouseInventoryList.jsx';
 import Nav from './Nav.jsx';
 import AddItem from './AddItem.jsx';
 import {parse} from 'cookie';
-import auth from '../lib/clientAuth.js';
 
 
 class HouseInventory extends React.Component {
@@ -31,7 +30,12 @@ class HouseInventory extends React.Component {
   }
 
   componentWillMount() {
-    auth(this.props.history);
+    let cookies = parse(document.cookie);
+    let fridgrSesh = JSON.parse(cookies.fridgrSesh.slice(2));
+
+    if (!cookies.fridgrSesh || !fridgrSesh.userId || !fridgrSesh.houseId) {
+      this.props.history.push('/login');
+    }
   }
 
   componentDidMount() {

@@ -187,7 +187,7 @@ app.post('/cookUser', function(req, res) {
     var sessionQuery = 'UPDATE sessions SET user_id = ${userId#} WHERE id = ${sessionId#}';
     db.query(sessionQuery, {userId: data[0].id, sessionId: currentSeshId})
     .then((sessionData) => {
-      console.log('Session updated with userId:', sessionData);
+      console.log('Session updated with userId:', data[0].id, sessionData);
 
       // add userId to cookie
       var currentCookie = req.cookies.fridgrSesh;
@@ -196,7 +196,7 @@ app.post('/cookUser', function(req, res) {
       res.status(201).end();
     })
     .catch((err) => {
-      console.log('Error updating session with userId:', err);
+      console.log('Error updating session with userId:', data[0].id, err);
     });
   })
   .catch( err=> console.log('unable to pass cookies', err));
