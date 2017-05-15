@@ -86,12 +86,11 @@ class CreateUser extends React.Component {
     }
   }
 
-  passInCooks(event) {
-    var userName = event.target.text;
+  passInCooks(username) {
     $.ajax({
       method: 'POST',
       url: '/cookUser',
-      data: {userName: userName, houseId: this.state.houseId},
+      data: {userName: username, houseId: this.state.houseId},
       success: (data) => {
         console.log('done passing the cookie');
         this.setState({
