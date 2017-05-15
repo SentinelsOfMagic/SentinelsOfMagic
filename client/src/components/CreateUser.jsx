@@ -26,7 +26,8 @@ class CreateUser extends React.Component {
       userNameExists: false,
       messageForUser: 'Enter a new user',
       houseId: houseId,
-      userNameList: []
+      userNameList: [],
+      buttonClicked: false
     };
 
     this.submitUserName = this.submitUserName.bind(this);
@@ -86,12 +87,18 @@ class CreateUser extends React.Component {
     });
   }
 
+  buttonClicked(bool) {
+    this.setState({
+      buttonClicked: bool
+    });
+  }
+
   render () {
     return (
       <Card className="container">
         <h4 className="card-heading">{this.state.messageForUser}</h4>
-        <UserNameInputBox dataFromInputBox={this.dataFromInputBox} submitUserName={this.submitUserName}/>
-        <UserList addUser={this.state.userNameList} passInCooks={this.passInCooks}/>
+        <UserNameInputBox dataFromInputBox={this.dataFromInputBox} submitUserName={this.submitUserName} buttonClicked={this.buttonClicked.bind(this)}/>
+        <UserList addUser={this.state.userNameList} passInCooks={this.passInCooks} clicked={this.state.buttonClicked}/>
       </Card>
     );
   }
