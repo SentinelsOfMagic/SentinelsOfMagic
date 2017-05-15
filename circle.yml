@@ -1,6 +1,6 @@
 machine:
   environment:
-    DATABASE_URL: postgresql://ubuntu:@127.0.0.1:5432/frigr
+    DATABASE_URL: postgresql://ubuntu:@127.0.0.1:5432/fridgr
 database:
   override:
     - psql -U ubuntu fridgr < database/fridgr.sql
