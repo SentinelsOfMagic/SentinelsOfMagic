@@ -4,7 +4,7 @@ import axios from 'axios';
 import HouseInventoryList from './HouseInventoryList.jsx';
 import Nav from './Nav.jsx';
 import AddItem from './AddItem.jsx';
-// import {parse} from 'cookie';
+import {parse} from 'cookie';
 
 
 class HouseInventory extends React.Component {
@@ -17,25 +17,15 @@ class HouseInventory extends React.Component {
       housename: ''
     };
 
-    var cookies = document.cookie.replace(/ /g, '').split(';').map(item => item.split('='));
-    var cookieJar = {};
+    var cookie = parse(document.cookie);
 
-    for (var i = 0; i < cookies.length; i++) {
-      cookieJar[cookies[i][0]] = cookies[i][1];
-    }
+    var houseId = parseInt(cookie.fridgrSesh.split('"houseId":')[1]);
+    console.log('Current houseId:', houseId);
+    this.state.houseId = houseId;
 
-    this.state.houseId = cookieJar['houseId'];
-    this.state.userId = cookieJar['userId'];
-
-    // var cookie = parse(document.cookie);
-
-    // var houseId = parseInt(cookie.fridgrSesh.split('"houseId":')[1]);
-    // console.log('Current houseId:', houseId);
-    // this.state.houseId = houseId;
-
-    // var userId = parseInt(cookie.fridgrSesh.split('"userId":')[1]);
-    // console.log('Current userId:', userId);
-    // this.state.userId = userId;
+    var userId = parseInt(cookie.fridgrSesh.split('"userId":')[1]);
+    console.log('Current userId:', userId);
+    this.state.userId = userId;
   }
 
   componentDidMount() {
@@ -80,12 +70,12 @@ class HouseInventory extends React.Component {
 
   render() {
     return (
-    <div className="item">
-      <Nav page={this.state.page}/>
-      <h2>{this.state.housename}</h2>
-      <AddItem houseId={this.state.houseId} submitItem={this.submitItem.bind(this)}/>
-      <HouseInventoryList items={this.state.items} userId={this.state.userId} submitItem={this.submitItem.bind(this)}/>
-    </div>
+      <div className="item">
+        <Nav page={this.state.page}/>
+        <h2>{this.state.housename}</h2>
+        <AddItem houseId={this.state.houseId} submitItem={this.submitItem.bind(this)}/>
+        <HouseInventoryList items={this.state.items} userId={this.state.userId} submitItem={this.submitItem.bind(this)}/>
+      </div>
     );
   }
 }
