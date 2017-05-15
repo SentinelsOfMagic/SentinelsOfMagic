@@ -13,6 +13,7 @@
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/index.js",
     "heroku-postbuild": "webpack -p --config ./webpack.config.js --progress",
+    "circle-build": "webpack -d --config webpack.config.js",
     "test": "mocha spec/serverSpec.js"
   },
   "dependencies": {
