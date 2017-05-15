@@ -26,7 +26,8 @@ class SelectUser extends React.Component {
       houseId: houseId,
       userId: 0,
       redirect: false,
-      to: '/inventory'
+      to: '/inventory',
+      usersCount: 0
     };
     this.getUsers = this.getUsers.bind(this);
     this.grabInventory = this.grabInventory.bind(this);
@@ -67,7 +68,8 @@ class SelectUser extends React.Component {
       data: { houseId: this.state.houseId },
       success: (data) => {
         this.setState({
-          data: data
+          data: data,
+          usersCount: data.length
         });
       }
     });
@@ -76,14 +78,14 @@ class SelectUser extends React.Component {
 
   render () {
     return (
-      <div>
+      <div className="item">
         <div className="somePadding someSidePadding">
-          <RaisedButton secondary={true}><Link to="/createUser">Create User</Link></RaisedButton>
+          <RaisedButton className="title" secondary={true} label={<Link to="/createUser">Create User</Link>}></RaisedButton>
         </div>
-        <div className="somePadding someSidePadding">Who are you? :D</div>
+        <div className="somePadding someSidePadding">Who are you? 😄</div>
         {this.state.redirect ? <Redirect to={this.state.to}/> :
-        <div className="somePadding"><Users users={this.state.data} houseId={this.state.houseId} redirect={this.grabInventory}/></div>}
-        </div>
+        <div className="somePadding item"><Users users={this.state.data} usersCount={this.state.usersCount} houseId={this.state.houseId} redirect={this.grabInventory}/></div>}
+      </div>
     );
   }
 

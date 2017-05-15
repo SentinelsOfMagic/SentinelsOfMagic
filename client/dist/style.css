@@ -10,6 +10,7 @@ body {
 
 .username {
   cursor: pointer;
+  text-transform: uppercase;
 }
 
 span:hover + .hovered {
@@ -17,7 +18,7 @@ span:hover + .hovered {
 }
 
 .hovered {
-    background-color: yellow;
+    background-color: #e5e5e5;
     padding: 20px;
     display: none;
 }
@@ -50,6 +51,11 @@ a:hover {
 .someSidePadding {
   margin-right: 20px;
   margin-left: 20px;
+}
+
+.largeSidePadding {
+  margin-right: 200px;
+  margin-left: 200px;
 }
 
 .text-center {
@@ -121,4 +127,8 @@ a:hover {
 .add-item {
   text-align: center;
   padding: 20px;
+}
+
+.user {
+  display: inline-block;
 }

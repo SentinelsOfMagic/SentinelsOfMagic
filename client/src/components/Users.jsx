@@ -4,8 +4,8 @@ import { GridList, GridTile } from 'material-ui/GridList';
 
 const Users = (props) => {
   return (
-  <div>
-    <GridList cellHeight="auto" cols={5} padding={15}>
+  <div className="item largeSidePadding">
+    <GridList cellHeight="auto" cols={props.usersCount}>
     {props.users
      .map((user)=>(
 
