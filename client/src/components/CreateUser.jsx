@@ -67,12 +67,12 @@ class CreateUser extends React.Component {
     }
   }
 
-  passInCooks () {
-    var userName = this.state.userName;
+  passInCooks(event) {
+    var userName = event.target.text;
     $.ajax({
       method: 'POST',
       url: '/cookUser',
-      data: {userName: userName},
+      data: {userName: userName, houseId: this.state.houseId},
       success: (data) => {
         console.log('done passing the cookie');
       }
@@ -102,7 +102,7 @@ class CreateUser extends React.Component {
       <Card className="container">
         <h4 className="card-heading">{this.state.messageForUser}</h4>
         <UserNameInputBox dataFromInputBox={this.dataFromInputBox} submitUserName={this.submitUserName} buttonClicked={this.buttonClicked.bind(this)}/>
-        <UserList addUser={this.state.userNameList} passInCooks={this.passInCooks} clicked={this.state.buttonClicked}/>
+        <UserList addUser={this.state.userNameList} passInCooks={this.passInCooks.bind(this)} clicked={this.state.buttonClicked}/>
       </Card>
     );
   }
