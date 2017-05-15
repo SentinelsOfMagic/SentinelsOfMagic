@@ -1,14 +1,17 @@
 let session = require('../../database/models/session');
 
 let authPageRequest = (req, res, next) => {
+  console.log(req.cookies);
   session.getSession(req.cookies.fridgrSesh.id)
   .then((session) => {
     if (session.hash === req.cookies.fridgrSesh.hash &&
-        session.houseId === req.cookies.fridgrSesh.houseId &&
-        session.userId === req.cookies.fridgrSesh.userId) {
+        session.house_id === req.cookies.fridgrSesh.houseId &&
+        session.user_id === req.cookies.fridgrSesh.userId) {
       next();
     } else {
       res.clearCookie('fridgrSesh');
+      res.clearCookie('houseId');
+      res.clearCookie('userId');
       res.redirect(401, '/login');
     }
   });
@@ -16,14 +19,19 @@ let authPageRequest = (req, res, next) => {
 };
 
 let authAPICall = (req, res, next) => {
+  console.log(req.cookies);
   session.getSession(req.cookies.fridgrSesh.id)
   .then((session) => {
     if (session.hash === req.cookies.fridgrSesh.hash &&
-        session.houseId === req.cookies.fridgrSesh.houseId &&
-        session.userId === req.cookies.fridgrSesh.userId) {
+        session.house_id === req.cookies.fridgrSesh.houseId &&
+        session.user_id === req.cookies.fridgrSesh.userId) {
       next();
     } else {
+      console.log(session);
+      console.log(req.cookies);
       res.clearCookie('fridgrSesh');
+      res.clearCookie('houseId');
+      res.clearCookie('userId');
       res.send({error: 'unauthorized'});
     }
   });
