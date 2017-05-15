@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import { GridList, GridTile } from 'material-ui/GridList';
 
 const Users = (props) => {
+  var colNums = (props.usersCount > 5) ? 5 : props.usersCount;
   return (
   <div className="item largeSidePadding">
-    <GridList cellHeight="auto" cols={props.usersCount}>
+    <GridList cellHeight="auto" cols={colNums}>
     {props.users
      .map((user)=>(
 
