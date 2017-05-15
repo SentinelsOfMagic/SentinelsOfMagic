@@ -9,7 +9,7 @@ database:
     - psql -U ubuntu circle_test < database/fridgr.sql
 compile:
   override:
-    - webpack -d
+    - npm run heroku-postbuild
 test:
   override:
     - npm test
