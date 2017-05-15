@@ -22,10 +22,13 @@ class SelectUser extends React.Component {
       userId: 0,
       redirect: false,
       to: '/inventory',
-      usersCount: 0
+      usersCount: 0,
+      redirectTwo: false,
+      toTwo: '/createUser'
     };
     this.getUsers = this.getUsers.bind(this);
     this.grabInventory = this.grabInventory.bind(this);
+    this.showCreateUser = this.showCreateUser.bind(this);
   }
 
   componentWillMount() {
@@ -72,20 +75,31 @@ class SelectUser extends React.Component {
     });
   }
 
+  showCreateUser() {
+    this.setState({
+      redirectTwo: true
+    });
+  }
 
   render () {
     return (
-      <div className="item">
-        <div className="somePadding someSidePadding">
-          <RaisedButton className="title" secondary={true} label={<Link to="/createUser">Create User</Link>}></RaisedButton>
+      <div>
+      {this.state.redirectTwo ? <Redirect to={this.state.toTwo}/> :
+        <div className="item">
+          <div className="selectUserTwo selectUserThree">
+            <RaisedButton className="title" secondary={true} onTouchTap={this.showCreateUser} label="Create User"></RaisedButton>
+          </div>
+          <div className="selectUserTwo selectUserThree black-text">Who are you? 😄</div>
+          {this.state.redirect ? <Redirect to={this.state.to}/> :
+          <div className="selectUserTwo item"><Users users={this.state.data} usersCount={this.state.usersCount} houseId={this.state.houseId} redirect={this.grabInventory}/></div>}
         </div>
-        <div className="somePadding someSidePadding black-text">Who are you? 😄</div>
-        {this.state.redirect ? <Redirect to={this.state.to}/> :
-        <div className="somePadding item"><Users users={this.state.data} usersCount={this.state.usersCount} houseId={this.state.houseId} redirect={this.grabInventory}/></div>}
+      }
       </div>
     );
   }
 
 }
 
+
+// label={<Link to="/createUser">Create User</Link>}
 export default SelectUser;
