@@ -12,7 +12,8 @@
     "start": "node ./server/index.js",
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/index.js",
-    "heroku-postbuild": "webpack -p --config ./webpack.config.js --progress"
+    "heroku-postbuild": "webpack -p --config ./webpack.config.js --progress",
+    "test": "mocha spec/serverSpec.js"
   },
   "dependencies": {
     "axios": "^0.16.1",
@@ -42,7 +43,8 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
-    "mocha": "^3.3.0"
+    "mocha": "^3.3.0",
+    "node-mocks-http": "^1.6.2"
   },
   "babel": {
     "presets": [

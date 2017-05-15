@@ -1,0 +1,15 @@
+machine:
+  environment:
+    DATABASE_URL: postgresql://ubuntu:@127.0.0.1:5432/fridgr
+database:
+  override:
+    - psql -U ubuntu fridgr < database/fridgr.sql
+dependencies:
+  override:
+    - npm install --dev
+compile:
+  override:
+    - webpack -d
+test:
+  override:
+    - npm test
