@@ -31,7 +31,7 @@ class UserNameInputBox extends React.Component {
     return (
 
       <div>
-       <TextField type='text' floatingLabelText="Name" onChange={this.change}></TextField>
+       <TextField type="text" floatingLabelText="Name" onChange={this.change}></TextField>
        <div>
         <RaisedButton className="somePadding" secondary={true} label="Submit" onClick={(e)=>{ this.passDataToCreateUser(); }}></RaisedButton>
        </div>
