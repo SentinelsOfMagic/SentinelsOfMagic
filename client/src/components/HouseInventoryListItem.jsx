@@ -51,12 +51,22 @@ class HouseInventoryListItem extends React.Component {
   }
 
   clickUnclaim(event) {
-    console.log('UNCLAIM');
     axios.post('/unclaim', { itemId: this.state.id })
       .then(res => {
         console.log('Successful POST request to /unclaim');
         this.setState({
           username: null
+        });
+      })
+      .catch(err => console.log('Bad POST request to /unclaim'));
+  }
+
+  clickUndo(event) {
+    axios.post('/undo', { itemId: this.state.id })
+      .then(res => {
+        console.log('Successful POST request to /unclaim');
+        this.setState({
+          needToRestock: false
         });
       })
       .catch(err => console.log('Bad POST request to /unclaim'));
@@ -78,7 +88,8 @@ class HouseInventoryListItem extends React.Component {
           <h1>😨</h1>
           <h4 className="item-name">{this.state.name}</h4>
           <h5 className="item-notes">{this.state.notes}</h5>
-          <RaisedButton primary={true} label="Add to My Shopping List" onClick={this.clickClaim.bind(this)}></RaisedButton>
+          <RaisedButton primary={true} label="Claim" onClick={this.clickClaim.bind(this)}></RaisedButton>
+          <RaisedButton label="Undo" onClick={this.clickUndo.bind(this)}></RaisedButton>
           <RaisedButton secondary={true} label="Delete" onClick={this.clickDelete.bind(this)}></RaisedButton>
         </div>
       );
