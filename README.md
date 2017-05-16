@@ -66,7 +66,7 @@ with appropriate replacements for username and password.
 
 Now when running on your dev machine this will be used for database connection, else the heroku DATABASE_URL environment variable will be used.
 
-Contact Connor if this doesn't work, there may be something subtle I missed. Also, maybe worth changing over to using .env at some point if we need a lot of keys.
+For deployment to heroku, look up pg:push. Note: user will need schema permissions.
 
 
 ### Roadmap
