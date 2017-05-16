@@ -73,10 +73,6 @@ class ShoppingList extends React.Component {
       });
     }
 
-    if (this.state.selected.length > 0) {
-
-    }
-
   }
 
   isSelected(index) {
