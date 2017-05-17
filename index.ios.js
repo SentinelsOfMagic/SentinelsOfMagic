@@ -1,38 +1,14 @@
-import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, Text, View } from 'react-native';
+import { AppRegistry } from 'react-native';
+import { StackNavigator } from 'react-navigation';
+import Main from './ios/app/components/Main';
 import Login from './ios/app/components/Login';
+import SignUp from './ios/app/components/SignUp';
+import styles from './ios/app/style.js';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+const newMobile = StackNavigator({
+  Home: { screen: Login },
+  SignUp: { screen: SignUp },
+  Main: { screen: Main }
 });
-
-export default class newMobile extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to fridgr~
-        </Text>
-        <Login />
-      </View>
-    );
-  }
-}
-
 
 AppRegistry.registerComponent('newMobile', () => newMobile);
