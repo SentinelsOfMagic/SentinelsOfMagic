@@ -9,7 +9,8 @@ import Settings from './Settings';
 const Main = TabNavigator({
   HouseInventory: { screen: HouseInventory },
   UserShoppingList: { screen: UserShoppingList },
-  Settings: { screen: Settings }
-});
+  Settings: { screen: Settings },
+},
+  { tabBarPosition: 'top' });
 
 export default Main;

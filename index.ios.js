@@ -3,12 +3,15 @@ import { StackNavigator } from 'react-navigation';
 import Main from './ios/app/components/Main';
 import Login from './ios/app/components/Login';
 import SignUp from './ios/app/components/SignUp';
+import CreateUser from './ios/app/components/CreateUser';
 import styles from './ios/app/style.js';
+
 
 const newMobile = StackNavigator({
   Home: { screen: Login },
   SignUp: { screen: SignUp },
-  Main: { screen: Main }
+  Main: { screen: Main },
+  CreateUser: { screen: CreateUser }
 });
 
 AppRegistry.registerComponent('newMobile', () => newMobile);
