@@ -10,7 +10,7 @@ import LoginPage from './containers/LoginPage.jsx';
 import SignUpPage from './containers/SignUpPage.jsx';
 import HouseInventory from './components/houseInventory.jsx';
 import CreateUser from './components/CreateUser.jsx';
-import dummyData from '../../database/dummyData.js'; // moved from houseInventory.jsx
+import dummyData from '../../../database/dummyData.js'; // moved from houseInventory.jsx
 import shoppingList from './components/shoppingList.jsx';
 import SelectUser from './components/SelectUser.jsx';
 import Logout from './components/Logout.jsx';

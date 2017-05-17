@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(assignCookie);
-app.use(express.static(__dirname + '/../client/dist'));
+app.use(express.static(__dirname + '/../fridgrWeb/client/dist'));
 
 // routes
 let routeHandlers = require('./lib/route-handlers');
@@ -264,6 +264,6 @@ app.get('*', function(req, res) {
   res.sendFile(path.resolve(__dirname + '/../client/dist/index.html'));
 });
 
-app.listen(process.env.PORT || 1337, function() {
-  console.log('Listening on 1337...');
+app.listen(process.env.PORT || 8080, function() {
+  console.log('Listening on 8080...');
 });
