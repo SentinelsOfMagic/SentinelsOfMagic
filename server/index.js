@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(assignCookie);
-app.use(express.static(__dirname + '/../fridgrWeb/client/dist'));
+app.use(express.static(__dirname + '/../web/client/dist'));
 
 // routes
 let routeHandlers = require('./lib/route-handlers');

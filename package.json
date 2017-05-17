@@ -2,8 +2,8 @@
   "name": "Fridgr",
   "version": "0.0.1",
   "description": "Tracking groceries got you stressed? Chill.",
-  "repository": "https://github.com/SentinelsOfMagic/SentinelsOfMagic",
-  "author": "Sentinels of Magic",
+  "repository": "https://github.com/ninjacodez/fridgr",
+  "author": "Ninja Turtles",
   "license": "MIT",
   "engines": {
     "node": ">=6.4.0"
@@ -12,8 +12,8 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/index.js",
-    "heroku-postbuild": "webpack -p --config ./fridgrWeb/webpack.config.js --progress",
-    "circle-build": "webpack -d --config fridgrWeb/webpack.config.js",
+    "heroku-postbuild": "webpack -p --config ./web/webpack.config.js --progress",
+    "circle-build": "webpack -d --config web/webpack.config.js",
     "test": "mocha spec/serverSpec.js"
   },
   "dependencies": {
@@ -35,7 +35,7 @@
     "pg-promise": "^5.6.7",
     "react": "16.0.0-alpha.6",
     "react-dom": "^15.5.4",
-    "react-native": "0.44.0",
+    "react-native": "^0.44.0",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
     "react-tap-event-plugin": "^2.0.1",

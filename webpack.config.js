@@ -1,6 +1,6 @@
 var path = require('path');
-var SRC_DIR = path.join(__dirname, '/fridgrWeb/client/src');
-var DIST_DIR = path.join(__dirname, '/fridgrWeb/client/dist');
+var SRC_DIR = path.join(__dirname, '/web/client/src');
+var DIST_DIR = path.join(__dirname, '/web/client/dist');
 
 module.exports = {
   entry: `${SRC_DIR}/index.jsx`,
@@ -22,7 +22,7 @@ module.exports = {
   },
   resolve: {
     modules: [
-      path.resolve('./fridgrWeb/client'),
+      path.resolve('./web/client'),
       'node_modules'
     ]
   }

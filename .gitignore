@@ -23,7 +23,7 @@ coverage
 
 # Compiled Dirs (http://nodejs.org/api/addons.html)
 build/
-fridgrWeb/client/dist/bundle.js
+web/client/dist/bundle.js
 
 # Database access credentials
 database/config.js
