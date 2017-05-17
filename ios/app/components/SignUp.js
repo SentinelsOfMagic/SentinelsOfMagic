@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Text, View, TextInput, Button } from 'react-native';
 import styles from '../style';
 
-class Login extends Component {
-  
-  static navigationOptions = { title: 'Login' };
+class SignUp extends Component {
+
+  static navigationOptions = { title: 'Sign Up' };
 
   constructor(props) {
     super(props);
@@ -13,7 +13,6 @@ class Login extends Component {
       password: ''
     };
     this.onPressSubmit = this.onPressSubmit.bind(this);
-    this.onPressSignUp = this.onPressSignUp.bind(this);
   }
 
   onPressSubmit() {
@@ -22,16 +21,11 @@ class Login extends Component {
     navigate('Main');
   }
 
-  onPressSignUp() {
-    const { navigate } = this.props.navigation;
-    navigate('SignUp');
-  }
-
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Welcome
+          Sign Up
         </Text>
         <TextInput
           style={{height: 40, borderColor: 'gray', borderWidth: 1}}
@@ -51,14 +45,9 @@ class Login extends Component {
           title="Submit"
           color="#841584"
         />
-        <Button
-          onPress={this.onPressSignUp}
-          title="New User Sign Up"
-          color="#841584"
-        />
       </View>
     );
   }
 }
 
-export default Login;
+export default SignUp;
