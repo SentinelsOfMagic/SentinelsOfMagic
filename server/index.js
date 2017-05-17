@@ -261,7 +261,7 @@ app.get('/api/shop', checkAuth.APICall, routeHandlers.getShoppingList);
 app.post('/api/shop', checkAuth.pageRequest, routeHandlers.updateWithPurchases);
 
 app.get('*', function(req, res) {
-  res.sendFile(path.resolve(__dirname + '/../client/dist/index.html'));
+  res.sendFile(path.resolve(__dirname + '/../web/client/dist/index.html'));
 });
 
 app.listen(process.env.PORT || 8080, function() {
