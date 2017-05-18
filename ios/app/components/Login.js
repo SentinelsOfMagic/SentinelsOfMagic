@@ -29,7 +29,7 @@ class Login extends Component {
     const houseName = this.state.houseName;
     const password = this.state.password;
 
-    axios.post('https://sentinelsofmagic.herokuapp.com/auth/login', {
+    axios.post('http://127.0.0.1:8080/auth/login', {
       houseName: houseName,
       password: password
     })
