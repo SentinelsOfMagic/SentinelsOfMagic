@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 import { TabNavigator } from 'react-navigation';
 import HouseInventoryNavigator from './HouseInventoryNavigator';
 import UserShoppingList from './UserShoppingList';
