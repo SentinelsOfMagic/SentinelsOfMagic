@@ -1,6 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
-import dummyUserData from '../../../database/dummyUserData.js';
+import dummyUserData from '../../../../database/dummyUserData.js';
 import Users from './Users.jsx';
 import { Link } from 'react-router-dom';
 import CookieParser from 'cookie-parser';
