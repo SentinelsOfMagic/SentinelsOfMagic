@@ -28,22 +28,37 @@ class HouseInventory extends React.Component {
         color="#841584"
       />),
     };
+<<<<<<< HEAD
   }
+=======
+>>>>>>> WIP
 
   constructor(props) {
     super(props);
     this.state = {
+<<<<<<< HEAD
       items: dummyData
+=======
+      items: []
+>>>>>>> WIP
     };
     this.getItems = this.getItems.bind(this);
   }
 
   getItems() {
+<<<<<<< HEAD
     const context = this;
     axios.post('http://127.0.0.1:8080/inventory', this.props.screenProps )
       .then(res => {
         console.log('Successful POST request to /inventory - house inventory items retrieved', res.data);
         context.setState({items: res.data});
+=======
+    axios.post('/inventory', { houseId: this.state.houseId })
+      .then(res => {
+        console.log('Successful POST request to /inventory - house inventory items retrieved');
+        this.setState({items: res.data});
+        debugger;
+>>>>>>> WIP
       })
       .catch(err => console.log('Unsuccessful POST request to /inventory - unable to retrieve house inventory items: ', err));
   }

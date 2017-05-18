@@ -14,17 +14,14 @@ class DetailView extends React.Component {
 
   handleClaimItem() {
     const { params } = this.props.navigation.state;
-    console.log('************ CLAIM ************', params.data.name);
   }
 
   handleUndoItem() {
     const { params } = this.props.navigation.state;
-    console.log('************ UNDO ************', params.data.name);
   }
 
   handleDeleteItem() {
     const { params } = this.props.navigation.state;
-    console.log('************ DELETE ************', params.data.name);
   }
 
   render() {
@@ -39,6 +36,7 @@ class DetailView extends React.Component {
         <Text>{'userid: ' + params.data.userid}</Text>
         <Text>{'username: ' + params.data.username}</Text>
 
+        <Text>{params.title}</Text>
         <Button style={{flex: 1}}
           onPress={this.handleClaimItem}
           title="Claim"
