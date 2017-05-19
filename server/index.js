@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(assignCookie);
-app.use(express.static(__dirname + '/../client/dist'));
+app.use(express.static(__dirname + '/../web/client/dist'));
 
 // routes
 let routeHandlers = require('./lib/route-handlers');
@@ -131,6 +131,7 @@ app.post('/checkUsers', function(req, res) {
 });
 
 app.post('/createUser', function(req, res) {
+  console.log('inside of /createUser')
   db.query('SELECT * FROM users WHERE username=${userName} and house_id=${houseId#}', { userName: req.body.userName, houseId: req.body.houseId })
     .then((data)=>{
       if (data.length === 0) {
@@ -261,9 +262,9 @@ app.get('/api/shop', checkAuth.APICall, routeHandlers.getShoppingList);
 app.post('/api/shop', checkAuth.pageRequest, routeHandlers.updateWithPurchases);
 
 app.get('*', function(req, res) {
-  res.sendFile(path.resolve(__dirname + '/../client/dist/index.html'));
+  res.sendFile(path.resolve(__dirname + '/../web/client/dist/index.html'));
 });
 
-app.listen(process.env.PORT || 1337, function() {
-  console.log('Listening on 1337...');
+app.listen(process.env.PORT || 8080, function() {
+  console.log('Listening on 8080...');
 });

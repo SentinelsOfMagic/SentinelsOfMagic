@@ -1,0 +1,18 @@
+machine:
+  environment:
+    DATABASE_URL: postgresql://ubuntu:@127.0.0.1:5432/circle_test
+    NODE_ENV: test
+    node:
+      version: 6.1.0
+dependencies:
+  override:
+    - nvm install 6 && npm install
+database:
+  override:
+    - psql -U ubuntu circle_test < database/fridgr.sql
+compile:
+  override:
+    - nvm use 6 && npm run circle-build
+test:
+  override:
+    - nvm use 6 && npm test
