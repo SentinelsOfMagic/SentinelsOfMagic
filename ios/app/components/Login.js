@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput, Button } from 'react-native';
+import { Text, View, TextInput, StyleSheet } from 'react-native';
 import axios from 'axios';
-import styles from '../style';
+// import styles from '../style';
+import { Button, Card } from 'react-native-material-design';
 
 class Login extends Component {
 
@@ -52,38 +53,66 @@ class Login extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome
-        </Text>
+      <View>
+        <Card.Body>
+          <Text>
+            Welcome
+          </Text>
+        </Card.Body>
+        <Card.Body>
+          <TextInput
+            onChangeText={(houseName) => this.setState({houseName})}
+            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+            value={this.state.houseName}
+            placeholder="House Name"
+            autoCorrect={false}
+            autoCapitalize="none"
+          />
+        </Card.Body>
         <TextInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-          onChangeText={(houseName) => this.setState({houseName})}
-          value={this.state.houseName}
-          placeholder="House Name"
-          autoCorrect={false}
-        />
-        <TextInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
           onChangeText={(password) => this.setState({password})}
+          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
           placeholder="password"
           autoCorrect={false}
-          secureTextEntry={true}
           autoCapitalize="none"
+          secureTextEntry={true}
         />
-        <Button
-          onPress={this.onPressSubmit}
-          title="Submit"
-          color="#841584"
-        />
-        <Button
-          onPress={this.onPressSignUp}
-          title="New User Sign Up"
-          color="#841584"
-        />
+        <View>
+          <Button
+            onPress={this.onPressSubmit}
+            text="Submit"
+            raised={true}
+          />
+        </View>
+        <View>
+          <Button
+            onPress={this.onPressSignUp}
+            text="New User Sign Up"
+            raised={true}
+          />
+        </View>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+  },
+  instructions: {
+    textAlign: 'center',
+    color: '#333333',
+    marginBottom: 5,
+  },
+});
 
 export default Login;
