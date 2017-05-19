@@ -19,6 +19,8 @@ let assignCookie = (req, res, next) => {
       .then((sessionData) => {
         console.log('New session created:', sessionData);
 
+        // yvonne added this line
+        req.cookies.fridgrSesh = {id: sessionData[0].id, hash: hashString};
         res.cookie('fridgrSesh', {id: sessionData[0].id, hash: hashString});
         next();
       })
