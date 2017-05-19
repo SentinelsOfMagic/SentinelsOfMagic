@@ -45,5 +45,4 @@ class newMobile extends Component {
   }
 }
 
-
 AppRegistry.registerComponent('newMobile', () => newMobile);

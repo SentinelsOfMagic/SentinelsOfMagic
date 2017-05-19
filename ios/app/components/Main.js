@@ -1,10 +1,11 @@
+import React from 'react';
 import { TabNavigator } from 'react-navigation';
 import HouseInventoryNavigator from './HouseInventoryNavigator';
 import UserShoppingList from './UserShoppingList';
 import SettingNavigator from './SettingNavigator';
 import Settings from './Settings';
 
-class Main extends Component {
+class Main extends React.Component {
 
   static navigationOptions = { header: null };
 
