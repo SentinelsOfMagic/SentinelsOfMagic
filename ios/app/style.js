@@ -36,7 +36,15 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 10,
-  }
+  },
+  icon: {
+    width: 26,
+    height: 26,
+  },
+  btn: {
+    width: 50,
+    height: 50,
+  },
 });
 
 export default styles;

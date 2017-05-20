@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, Image, } from 'react-native';
 import axios from 'axios';
-
 import InventoryListView from './InventoryListView';
 import dummyData from '../../../database/dummyData.js';
 
@@ -13,13 +12,6 @@ class HouseInventory extends React.Component {
       navigate('AddItem', screenProps);
     }
     return {
-      tabBarLabel: 'House Inventory',
-      tabBarIcon: ({ tintColor }) => (
-        <Image
-          source={require('../img/chats-icon.png')}
-          style={[styles.icon, {tintColor: tintColor}]}
-        />
-      ),
       title: 'House Inventory',
       headerRight:
       (<Button

@@ -10,7 +10,6 @@ class UserShoppingList extends React.Component {
 
   static navigationOptions = ({ navigation, screenProps }) => {
 
-
     const removeFromShoppingList = () => {
       axios.post('http://127.0.0.1:8080/removeFromShoppingList',
       {...screenProps, data: navigation.state.params.selectedItems})
@@ -29,13 +28,6 @@ class UserShoppingList extends React.Component {
     };
 
     return {
-      tabBarLabel: 'Shopping List',
-      tabBarIcon: ({ tintColor }) => (
-        <Image
-          source={require('../img/notif-icon.png')}
-          style={[styles.icon, {tintColor: tintColor}]}
-        />
-      ),
       title: 'Shopping List',
       headerRight:
       (<Button
