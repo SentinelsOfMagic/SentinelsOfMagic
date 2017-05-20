@@ -22,11 +22,10 @@ const styles = StyleSheet.create({
 class Row extends React.Component {
   constructor(props) {
     super(props);
-    this.showDetailView = this.showDetailView.bind(this);
   }
-  showDetailView() {
-    console.log('clicked', this.props.title);
-  }
+  // componentWillReceiveProps(props) {
+  //   props.getItems();
+  // }
   render() {
     // const {navigate} = this.props.navigation;
     return (

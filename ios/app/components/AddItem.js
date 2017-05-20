@@ -51,6 +51,9 @@ class AddItem extends Component {
 
     axios.post('http://127.0.0.1:8080/add', params)
     .then(res => {
+      this.props.screenProps.getItems();
+    })
+    .then(() => {
       goBack();
     })
     .catch(err => {

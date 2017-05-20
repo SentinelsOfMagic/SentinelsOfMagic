@@ -3,11 +3,11 @@ import { Image } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import HouseInventory from './HouseInventory';
 import DetailView from './DetailView';
-import Camera from './Camera';
 import AddItem from './AddItem';
 import styles from '../style';
+import Camera from './Camera';
 
-class HouseInventoryNavigator extends Component {
+class HouseInventoryNavigator extends React.Component {
 
   static navigationOptions = {
     tabBarLabel: 'House Inventory',
@@ -24,12 +24,10 @@ class HouseInventoryNavigator extends Component {
       List: { screen: HouseInventory },
       Detail: { screen: DetailView },
       AddItem: { screen: AddItem },
-      Camera: { screen: Camera}
+      Camera: { screen: Camera },
     });
-    console.log('************************************', this.props.screenProps);
 
     return (
-
       <HINavigator screenProps={this.props.screenProps}/>
     );
   }

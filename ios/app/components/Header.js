@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, TextInput } from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 8,
+    padding: 20,
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#C1C1C1',
