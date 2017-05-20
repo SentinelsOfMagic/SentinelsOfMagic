@@ -42,6 +42,7 @@ CREATE TABLE houses_items (
   item_id integer NOT NULL,
   need_to_restock boolean NOT NULL,
   notes text DEFAULT '',
+  image text DEFAULT '', 
   user_id integer
 );
 
@@ -72,4 +73,3 @@ CREATE TABLE users_private_items (
 );
 
 CREATE INDEX users_private_items_user_id_index ON users_private_items (user_id);
-

@@ -20,7 +20,8 @@ class CreateUser extends Component {
       username: '',
       userArray: [],
       houseId: null,
-      successMessage: null
+      message: null,
+      errorColor: "#00b159"
     };
     this.onPressSubmit = this.onPressSubmit.bind(this);
     this.onPressUser = this.onPressUser.bind(this);
@@ -51,9 +52,17 @@ class CreateUser extends Component {
     })
     .then((response) => {
       if (response && response.data === 'Successfully created user') {
-        this.state.userArray.push(username)
+        this.state.userArray.unshift(username)
+        this.setState({
+          username: '',
+          message: 'User added. Please select user in dropdown.'
+        })
       } else {
-        throw new Error('could not add user');
+        console.log(response.data)
+        this.setState({
+          message: response.data,
+          errorColor: "#d50032"
+        })
       }
     })
     .catch((err) => {
@@ -83,8 +92,10 @@ class CreateUser extends Component {
           Add New User
         </Text>
         <TextField
-          onChangeText={(username) => this.setState({username})}
+          onChangeText={(username) => this.setState({username: username, message: null})}
           label="What's your name?"
+          error={this.state.message}
+          errorColor={this.state.errorColor}
           value={this.state.username}
           autoCorrect={false}
         />

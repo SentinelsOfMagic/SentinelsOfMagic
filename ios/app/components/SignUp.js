@@ -49,7 +49,7 @@ class SignUp extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
+        <Text style={styles.loading}>
           Sign Up
         </Text>
         <TextField

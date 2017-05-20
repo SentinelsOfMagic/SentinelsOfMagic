@@ -6,13 +6,22 @@ const styles = StyleSheet.create({
     paddingHorizontal: 60,
     paddingBottom: 60,
     justifyContent: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#00aedb',
+  },
+  loading: {
+    color: '#ffffff',
+    textAlign: 'center',
+    fontSize: 35,
+    fontWeight: '700',
+    fontFamily: 'DamascusBold',
+    textShadowColor: '#222222',
+    marginVertical: 30,
   },
   createUser: {
     flex: 1,
     paddingHorizontal: 60,
     paddingTop: 60,
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#00aedb',
   },
   welcome: {
     fontSize: 20,
@@ -45,6 +54,9 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
   },
+  header: {
+    fontSize: 10,
+  }
 });
 
 export default styles;

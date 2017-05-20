@@ -34,6 +34,7 @@ class Login extends Component {
       password: password
     })
     .then((response) => {
+      console.log(response.data);
       if (response && response.data.length > 0) {
         const userArray = response.data;
         navigate('CreateUser', {userArray: userArray});
@@ -55,7 +56,7 @@ class Login extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
+        <Text style={styles.loading}>
           Login
         </Text>
         <TextField

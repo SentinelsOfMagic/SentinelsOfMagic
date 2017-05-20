@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, Image, } from 'react-native';
 import axios from 'axios';
-
 import InventoryListView from './InventoryListView';
 import dummyData from '../../../database/dummyData.js';
 
@@ -18,7 +17,6 @@ class HouseInventory extends React.Component {
       (<Button
         onPress={onPressAddItemView}
         title="+ add item"
-        color="#841584"
       />),
     };
   }
@@ -34,11 +32,11 @@ class HouseInventory extends React.Component {
 
   getItems() {
     axios.post('http://127.0.0.1:8080/inventory', this.props.screenProps )
-      .then(res => {
-        console.log('Successful POST request to /inventory - house inventory items retrieved', res.data);
-        this.setState({items: res.data}, console.log('state^^^^^^^^^^^^', this.state));
-      })
-      .catch(err => console.log('Unsuccessful POST request to /inventory - unable to retrieve house inventory items: ', err));
+    .then(res => {
+      console.log('Successful POST request to /inventory - house inventory items retrieved', res.data);
+      this.setState({items: res.data}, console.log('state^^^^^^^^^^^^', this.state));
+    })
+    .catch(err => console.log('Unsuccessful POST request to /inventory - unable to retrieve house inventory items: ', err));
   }
 
   componentDidMount() {
@@ -51,7 +49,7 @@ class HouseInventory extends React.Component {
   // componentsDidUpdate() {
   //   this.getItems();
   // }
-  
+
   render() {
     return (
       <InventoryListView
