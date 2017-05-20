@@ -13,10 +13,13 @@ class UserShoppingList extends React.Component {
       axios.post('https://fridgr-mobile.herokuapp.com/removeFromShoppingList',
       {...screenProps, data: navigation.state.params.selectedItems})
       .then(res => {
-        navigation.setParams({
+        return navigation.setParams({
           shoppingListItems: res.data,
           selectedItems: [],
         });
+      })
+      .then(() => {
+        screenProps.forceRenderInMain();
       })
       .catch(err => {
         console.log(err);
@@ -54,16 +57,26 @@ class UserShoppingList extends React.Component {
     });
   }
 
-  handleClickRow(item) {
-    this.props.navigation.setParams({
-      selectedItems: [...this.props.navigation.state.params.selectedItems, item]
-    }, () => console.log('SHOPPING LIST STATE:', this.props.navigation.state.params));
+  handleClickRow(item, isHighlighted) {
+    const { params } = this.props.navigation.state;
+    if (isHighlighted) {
+      params.selectedItems.forEach((selectedItem, i) => {
+        if (selectedItem.id === item.id) {
+          params.selectedItems.splice(i, 1);
+          this.props.navigation.setParams({selectedItems: params.selectedItems});
+        }
+      });
+    } else {
+      this.props.navigation.setParams({
+        selectedItems: [...params.selectedItems, item],
+      });
+    }
   }
-  // shouldComponentUpdate(nextProps, nextState)
   componentDidMount() {
     this.getShoppingList();
   }
 
+  // shouldComponentUpdate(nextProps, nextState)
   // componentWillReceiveProps(props) {
   //   this.getShoppingList();
   // }

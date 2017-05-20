@@ -19,6 +19,7 @@ class Main extends React.Component {
   }
 
   forceRender() {
+    console.log('****************** FORCE UPDATE **************')
     this.forceUpdate();
   }
 
