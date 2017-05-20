@@ -52,6 +52,7 @@ class DetailView extends React.Component {
           itemUserId: this.state.userId,
         }, () => {
           data.getItems();
+          this.props.screenProps.forceRenderInMain();
         });
       })
       .catch(err => console.log('Bad POST request to /claim: ', err));
@@ -67,6 +68,7 @@ class DetailView extends React.Component {
           username: null,
         }, () => {
           data.getItems();
+          this.props.screenProps.forceRenderInMain();
         });
       })
       .catch(err => console.log('Bad POST request to /unclaim'));

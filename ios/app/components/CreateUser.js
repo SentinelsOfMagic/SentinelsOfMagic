@@ -93,6 +93,8 @@ class CreateUser extends Component {
         </Text>
         <TextField
           onChangeText={(username) => this.setState({username: username, message: null})}
+          textColor="#ffffff"
+          tintColor="#ffffff"
           label="What's your name?"
           error={this.state.message}
           errorColor={this.state.errorColor}
@@ -102,6 +104,7 @@ class CreateUser extends Component {
         <View style={styles.button}>
           <Button
             onPress={this.onPressSubmit}
+            overrides={{textColor: '#ffffff', backgroundColor:'#f37735'}}
             text="Create User"
             raised={true}
           />
@@ -114,6 +117,7 @@ class CreateUser extends Component {
         <View style={styles.center}>
           <ModalDropdown
             dropdownStyle={styles.dropdown}
+            style={styles.buttonStyle}
             textStyle={styles.textStyle}
             options={this.state.userArray}
             onSelect={this.onPressUser}

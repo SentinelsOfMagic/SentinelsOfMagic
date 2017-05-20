@@ -18,11 +18,16 @@ class Main extends React.Component {
     navigate(str, params);
   }
 
+  forceRender() {
+    this.forceUpdate();
+  }
+
   render() {
     const { state } = this.props.navigation;
 
     const screenProps = state.params;
     screenProps.navInMain = this.nav.bind(this);
+    screenProps.forceRenderInMain = this.forceRender.bind(this);
 
     const TabNav = TabNavigator({
       HouseInventory: { screen: HouseInventoryNavigator },

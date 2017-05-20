@@ -24,6 +24,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#00aedb',
   },
   welcome: {
+    color: '#ffffff',
+    textAlign: 'center',
+    fontWeight: '700',
+    fontFamily: 'DamascusBold',
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
@@ -35,10 +39,19 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     fontSize: 15,
+    color: '#ffffff'
+  },
+  buttonStyle: {
+    color: '#0000ff'
   },
   dropdown: {
-    alignSelf: 'center',
-    width: 200
+    position: 'absolute',
+    height: (33 + StyleSheet.hairlineWidth) * 5,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: 'lightgray',
+    borderRadius: 2,
+    backgroundColor: 'white',
+    justifyContent: 'center'
   },
   center: {
     alignSelf: 'center'

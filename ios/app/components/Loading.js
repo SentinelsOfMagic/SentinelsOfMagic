@@ -35,6 +35,7 @@ class Loading extends Component {
         <View style={styles.button}>
           <Button
             onPress={this.onPressLogin}
+            overrides={{textColor: '#ffffff', backgroundColor:'#f37735'}}
             text="Login"
             raised={true}
           />
@@ -42,6 +43,7 @@ class Loading extends Component {
         <View style={styles.button}>
           <Button
             onPress={this.onPressSignUp}
+            overrides={{textColor: '#ffffff', backgroundColor:'#ffc425'}}
             text="Sign Up"
             raised={true}
           />

@@ -61,6 +61,8 @@ class Login extends Component {
         </Text>
         <TextField
           onChangeText={(houseName) => this.setState({houseName})}
+          textColor="#ffffff"
+          tintColor="#ffffff"
           label="House Name"
           value={this.state.houseName}
           autoCorrect={false}
@@ -69,6 +71,8 @@ class Login extends Component {
         />
         <TextField
           onChangeText={(password) => this.setState({password})}
+          textColor="#ffffff"
+          tintColor="#ffffff"
           label="Password"
           autoCorrect={false}
           autoCapitalize="none"
@@ -78,6 +82,7 @@ class Login extends Component {
         <View style={styles.button}>
           <Button
             onPress={this.onPressSubmit}
+            overrides={{textColor: '#ffffff', backgroundColor:'#f37735'}}
             text="Login"
             raised={true}
           />
@@ -85,6 +90,7 @@ class Login extends Component {
         <View style={styles.button}>
           <Button
             onPress={this.onPressSignUp}
+            overrides={{textColor: '#ffffff', backgroundColor:'#ffc425'}}
             text="Go To Sign Up"
             raised={true}
           />
