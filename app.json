@@ -1,4 +1,18 @@
 {
-  "name": "mobile",
-  "displayName": "mobile"
+  "name": "fridgr",
+  "displayName": "fridgr",
+  "scripts": {
+  },
+  "env": {
+  },
+  "formation": {
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
 }
