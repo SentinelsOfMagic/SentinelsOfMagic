@@ -3,7 +3,7 @@ import { View, Text, Button, StyleSheet } from 'react-native';
 import Header from './Header';
 import axios from 'axios';
 
-const SERVER_URL = 'http://127.0.0.1:8080';
+const SERVER_URL = 'https://fridgr-mobile.herokuapp.com';
 
 class DetailView extends React.Component {
 

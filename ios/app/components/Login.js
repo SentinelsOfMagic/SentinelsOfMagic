@@ -29,15 +29,16 @@ class Login extends Component {
     const houseName = this.state.houseName;
     const password = this.state.password;
 
-    axios.post('http://127.0.0.1:8080/auth/login', {
+    axios.post('https://fridgr-mobile.herokuapp.com/auth/login', {
       houseName: houseName,
       password: password
     })
     .then((response) => {
       console.log(response.data);
-      if (response && response.data.length > 0) {
-        const userArray = response.data;
-        navigate('CreateUser', {userArray: userArray});
+      if (response) {
+        const userArray = response.data.userData;
+        const houseId = response.data.houseId;
+        navigate('CreateUser', {userArray: userArray, houseId: houseId});
       } else {
         throw new Error('no existing users');
       }

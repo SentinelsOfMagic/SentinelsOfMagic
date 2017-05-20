@@ -22,7 +22,7 @@ class ChangeUser extends Component {
   componentDidMount() {
     const { navigate } = this.props.navigation;
 
-    axios.post('http://127.0.0.1:8080/users', this.props.screenProps)
+    axios.post('https://fridgr-mobile.herokuapp.com/users', this.props.screenProps)
     .then((response) => {
       if (response && response.data.length > 0) {
         console.log('success@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', response.data);

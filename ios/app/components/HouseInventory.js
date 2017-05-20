@@ -31,7 +31,7 @@ class HouseInventory extends React.Component {
   }
 
   getItems() {
-    axios.post('http://127.0.0.1:8080/inventory', this.props.screenProps )
+    axios.post('https://fridgr-mobile.herokuapp.com/inventory', this.props.screenProps )
     .then(res => {
       console.log('Successful POST request to /inventory - house inventory items retrieved', res.data);
       this.setState({items: res.data}, console.log('state^^^^^^^^^^^^', this.state));

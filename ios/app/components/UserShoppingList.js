@@ -10,7 +10,7 @@ class UserShoppingList extends React.Component {
   static navigationOptions = ({ navigation, screenProps }) => {
 
     const removeFromShoppingList = () => {
-      axios.post('http://127.0.0.1:8080/removeFromShoppingList',
+      axios.post('https://fridgr-mobile.herokuapp.com/removeFromShoppingList',
       {...screenProps, data: navigation.state.params.selectedItems})
       .then(res => {
         navigation.setParams({
@@ -45,7 +45,7 @@ class UserShoppingList extends React.Component {
   }
 
   getShoppingList() {
-    axios.post('http://127.0.0.1:8080/shoppingList', this.props.screenProps)
+    axios.post('https://fridgr-mobile.herokuapp.com/shoppingList', this.props.screenProps)
     .then(res => {
       this.props.navigation.setParams({shoppingListItems: res.data});
     })

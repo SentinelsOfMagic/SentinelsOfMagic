@@ -32,7 +32,7 @@ class SignUp extends Component {
     const houseName = this.state.houseName;
     const password = this.state.password;
 
-    axios.post('http://127.0.0.1:8080/auth/signup', {
+    axios.post('https://fridgr-mobile.herokuapp.com/auth/signup', {
       houseName: houseName,
       password: password
     })

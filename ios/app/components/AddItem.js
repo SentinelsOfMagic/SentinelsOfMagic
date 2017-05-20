@@ -50,7 +50,7 @@ class AddItem extends Component {
       userId: userId
     };
 
-    axios.post('http://127.0.0.1:8080/add', params)
+    axios.post('https://fridgr-mobile.herokuapp.com/add', params)
     .then(res => {
       this.props.screenProps.getItems();
     })
@@ -109,7 +109,7 @@ class AddItem extends Component {
   }
 
   render() {
-    const image = this.state.image?
+    const image = (this.state.image !== '' ?
     (<Image style={{
       width: 200,
       height: 200,
@@ -117,7 +117,7 @@ class AddItem extends Component {
     }} source={{
       uri: this.state.image
     }}/> )
-    : ( <View></View> );
+    : ( <View></View> ));
 
     return (
       <View style={styles.container}>
@@ -127,18 +127,23 @@ class AddItem extends Component {
         </Text>
         <TextField
           label="New Item"
+          textColor="#ffffff"
+          tintColor="#ffffff"
           onChangeText={(name) => this.setState({name})}
           value={this.state.name}
           autoCorrect={false}
         />
         <TextField
           label="Notes"
+          textColor="#ffffff"
+          tintColor="#ffffff"
           multiline={true}
           onChangeText={(notes) => this.setState({notes})}
           value={this.state.notes}
         />
         <MDButton
           onPress={this.onPressSubmit}
+          overrides={{textColor: '#ffffff', backgroundColor:'#f37735'}}
           text="Submit"
           raised={true}
         />

@@ -33,11 +33,13 @@ class Settings extends Component {
       <View style={styles.container}>
          <Button
           onPress={this.onPressChangeUser}
+          overrides={{textColor: '#ffffff', backgroundColor:'#f37735'}}
           text="Change User"
           raised={true}
         />
         <Button
           onPress={this.onPressLogOut}
+          overrides={{textColor: '#ffffff', backgroundColor:'#ffc425'}}
           text="Logout"
           raised={true}
           color="#841584"

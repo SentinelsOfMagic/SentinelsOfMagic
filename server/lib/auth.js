@@ -159,8 +159,9 @@ router.post('/login', (req, res, next) => {
             // add houseId to cookie
             var currentCookie = req.cookies.fridgrSesh;
             currentCookie['houseId'] = houseData.id;
+            let output = {userData: usersData, houseId: houseData.id};
             res.cookie('fridgrSesh', currentCookie);
-            res.status(200).json(usersData);
+            res.status(200).json(output);
           })
           .catch((err) => {
             console.log('Error updating session with houseId:', err);

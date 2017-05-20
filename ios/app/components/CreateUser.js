@@ -31,13 +31,14 @@ class CreateUser extends Component {
     const { navigate, state } = this.props.navigation;
     let users = [];
     const dataArray = state.params.userArray;
+    const houseId = state.params.houseId;
 
     for (let i = 0; i < dataArray.length; i++) {
       users.push(dataArray[i].username)
     }
     this.setState({
       userArray: users,
-      houseId: dataArray[0].house_id
+      houseId: houseId
     })
   }
 
@@ -46,7 +47,7 @@ class CreateUser extends Component {
 
     const username = this.state.username;
 
-    axios.post('http://127.0.0.1:8080/createUser', {
+    axios.post('https://fridgr-mobile.herokuapp.com/createUser', {
       userName: username,
       houseId: this.state.houseId
     })
@@ -74,7 +75,7 @@ class CreateUser extends Component {
     const { navigate, state } = this.props.navigation;
 
     const dataArray = state.params.userArray;
-    const userId = dataArray[index].id;
+    const userId = state.params.houseId;
     this.setState({
       userId: userId
     }, () => {
