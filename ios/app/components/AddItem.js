@@ -37,7 +37,7 @@ class AddItem extends Component {
   }
 
   onPressSubmit() {
-    const { navigate } = this.props.navigation;
+    const { navigate, goBack } = this.props.navigation;
     const { houseId, userId } = this.props.screenProps;
 
     const params = {
@@ -49,8 +49,7 @@ class AddItem extends Component {
 
     axios.post('http://127.0.0.1:8080/add', params)
     .then(res => {
-      console.log('*********************************Successful POST request to /add');
-      navigate('List', this.props.screenProps);
+      goBack();
     })
     .catch(err => {
       console.log('Bad POST request to /add: ', err.response.data);

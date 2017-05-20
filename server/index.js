@@ -258,8 +258,8 @@ app.post('/add', (req, res) => {
     .catch(err => console.log(`Error querying ITEMS table for ${req.body.name}: `, err));
 });
 
-app.get('/api/shop', checkAuth.APICall, routeHandlers.getShoppingList);
-app.post('/api/shop', checkAuth.pageRequest, routeHandlers.updateWithPurchases);
+app.post('/shoppingList', routeHandlers.getShoppingList);
+app.post('/removeFromShoppingList', routeHandlers.updateWithPurchases);
 
 app.get('*', function(req, res) {
   res.sendFile(path.resolve(__dirname + '/../web/client/dist/index.html'));

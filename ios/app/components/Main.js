@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { TabNavigator } from 'react-navigation';
 import HouseInventoryNavigator from './HouseInventoryNavigator';
-import UserShoppingList from './UserShoppingList';
 import SettingNavigator from './SettingNavigator';
+import UserShoppingListNavigator from './UserShoppingListNavigator';
 import Settings from './Settings';
 
-class Main extends Component {
+class Main extends React.Component {
 
   static navigationOptions = { header: null };
 
@@ -26,7 +26,7 @@ class Main extends Component {
 
     const TabNav = TabNavigator({
       HouseInventory: { screen: HouseInventoryNavigator },
-      UserShoppingList: { screen: UserShoppingList },
+      UserShoppingList: { screen: UserShoppingListNavigator },
       SettingNavigator: { screen: SettingNavigator },
     });
     console.log(state.routeName);

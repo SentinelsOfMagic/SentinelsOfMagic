@@ -66,10 +66,11 @@ class CreateUser extends Component {
     const userId = dataArray[index].id;
     this.setState({
       userId: userId
-    });
-    navigate('Main', {
-      houseId: this.state.houseId,
-      userId: this.state.userId
+    }, () => {
+      navigate('Main', {
+        houseId: this.state.houseId,
+        userId: this.state.userId
+      });
     });
   }
 

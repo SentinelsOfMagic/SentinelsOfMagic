@@ -6,6 +6,7 @@ import InventoryListView from './InventoryListView';
 import dummyData from '../../../database/dummyData.js';
 
 class HouseInventory extends React.Component {
+
   static navigationOptions = ({ navigation, screenProps }) => {
     const onPressAddItemView = () => {
       const { navigate } = navigation;
@@ -20,7 +21,6 @@ class HouseInventory extends React.Component {
         />
       ),
       title: 'House Inventory',
-      headerLeft: null,
       headerRight:
       (<Button
         onPress={onPressAddItemView}
@@ -35,6 +35,7 @@ class HouseInventory extends React.Component {
     this.state = {
       items: dummyData
     };
+    // this.navigationOptions = this.navigationOptions.bind(this);
     this.getItems = this.getItems.bind(this);
   }
 
@@ -57,7 +58,9 @@ class HouseInventory extends React.Component {
       <InventoryListView
       navigation={this.props.navigation}
       headerTitle={`House Inventory - ${this.props.screenProps.houseId}`}
-      listViewData={this.state.items}/>
+      listViewData={this.state.items}
+      screenProps={this.props.screenProps}
+      getItems={this.getItems}/>
     );
   }
 }
