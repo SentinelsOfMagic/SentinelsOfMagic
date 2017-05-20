@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput, StyleSheet } from 'react-native';
-import axios from 'axios';
-// import styles from '../style';
+import { Text, View } from 'react-native';
 import { Button, Card } from 'react-native-material-design';
+import { TextField } from 'react-native-material-textfield';
+import axios from 'axios';
+import styles from '../style';
 
 class Login extends Component {
 
   static navigationOptions = {
-    title: 'Login',
-    headerLeft: null
+    header: null
   };
 
   constructor(props) {
@@ -16,8 +16,8 @@ class Login extends Component {
     this.state = {
       houseName: '',
       password: '',
-      userArray: []
-
+      userArray: [],
+      error: null
     };
     this.onPressSubmit = this.onPressSubmit.bind(this);
     this.onPressSignUp = this.onPressSignUp.bind(this);
@@ -42,7 +42,8 @@ class Login extends Component {
       }
     })
     .catch((err) => {
-      console.log('Error occurred during login:', err);
+      console.log('Error occurred during login:', err.response.data.message);
+      this.setState({ error: err.response.data.message })
     });
   }
 
@@ -53,41 +54,37 @@ class Login extends Component {
 
   render() {
     return (
-      <View>
-        <Card.Body>
-          <Text>
-            Welcome
-          </Text>
-        </Card.Body>
-        <Card.Body>
-          <TextInput
-            onChangeText={(houseName) => this.setState({houseName})}
-            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-            value={this.state.houseName}
-            placeholder="House Name"
-            autoCorrect={false}
-            autoCapitalize="none"
-          />
-        </Card.Body>
-        <TextInput
+      <View style={styles.container}>
+        <Text style={styles.welcome}>
+          Login
+        </Text>
+        <TextField
+          onChangeText={(houseName) => this.setState({houseName})}
+          label="House Name"
+          value={this.state.houseName}
+          autoCorrect={false}
+          autoCapitalize="none"
+          error={this.state.error}
+        />
+        <TextField
           onChangeText={(password) => this.setState({password})}
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-          placeholder="password"
+          label="Password"
           autoCorrect={false}
           autoCapitalize="none"
           secureTextEntry={true}
+          error={this.state.error}
         />
-        <View>
+        <View style={styles.button}>
           <Button
             onPress={this.onPressSubmit}
-            text="Submit"
+            text="Login"
             raised={true}
           />
         </View>
-        <View>
+        <View style={styles.button}>
           <Button
             onPress={this.onPressSignUp}
-            text="New User Sign Up"
+            text="Go To Sign Up"
             raised={true}
           />
         </View>
@@ -95,24 +92,5 @@ class Login extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
 
 export default Login;

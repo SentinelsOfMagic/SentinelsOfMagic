@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StackNavigator } from 'react-navigation';
-import { Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
+import { Button } from 'react-native-material-design';
 import CreateUser from './CreateUser';
 import Login from './Login';
 import styles from '../style';
@@ -30,17 +31,15 @@ class Settings extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Settings
-        </Text>
          <Button
           onPress={this.onPressChangeUser}
-          title="Change User"
-          color="#841584"
+          text="Change User"
+          raised={true}
         />
         <Button
           onPress={this.onPressLogOut}
-          title="Logout"
+          text="Logout"
+          raised={true}
           color="#841584"
         />
       </View>

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
 import { NavigationActions } from 'react-navigation'
+import { Button, Card } from 'react-native-material-design';
+import { TextField } from 'react-native-material-textfield';
 import axios from 'axios';
 import ModalDropdown from 'react-native-modal-dropdown';
 import styles from '../style';
@@ -54,8 +56,10 @@ class ChangeUser extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles.createUser}>
         <ModalDropdown
+          dropdownStyle={styles.dropdown}
+          textStyle={styles.textStyle}
           options={this.state.usernames}
           onSelect={this.onPressUser}
         />

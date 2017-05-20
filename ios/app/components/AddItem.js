@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput, Button, Image } from 'react-native';
+import { Text, View, TextInput, Image, Button } from 'react-native';
+import { Button as MDButton, Card } from 'react-native-material-design';
+import { TextField } from 'react-native-material-textfield';
 import Main from './Main';
 import axios from 'axios';
 import styles from '../style';
@@ -12,12 +14,11 @@ class AddItem extends Component {
       navigate('Camera', screenProps);
     }
     return {
-      title: 'Add Item',
       headerRight:
       (<Button
         onPress={onPressScan}
-        title="Scan Bar Code"
-        color="#841584"
+        title="Scan"
+        style={styles.header}
       />),
     };
   }
@@ -29,11 +30,12 @@ class AddItem extends Component {
       notes: '',
       errorName: '',
       errorText: '',
-      image: ''
+      image: null
     }
     this.onPressSubmit = this.onPressSubmit.bind(this);
-    this.onPressScan = this.onPressScan.bind(this);
+    // this.onPressScan = this.onPressScan.bind(this);
     this.searchUPC = this.searchUPC.bind(this);
+    this.props.screenProps.searchUPC = this.searchUPC;
   }
 
   onPressSubmit() {
@@ -60,11 +62,11 @@ class AddItem extends Component {
     });
   }
 
-  onPressScan() {
-    const { navigate } = this.props.navigation;
-    this.props.screenProps.searchUPC = this.searchUPC;
-    navigate('Camera', this.props.screenProps);
-  }
+  // onPressScan() {
+  //   const { navigate } = this.props.navigation;
+  //   this.props.screenProps.searchUPC = this.searchUPC;
+  //   navigate('Camera', this.props.screenProps);
+  // }
 
   searchUPC(upc) {
     console.log('from searchUPC', upc);
@@ -103,40 +105,37 @@ class AddItem extends Component {
   }
 
   render() {
+    const image = this.state.image?
+    (<Image style={{
+      width: 200,
+      height: 200
+    }} source={{
+      uri: this.state.image
+    }}/> )
+    : ( <View></View> );
+
     return (
       <View style={styles.container}>
-        <Image style={{
-          width: 200,
-          height: 200
-        }} source={{
-          uri: this.state.image
-        }}/>
-        <Button
-          onPress={this.onPressScan}
-          title="Scan Bar Code"
-          color="#841584"
-        />
+        {image}
         <Text style={styles.welcome}>
           Add New Item
         </Text>
-        <TextInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+        <TextField
+          label="New Item"
           onChangeText={(name) => this.setState({name})}
           value={this.state.name}
-          placeholder="new food item"
           autoCorrect={false}
         />
-        <TextInput
-          style={{height: 100, borderColor: 'gray', borderWidth: 1}}
+        <TextField
+          label="Notes"
           multiline={true}
           onChangeText={(notes) => this.setState({notes})}
           value={this.state.notes}
-          placeholder="notes"
         />
-        <Button
+        <MDButton
           onPress={this.onPressSubmit}
-          title="Submit"
-          color="#841584"
+          text="Submit"
+          raised={true}
         />
       </View>
     );

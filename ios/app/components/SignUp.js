@@ -1,20 +1,29 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput, Button } from 'react-native';
+import { Text, View } from 'react-native';
+import { Button, Card } from 'react-native-material-design';
+import { TextField } from 'react-native-material-textfield';
 import axios from 'axios';
 import CreateUser from './CreateUser';
 import styles from '../style';
 
 class SignUp extends Component {
 
-  static navigationOptions = { title: 'Sign Up' };
+  static navigationOptions = { header: null };
 
   constructor(props) {
     super(props);
     this.state = {
       houseName: '',
-      password: ''
+      password: '',
+      error: null
     };
     this.onPressSubmit = this.onPressSubmit.bind(this);
+    this.onPressLogin = this.onPressLogin.bind(this);
+  }
+
+  onPressLogin() {
+    const { goBack } = this.props.navigation;
+    goBack();
   }
 
   onPressSubmit() {
@@ -32,7 +41,8 @@ class SignUp extends Component {
       navigate('Login');
     })
     .catch((err) => {
-      console.log('Error occurred during signup:', err);
+      console.log('Error occurred during signup:', err.response.data.message);
+      this.setState({ error: err.response.data.message })
     });
   }
 
@@ -42,24 +52,33 @@ class SignUp extends Component {
         <Text style={styles.welcome}>
           Sign Up
         </Text>
-        <TextInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+        <TextField
+          label="House Name"
           onChangeText={(houseName) => this.setState({houseName})}
           value={this.state.houseName}
-          placeholder="House Name"
           autoCorrect={false}
+          error={this.state.error}
         />
-        <TextInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+        <TextField
+          label="Password"
           onChangeText={(password) => this.setState({password})}
-          placeholder="password"
           autoCorrect={false}
+          error={this.state.error}
         />
-        <Button
-          onPress={this.onPressSubmit}
-          title="Submit"
-          color="#841584"
-        />
+        <View style={styles.button}>
+          <Button
+            onPress={this.onPressSubmit}
+            text="Sign Up"
+            raised={true}
+          />
+        </View>
+        <View style={styles.button}>
+          <Button
+            onPress={this.onPressLogin}
+            text="Go Back to Login"
+            raised={true}
+          />
+        </View>
       </View>
     );
   }

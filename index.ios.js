@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import { AppRegistry } from 'react-native';
 import { StackNavigator } from 'react-navigation';
-
-import { Navigator, NativeModules } from 'react-native';
-import { COLOR, ThemeProvider } from 'react-native-material-ui';
-
 import Main from './ios/app/components/Main';
 import Login from './ios/app/components/Login';
 import SignUp from './ios/app/components/SignUp';
@@ -19,17 +15,6 @@ class newMobile extends Component {
   }
 
   render() {
-    const uiTheme = {
-      palette: {
-        primaryColor: COLOR.green500,
-      },
-      toolbar: {
-        container: {
-          height: 100,
-        },
-      },
-    };
-
     const Nav = StackNavigator({
       Login: { screen: Login },
       SignUp: { screen: SignUp },
@@ -38,9 +23,7 @@ class newMobile extends Component {
     });
 
     return (
-      <ThemeProvider uiTheme={uiTheme}>
-        <Nav />
-      </ThemeProvider>
+      <Nav />
     );
   }
 }

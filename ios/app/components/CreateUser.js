@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput, Button } from 'react-native';
+import { Text, View } from 'react-native';
+import { Button, Card } from 'react-native-material-design';
+import { TextField } from 'react-native-material-textfield';
 import Main from './Main';
 import axios from 'axios';
 import ModalDropdown from 'react-native-modal-dropdown';
@@ -8,8 +10,7 @@ import styles from '../style';
 class CreateUser extends Component {
 
   static navigationOptions = {
-    title: 'Add New User',
-    headerLeft: null
+    header: null
   };
 
   constructor(props) {
@@ -18,7 +19,8 @@ class CreateUser extends Component {
       userId: null,
       username: '',
       userArray: [],
-      houseId: null
+      houseId: null,
+      successMessage: null
     };
     this.onPressSubmit = this.onPressSubmit.bind(this);
     this.onPressUser = this.onPressUser.bind(this);
@@ -78,23 +80,34 @@ class CreateUser extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Who are you? 😄😄😄
+          Add New User
         </Text>
-        <TextInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+        <TextField
           onChangeText={(username) => this.setState({username})}
+          label="What's your name?"
           value={this.state.username}
-          placeholder="username"
           autoCorrect={false}
         />
-        <Button
-          onPress={this.onPressSubmit}
-          title="Create User"
-          color="#841584"
-        />
-        <ModalDropdown options={this.state.userArray}
-          onSelect={this.onPressUser}
-        />
+        <View style={styles.button}>
+          <Button
+            onPress={this.onPressSubmit}
+            text="Create User"
+            raised={true}
+          />
+        </View>
+        <View style={{marginTop: 50}}>
+          <Text style={styles.welcome}>
+            Select Existing User
+          </Text>
+        </View>
+        <View style={styles.center}>
+          <ModalDropdown
+            dropdownStyle={styles.dropdown}
+            textStyle={styles.textStyle}
+            options={this.state.userArray}
+            onSelect={this.onPressUser}
+          />
+        </View>
       </View>
     );
   }

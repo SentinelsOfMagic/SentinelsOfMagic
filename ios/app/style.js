@@ -3,8 +3,15 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingHorizontal: 60,
+    paddingBottom: 60,
     justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+  createUser: {
+    flex: 1,
+    paddingHorizontal: 60,
+    paddingTop: 60,
     backgroundColor: '#F5FCFF',
   },
   welcome: {
@@ -12,11 +19,24 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 10,
   },
-  instructions: {
+  button: {
     textAlign: 'center',
     color: '#333333',
-    marginBottom: 5,
+    paddingHorizontal: 40,
   },
+  textStyle: {
+    fontSize: 15,
+  },
+  dropdown: {
+    alignSelf: 'center',
+    width: 200
+  },
+  center: {
+    alignSelf: 'center'
+  },
+  header: {
+    fontSize: 10,
+  }
 });
 
 export default styles;
