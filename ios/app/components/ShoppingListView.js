@@ -1,12 +1,9 @@
 import React from 'react';
 import { ListView, Text, View, StyleSheet } from 'react-native';
-import Row from './Row';
+import ShoppingListRow from './ShoppingListRow';
 import Header from './Header';
 
-import spoonSampleData from '../spoonSampleData';
-import dummyData from '../../../database/dummyData.js';
-
-class InventoryListView extends React.Component {
+class ShoppingListView extends React.Component {
 
   constructor(props) {
     super(props);
@@ -38,10 +35,10 @@ class InventoryListView extends React.Component {
           style={styles.container}
           dataSource={this.state.dataSource}
           renderRow={(data) => (
-            <Row
+            <ShoppingListRow
               {...data}
               navigation={this.props.navigation}
-              getItems={this.props.getItems}
+              handleClickRow={this.props.handleClickRow}
               screenProps={this.props.screenProps}
             />
           )}
@@ -77,4 +74,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default InventoryListView;
+export default ShoppingListView;

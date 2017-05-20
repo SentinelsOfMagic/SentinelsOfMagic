@@ -19,22 +19,22 @@ const styles = StyleSheet.create({
   },
 });
 
-class Row extends React.Component {
+class ShoppingListRow extends React.Component {
   constructor(props) {
     super(props);
-    this.showDetailView = this.showDetailView.bind(this);
   }
-  showDetailView() {
-    console.log('clicked', this.props.title);
-  }
+
   render() {
     // const {navigate} = this.props.navigation;
     return (
-      <TouchableHighlight onPress={() => this.props.navigation.navigate('Detail', { data: this.props })}>
+      <TouchableHighlight onPress={() => {
+        this.props.handleClickRow(this.props);
+        console.log('PRESSED SHOPPING LIST ITEM')
+      }}>
         <View style={styles.container}>
           <Image source={{uri: this.props.image}} style={styles.photo}/>
           <Text style={styles.text}>
-            {this.props.name}
+            {'item: ', this.props.houses_items_id, ', id - ', this.props.id, ', name - ', this.props.itemname}
           </Text>
         </View>
       </TouchableHighlight>
@@ -42,4 +42,4 @@ class Row extends React.Component {
   }
 }
 
-export default Row;
+export default ShoppingListRow;

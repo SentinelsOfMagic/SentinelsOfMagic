@@ -1,8 +1,12 @@
 import React from 'react';
 import { TabNavigator } from 'react-navigation';
 import HouseInventoryNavigator from './HouseInventoryNavigator';
+<<<<<<< HEAD
 import UserShoppingList from './UserShoppingList';
 import SettingNavigator from './SettingNavigator';
+=======
+import UserShoppingListNavigator from './UserShoppingListNavigator';
+>>>>>>> working inventory/shopping list
 import Settings from './Settings';
 
 class Main extends React.Component {
