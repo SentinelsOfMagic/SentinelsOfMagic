@@ -1,12 +1,8 @@
 import React from 'react';
 import { TabNavigator } from 'react-navigation';
 import HouseInventoryNavigator from './HouseInventoryNavigator';
-<<<<<<< HEAD
-import UserShoppingList from './UserShoppingList';
 import SettingNavigator from './SettingNavigator';
-=======
 import UserShoppingListNavigator from './UserShoppingListNavigator';
->>>>>>> working inventory/shopping list
 import Settings from './Settings';
 
 class Main extends React.Component {
@@ -30,7 +26,7 @@ class Main extends React.Component {
 
     const TabNav = TabNavigator({
       HouseInventory: { screen: HouseInventoryNavigator },
-      UserShoppingList: { screen: UserShoppingList },
+      UserShoppingList: { screen: UserShoppingListNavigator },
       SettingNavigator: { screen: SettingNavigator },
     });
     console.log(state.routeName);

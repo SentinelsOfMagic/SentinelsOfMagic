@@ -14,8 +14,10 @@ class HouseInventoryNavigator extends Component {
       AddItem: { screen: AddItem },
       Camera: { screen: Camera}
     });
+    console.log('************************************', this.props.screenProps);
 
     return (
+
       <HINavigator screenProps={this.props.screenProps}/>
     );
   }

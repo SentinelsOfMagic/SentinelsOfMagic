@@ -49,12 +49,7 @@ class AddItem extends Component {
 
     axios.post('http://127.0.0.1:8080/add', params)
     .then(res => {
-      console.log('*********************************Successful POST request to /add');
-<<<<<<< HEAD
-      navigate('List', this.props.screenProps);
-=======
       goBack();
->>>>>>> working inventory/shopping list
     })
     .catch(err => {
       console.log('Bad POST request to /add: ', err.response.data);
