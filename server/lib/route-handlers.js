@@ -1,11 +1,12 @@
 let shop = require('../../database/models/shoppingList');
 
 let getShoppingList = (req, res) => {
-
-  shop.getShoppingListForUser(req.cookies.fridgrSesh.userId, req.cookies.fridgrSesh.houseId).then((data) => {
+  shop.getShoppingListForUser(req.body.userId, req.body.houseId)
+  .then(data => {
+    console.log('getshoppingList');
     res.send(data);
   })
-  .catch((err) => {
+  .catch(err => {
     console.log(err);
     res.send(err);
   });
@@ -13,7 +14,8 @@ let getShoppingList = (req, res) => {
 
 let updateWithPurchases = (req, res) => {
 
-  shop.updateWithPurchases(req.cookies.fridgrSesh.userId, req.cookies.fridgrSesh.houseId, req.body.data).then((data) => {
+  shop.updateWithPurchases(req.body.userId, req.body.houseId, req.body.data).then((data) => {
+    console.log('updateWithPurchases');
     res.send(data);
   })
   .catch((err) => {

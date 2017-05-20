@@ -2,18 +2,19 @@
   "name": "Fridgr",
   "version": "0.0.1",
   "description": "Tracking groceries got you stressed? Chill.",
-  "repository": "https://github.com/SentinelsOfMagic/SentinelsOfMagic",
-  "author": "Sentinels of Magic",
+  "repository": "https://github.com/ninjacodez/fridgr",
+  "author": "Ninja Turtles",
   "license": "MIT",
   "engines": {
     "node": ">=6.4.0"
   },
   "scripts": {
-    "start": "node ./server/index.js",
+    "start": "node node_modules/react-native/local-cli/cli.js start",
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/index.js",
+    "ios-dev": "react-native run-ios",
     "heroku-postbuild": "webpack -p --config ./webpack.config.js --progress",
-    "circle-build": "webpack -d --config webpack.config.js",
+    "circle-build": "webpack -d --config web/webpack.config.js",
     "test": "mocha spec/serverSpec.js"
   },
   "dependencies": {
@@ -30,11 +31,19 @@
     "crypto": "0.0.3",
     "express": "^4.15.2",
     "jquery": "^3.2.1",
-    "material-ui": "^0.18.0",
+    "material-ui": "^0.18.1",
     "nodemon": "^1.11.0",
     "pg-promise": "^5.6.7",
-    "react": "^15.5.4",
+    "react": "16.0.0-alpha.6",
     "react-dom": "^15.5.4",
+    "react-native": "^0.44.0",
+    "react-native-axios": "^0.17.1",
+    "react-native-camera": "^0.8.0",
+    "react-native-material-design": "^0.3.7",
+    "react-native-material-textfield": "^0.5.0",
+    "react-native-modal-dropdown": "^0.4.2",
+    "react-native-vector-icons": "git+https://github.com/oblador/react-native-vector-icons",
+    "react-navigation": "^1.0.0-beta.9",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
     "react-tap-event-plugin": "^2.0.1",
@@ -42,10 +51,14 @@
     "webpack": "^2.5.0"
   },
   "devDependencies": {
+    "babel-jest": "20.0.1",
+    "babel-preset-react-native": "1.9.2",
     "chai": "^3.5.0",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
+    "jest": "20.0.1",
     "mocha": "^3.3.0",
-    "node-mocks-http": "^1.6.2"
+    "node-mocks-http": "^1.6.2",
+    "react-test-renderer": "16.0.0-alpha.6"
   },
   "babel": {
     "presets": [
